@@ -17,9 +17,14 @@ module.exports = {
             presets: ['@babel/preset-env','@babel/preset-react']
           }
         }
-      }
+      },
+      {
+        test: /\.mp4$/,
+        use: 'file-loader?name=videos/[name].[ext]',
+      },
     ]
   },
+  
   plugins: [
     new HtmlWebpackPlugin({
         template: "public/index.html",
