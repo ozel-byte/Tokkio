@@ -1,3 +1,3 @@
-# Tokkio
+# TokkioIu
 
-Plataforma para Videollamadas, Con filtros en tiempo real
+Ediciones de fotos con tus amigos en tiempo real.
