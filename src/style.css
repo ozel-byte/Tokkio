@@ -2,7 +2,97 @@
     padding: 0px;
     margin: 0px;
 }
+
+body{
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+p{
+    font-weight: lighter;
+}
+
+.fondo-img{
+    width: 100%;
+    height: 100vh;
+    background-color: cadetblue;
+}
+.fondo-img img{
+   width: 100%;
+    height: 100vh;
+}
+.container{
+    width: 100%;
+    position: absolute;
+    margin-top: -41.8%;
+    height: 100vh;
+    display: flex;
+
+
+
+}
 .logo{
+
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    color: white;
+    font-family: Verdana;
+    font-weight: bold;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.container-form{
+
+    width: 50%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.card{
+    background-color: white;
+    border-radius: 10px;
+    width: 70%;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.card > div{
+    padding: 20px;
+}
+.card h1{
+    color: #323232;
+    font-family: 'Raleway', sans-serif;
+}
+.form input{
+    width: 300px;
+    height: 20px;
     padding: 10px;
-    color: rgb(38, 190, 228);
+
+}
+.button-start{
+    width: 300px;
+    height: 50px;
+    background-color: #156eff;
+    border: 1px solid #156eff;
+    color: white;
+    border-radius: 10px;
+    transition: 1s ease-in;
+    padding: 10px;
+}
+.button-start:hover{
+    background-color: white;
+    border: 1px solid #156eff;
+    color: #156eff;
+    transition: 1s ease-in-out;
+}
+.form{
+    font-family: 'Raleway', sans-serif;
+}
+.h1{
+    font-family: -apple-system;
 }

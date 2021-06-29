@@ -19,8 +19,15 @@ module.exports = {
         }
       },
       {
-        test: /\.mp4$/,
-        use: 'file-loader?name=videos/[name].[ext]',
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'imgs/[name].[ext]',
+            },
+          },
+        ],
       },
     ]
   },
@@ -31,4 +38,9 @@ module.exports = {
         filename: "index.html"
     }),
   ],
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    hot: true
+  },
 };
