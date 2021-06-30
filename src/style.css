@@ -2,40 +2,54 @@
     padding: 0px;
     margin: 0px;
 }
-:root{
-    --margin-top-posicion: 7%;
-}
 body{
    overflow-x: hidden;
     overflow-y: hidden;
 }
 .logo{
+    position: absolute;
     color: white;
-    padding: 10px;
+    display: flex;
+    align-items: center;
+    margin-top: -30%;
+    margin-left: -30%;
 }
 .logo h2{
     font-family: "Ubuntu Mono";
     font-size: 30px;
-}
-.logo p{
-    margin-top: 10px;
-    font-family: Verdana;
-    color: #9a9a9a;
+    padding-left: 10px;
 }
 .container-card{
     display: flex;
 }
+.info{
+    font-family: Arial;
+    position: absolute;
+    color: white;
+    margin-top: -15%;
+    margin-right: 10%;
+}
+.info h1{
+    font-size: 35px;
+}
 .card-info{
-    width: 50%;
+    width: 55%;
     height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-color: #17315a;
+    size: ledger;
+}
+.card-info div{
+    padding: 10px;
+}
+
+.imgaen{
+    transition: 10s ease-in-out;
 }
 .card-login{
-    width: 50%;
+    width: 45%;
     height: 100vh;
     display: flex;
     flex-direction: column;
@@ -44,10 +58,15 @@ body{
     background-color: white;
 }
 .card-login div{
-    padding: 10px;
+    padding: 30px;
 }
-.titulo{
-
+.titulo {
+color: #0c7cfa;
+    font-family: Arial;
+}
+.form label{
+    color: #666666;
+    font-family: Arial;
 }
 .card-login h2{
     font-family: Arial;
@@ -72,45 +91,11 @@ body{
     justify-content: center;
 }
 .button-inicio{
-    background-color: #d1e0fd;
-    color: #91abdc;
+    background-color: #3a7dff;
+    color: #fafafa;
     width: 40%;
     border-radius: 7px;
     border: 1px solid #d1e0fd;
     padding: 10px;
 }
-.posicion-img{
 
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    position: absolute;
-    background-image: url("https://images.unsplash.com/photo-1624948737703-39a18531ae0d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=755&q=80");
-    background-position: center;
-    background-size: cover;
-    transition: 1s ease-in-out;
-}
-.posicion-img:hover{
-    width: 70px;
-    height: 70px;
-    transition: 0.5s ease-in;
-    border:3px dotted #0c7cfa;
-}
-.posicion-img2 {
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
-    margin-right: 35%;
-    margin-top: -5%;
-    position: absolute;
-    background-image: url("https://images.unsplash.com/photo-1624948779888-6c04d2817919?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60");
-    background-position: center;
-    background-size: cover;
-    transition: 0.5s ease-in;
-}
-.posicion-img2:hover{
-    width: 70px;
-    height: 70px;
-    transition: 0.5s ease-in;
-    border:3px dotted #0c7cfa;
-}
