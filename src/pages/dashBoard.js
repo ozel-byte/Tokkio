@@ -1,6 +1,7 @@
 import React from "react";
 import CampoEdicionImagen from "../componentes/campoEdicionImagen";
 import ListaUsuarios from "../componentes/listaUsuarios";
+import HerramientasEdicion from "../componentes/herramientasEdicion";
 
 class DashBoard extends React.Component {
     render() {
@@ -14,7 +15,7 @@ class DashBoard extends React.Component {
                         <CampoEdicionImagen/>
                     </div>
                     <div className="herramientas">
-
+                        <HerramientasEdicion/>
                     </div>
                 </div>
             </div>

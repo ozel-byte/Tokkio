@@ -47,7 +47,7 @@
 
 .amigosEditand {
     width: 100%;
-    height: 30vh;
+    height: 24vh;
     margin-left: 10px;
 }
 
@@ -77,6 +77,11 @@
 .colorTexto{
     color: #182e5d;
     margin-left: 40px;
+    margin-top: 10px;
+}
+
+.textoHerr{
+    color: #182e5d;
 }
 
 .colorNombre{
@@ -103,8 +108,75 @@
 }
 
 .padreBarra{
+    height: 5vh;
     display: flex;
+    margin-top: 1px;
     justify-content: center;
     align-items: center;
-    margin-right: 20px;
+    background-color: white;
+}
+
+.listaScroll{
+    width: 98%;
+    height: 60vh;
+    overflow:hidden;
+    overflow-y:scroll;
+}
+
+.tituloHerramineta{
+    display: flex;
+    width: 100%;
+    height: 4vh;
+    justify-content: center;
+    align-items: center;
+}
+
+.sliders{
+    display: flex;
+    width: 100%;
+    height: 11vh;
+    justify-content: center;
+}
+
+.textoSlider{
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.sliderBarra{
+    width: 100%;
+    margin-left: 10px;
+}
+
+.slider{
+    -webkit-appearance: none;
+    margin-top: 10px;
+    width: 90%;
+    height: 10px;
+    border-radius: 5px;
+    background: #d3d3d3;
+    outline: none; /* Eliminar el contorno */
+    opacity: 0.8; /* Establecer la transparencia (para efectos de mouse-over en hover) */
+    -webkit-transition: .2s; /* Transición de 0,2 segundos al pasar el ratón por encima */
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 2; /* Se muestra completamente al pasar el ratón por encima */
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Anular el aspecto por defecto */
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #0c7cfa;
+    cursor: pointer; /* Cursor al pasar el ratón por encima */
+}
+
+.filtros{
+    width: 100%;
+    height: 76.8vh;
+    border: solid 1px black;
 }

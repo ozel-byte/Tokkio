@@ -7,7 +7,7 @@ class ListaUsuarios extends React.Component {
         super();
         this.state = {
             arreglo : [
-                'Ozel', 'Bryan', 'Kevin', 'El otro Kevin', 'Pancrasia'
+                'Ozel', 'Bryan', 'Kevin', 'El otro Kevin', 'Diego', 'Andres', 'Kevin3'
             ]
         }
 
@@ -20,7 +20,6 @@ class ListaUsuarios extends React.Component {
                     <ItemLista nombre="Soy yo"/>
                 </div>
                 <div className="amigosEditand">
-                    <br/>
                     <h1 className="colorTexto">Amigos en edición</h1>
                     <div>
                         <ul>
@@ -35,23 +34,23 @@ class ListaUsuarios extends React.Component {
                         </ul>
                     </div>
                 </div>
+                <div className="padreBarra">
+                    <div>
+                        <input type="text" className="barraBusqueda" placeholder="Buscar amigos..."/>
+                    </div>
+                </div>
                 <div className="listaConectados">
-
-                   <div className="padreBarra">
-                       <div className="buscador">
-                           <input type="text" className="barraBusqueda" placeholder="Buscar amigos..."/>
-                       </div>
-                   </div>
-
-                    {
-                        this.state.arreglo.map(item =>{
-                            return <ul>
-                                <li>
-                                    <ItemLista nombre={item}/>
-                                </li>
-                            </ul>
-                        })
-                    }
+                    <div className="listaScroll" >
+                        {
+                            this.state.arreglo.map(item =>{
+                                return <ul>
+                                    <li>
+                                        <ItemLista nombre={item}/>
+                                    </li>
+                                </ul>
+                            })
+                        }
+                    </div>
                 </div>
             </div>
         )
