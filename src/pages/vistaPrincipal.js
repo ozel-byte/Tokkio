@@ -29,7 +29,7 @@ class VistaPrincipal extends React.Component{
                     <div className="card-login">
                         <div className="titulo">
                             <h2>Hola! Bienvenido a TokkioEdit</h2>
-                            <p>No tienes cuenta? <a href="##">Crear cuenta</a></p>
+                            <p>No tienes cuenta? <a href="/signUp">Crear cuenta</a></p>
                         </div>
                         <div className="form">
                             <label for="">Correo</label>

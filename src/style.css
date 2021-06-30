@@ -98,4 +98,76 @@ color: #0c7cfa;
     border: 1px solid #d1e0fd;
     padding: 10px;
 }
+.container-signup{
 
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card-signup{
+    font-family: Arial;
+    background-color: white;
+    border-radius: 7px;
+    width: 40%;
+    height: 80vh;
+    -webkit-box-shadow: 0px 0px 12px 5px rgba(199,199,199,0.52);
+    box-shadow: 0px 0px 12px 5px rgba(199,199,199,0.52);
+}
+.card-signup h2{
+    font-family: Arial;
+}
+.text-singup{
+    margin-left: 40px;
+    margin-top: 20px;
+}
+.text-singup p{
+    font-family: Arial;
+    font-size: 15px;
+    color: #666666;
+}
+
+/* estilos del formulariuo sing up */
+
+.container-img-user{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.container-img-user img{
+    margin-top: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.content-item-signup{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.form-singup{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+.signup-button{
+    background-color: #0c7cfa;
+    border: none;
+    border-radius: 7px;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: white;
+    cursor: pointer;
+}
+.form-singup input{
+    width: 70%;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    border: 1px solid #afafaf;
+}
