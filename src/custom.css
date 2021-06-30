@@ -2,3 +2,109 @@
     padding: 0px;
     margin: 0px;
 }
+
+.contenerPadre{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.listaUsuario{
+    width: 20%;
+    height: 100vh;
+}
+
+.imagenEdit {
+    width: 60%;
+    height: 100vh;
+    background-color: mistyrose;
+}
+
+.herramientas{
+    width: 20%;
+    height: 100vh;
+}
+
+.cargarImagen img{
+    width: 800px;
+}
+
+.cargarImagen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+}
+
+.datosUsuario{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 10vh;
+    margin-left: 10px;
+}
+
+.amigosEditand {
+    width: 100%;
+    height: 30vh;
+    margin-left: 10px;
+}
+
+.listaConectados {
+    width: 100%;
+    height: 60vh;
+    margin-left: 10px;
+}
+
+#imagenUsuario {
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    border:2px solid #666;
+}
+
+.item{
+    display: flex;
+    align-items: center;
+    margin-top: 25px;
+}
+
+.nombreUsuario{
+    margin-left: 10px;
+}
+
+.colorTexto{
+    color: #182e5d;
+    margin-left: 40px;
+}
+
+.colorNombre{
+    color: #0c7cfa;
+}
+.barraBusqueda{
+    width: 300px;
+    height: 15px;
+    border-radius: 100px;
+    color: white;
+    border: none;
+    background-color: #0c7cfa;
+    padding: 10px;
+}
+
+/* Para cambiar el color del texto de un pleaxeholder*/
+.barraBusqueda::placeholder{
+    color: white;
+}
+
+/* Para cambiar el color o quitar el borde al dar click sobre un input*/
+.barraBusqueda:focus{
+    outline: none;
+}
+
+.padreBarra{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+}

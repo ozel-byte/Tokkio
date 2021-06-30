@@ -3,6 +3,7 @@ import AgregarImagen from "./agregarImagen";
 import {BrowserRouter as Router, Route,Switch} from "react-router-dom";
 import VistaPrincipal from "./vistaPrincipal";
 import Logo from "../componentes/logo";
+import DashBoard from "./dashBoard";
 class App extends React.Component{
     constructor(props){
         super(props);
@@ -12,7 +13,7 @@ class App extends React.Component{
         return(
            <Router>
                <Route exact path="/" >
-                   <VistaPrincipal/>
+                   <DashBoard/>
                </Route>
                <Route exact path="/Logo" >
                    <Logo/>
