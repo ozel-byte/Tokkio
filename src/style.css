@@ -5,6 +5,10 @@
 :root{
     --margin-top-posicion: 7%;
 }
+body{
+   overflow-x: hidden;
+    overflow-y: hidden;
+}
 .logo{
     color: white;
     padding: 10px;
