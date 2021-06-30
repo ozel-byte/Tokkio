@@ -18,6 +18,9 @@ class App extends React.Component{
                <Route exact path="/Logo" >
                    <Logo/>
                </Route>
+               <Route exact path="/dashBoard">
+                   <DashBoard/>
+               </Route>
            </Router>
         )
     }
