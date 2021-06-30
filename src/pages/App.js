@@ -13,7 +13,7 @@ class App extends React.Component{
         return(
            <Router>
                <Route exact path="/" >
-                   <DashBoard/>
+                   <VistaPrincipal/>
                </Route>
                <Route exact path="/Logo" >
                    <Logo/>

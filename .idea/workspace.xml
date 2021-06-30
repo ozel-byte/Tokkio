@@ -2,16 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b57b519-5c4f-463b-a90b-c51289c975c5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/componentes/campoEdicionImagen.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/componentes/herramientasEdicion.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/componentes/itemLista.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/componentes/listaUsuarios.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/componentes/posicionUserCardInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/frond-end2.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/custom.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/componentes/logo.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/componentes/logo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/pages/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/dashBoard.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashBoard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/webpack.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/vistaPrincipal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vistaPrincipal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,9 +31,6 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1uEn2DB8Ub5tVUs7qeBHST1tVpq" />
-  <component name="ProjectLevelVcsManager">
-    <ConfirmationsSetting value="2" id="Add" />
-  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -62,9 +60,9 @@
       <updated>1624239406675</updated>
       <workItem from="1624239407825" duration="534000" />
       <workItem from="1624241354351" duration="1598000" />
-      <workItem from="1624936667399" duration="7562000" />
-      <workItem from="1624944438647" duration="316000" />
-      <workItem from="1625016805907" duration="9267000" />
+      <workItem from="1624936667399" duration="8058000" />
+      <workItem from="1624993400479" duration="711000" />
+      <workItem from="1625071481771" duration="4470000" />
     </task>
     <servers />
   </component>
