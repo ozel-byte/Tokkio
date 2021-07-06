@@ -362,30 +362,108 @@ padding: 10px;
 /* media */
 @media (max-width: 1400px){
     .canva {
-        width: 42%;
+        width: 80%;
     }
     .btnCargarImg{
         width: 100px;
-        height: 25px;
+        height: 35px;
         border-radius: 100px;
         color: white;
         border: none;
         font-size: 10px;
         background-color: #0c7cfa;
         margin-top: 3px;
+        margin-left: 20px
     }
     .btnElegirImg{
         width: 100%;
     }
     .btnFiltro{
         width: 15%;
-        height: 3vh;
+        height: 5vh;
         margin-left: 3px;
         margin-right: 3px;
         border: none;
         border-radius: 10px;
         color: white;
         background-color: #0c7cfa;
-        font-size: 10px;
+        font-size: 15px;
+    }
+    .nombreParametro h1{
+        font-size: 20px;
+    }
+    .nombreParametro h3{
+        font-size: 15px;
+    }
+    .btnOpciones{
+        width: 30%;
+        height: 5vh;
+        margin: 0px 10px 0px 10px;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        font-size: 15px;
+    }
+    .space-textos label{
+        font-size: 25px;
+        color: #182e5d;
+    }
+    .space-botones button{
+        width: 45%;
+        height: 3vh;
+        border-radius: 100px;
+        margin-left: 2px;
+        margin-right: 2px;
+        margin-top: -10px;
+        border: solid 1px black;
+        background-color: white;
+        color: #0c7cfa;
+        font-size: 20px;
+    }
+}
+@media (min-width: 1400px){
+    .btnCargarImg{
+        width: 150px;
+        height: 20px;
+        border-radius: 100px;
+        color: white;
+        border: none;
+        font-size: 15px;
+        background-color: #0c7cfa;
+        margin-top: 3px;
+        margin-left: 20px;
+    }
+    .btnElegirImg{
+        width: 100%;
+    }
+    .SubirImg{
+        display: flex;
+        width: 18%;
+        height: 19.8vh;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media (min-width: 1920px){
+    .SubirImg{
+        display: flex;
+        width: 14%;
+        height: 19.8vh;
+        justify-content: center;
+        align-items: center;
+    }
+    .btnCargarImg{
+        width: 300px;
+        height: 25px;
+        border-radius: 100px;
+        color: white;
+        border: none;
+        font-size: 15px;
+        background-color: #0c7cfa;
+        margin-top: 3px;
+    }
+    .btnElegirImg{
+        width: 100%;
     }
 }
