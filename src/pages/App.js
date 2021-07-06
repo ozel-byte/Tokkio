@@ -3,7 +3,7 @@ import AgregarImagen from "./agregarImagen";
 import {BrowserRouter as Router, Route,Switch} from "react-router-dom";
 import VistaPrincipal from "./vistaPrincipal";
 import Logo from "../componentes/logo";
-import DashBoard from "./dashBoard";
+import DashBoard from "./dashBoardv2";
 import SignUp from "./signUp";
 class App extends React.Component{
     constructor(props){
@@ -23,7 +23,7 @@ class App extends React.Component{
                    <Logo/>
                </Route>
                <Route exact path="/dashBoard">
-                   <DashBoard/>
+                 <DashBoard/>
                </Route>
            </Router>
         )

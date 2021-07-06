@@ -180,3 +180,66 @@
     height: 76.8vh;
     border: solid 1px black;
 }
+
+/* codigo del dashboard */
+
+.container-windows-slider{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    flex-direction: column;
+}
+.window-slider-list{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 10vh;
+    background-color: black;
+}
+.windows-slider-img{
+    width: 100%;
+    height: 70vh;
+    background-color: blue;
+}
+.windows-slider-configure{
+    width: 100%;
+    height: 20vh;
+    background-color: cadetblue;
+}
+.space-configure-img{
+    width: 80%;
+    height: 10vh;
+    background-color: red;
+}
+.list-users{
+    width: 20%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 10vh;
+    background-color: cornsilk;
+    font-size: 20px;
+}
+.list-users h1{
+    font-size: 20px;
+}
+.list-user-conectados{
+    background-color: grey;
+    width: 15%;
+    height: 50vh;
+    position: absolute;
+    margin-left: 70%;
+    margin-top: 4%;
+    display: none;
+}
+.notificacion{
+    background-color: pink;
+    width: 15%;
+    height: 50vh;
+    position: absolute;
+    margin-left: 85%;
+    margin-top: 4%;
+    display: none;
+}
+/* media */
+

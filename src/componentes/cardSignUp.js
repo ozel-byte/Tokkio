@@ -23,7 +23,6 @@ class CardSignUp extends React.Component{
                            <button className='signup-button'>Crear</button>
                        </div>
                    </div>
-
                 </div>
             </>
         )

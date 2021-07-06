@@ -1,173 +1,284 @@
-*{
-    padding: 0px;
-    margin: 0px;
-}
+
 body{
    overflow-x: hidden;
     overflow-y: hidden;
 }
-.logo{
-    position: absolute;
-    color: white;
-    display: flex;
-    align-items: center;
-    margin-top: -30%;
-    margin-left: -30%;
+*{
+    padding: 0px;
+    margin: 0px;
 }
-.logo h2{
-    font-family: "Ubuntu Mono";
-    font-size: 30px;
-    padding-left: 10px;
-}
-.container-card{
+
+.container{
     display: flex;
 }
-.info{
-    font-family: Arial;
-    position: absolute;
-    color: white;
-    margin-top: -15%;
-    margin-right: 10%;
-}
-.info h1{
-    font-size: 35px;
-}
-.card-info{
-    width: 55%;
+
+.card-one{
+    width: 60%;
     height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    size: ledger;
+    background-color: thistle;
+    background-image: url("https://images.unsplash.com/photo-1508153460964-48ffffcb0829?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
 }
-.card-info div{
-    padding: 10px;
-}
-
-.imgaen{
-    transition: 10s ease-in-out;
-}
-.card-login{
-    width: 45%;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: white;
-}
-.card-login div{
-    padding: 30px;
-}
-.titulo {
-color: #0c7cfa;
-    font-family: Arial;
-}
-.form label{
-    color: #666666;
-    font-family: Arial;
-}
-.card-login h2{
-    font-family: Arial;
-    font-size: 30px;
-    color: black;
-}
-.form{
-    width: 70%;
-    display: flex;
-    flex-direction: column;
-}
-.form input{
-    padding: 15px;
-    margin: 10px;
-    border: 1px solid #c7c7c7;
-    border-radius: 7px;
-}
-.contenedor-button{
-
-    width: 100vh;
-    display: flex;
-    justify-content: center;
-}
-.button-inicio{
-    background-color: #3a7dff;
-    color: #fafafa;
-    width: 40%;
-    border-radius: 7px;
-    border: 1px solid #d1e0fd;
-    padding: 10px;
-}
-.container-signup{
-
+.posicioncard{
     width: 100%;
     height: 100vh;
     display: flex;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.card-one h2{
+    margin-top: 10%;
+    margin-left: 2%;
+}
+.card-two{
+    width: 40%;
+    height: 100vh;
+    background-color: steelblue;
+}
+
+.card-one img{
+    width: 50px;
+    height: 50px;
+}
+.information{
+    text-align: center;
+}
+.container-form{
+    display: flex;
+    width: 100%;
+    height: 100vh;
     justify-content: center;
     align-items: center;
+}
+.card-form{
+    padding: 10px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+    width: 65%;
+    height: 60%;
+}
+.text-form{
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.text-form h2{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.formulario{
+    display: flex;
+    flex-direction: column;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.formulario input{
+    padding-top: 10px;
+    padding-left: 10px;
+    border: 1px solid rgb(189, 189, 189);
+    padding-bottom: 10px;
+
+}
+.formulario > input{
+    margin: 10px;
+
+}
+.button-iniciar{
+    background-color: #3c7dfa;
+    border: none;
+    padding: 10px 40px 10px 40px;
+    border-radius: 5px;
+    color: white;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* 400px - 900px - 1200px - 1080px - 1990px-  */
+@media (max-width: 600px) {
+    body{
+        overflow-y: hidden;
+    }
+    .posicioncard{
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        color: white;
+        margin-top: 30px;
+    }
+    .card-one{
+        width: 100%;
+    }
+    .card-two{
+        width: 0%;
+    }
+    .container-form{
+        margin-top: 10%;
+        margin-left: -98%;
+        position: absolute;
+    }
+}
+@media (min-width: 600px){
+    body{
+        overflow-y: hidden;
+    }
+    .posicioncard{
+        align-items: center;
+        flex-direction: column;
+        color: white;
+        margin-top: 12%;
+    }
+    .card-one{
+        width: 100%;
+    }
+    .card-two{
+        overflow-x: hidden;
+        width: 0%;
+    }
+    .container-form{
+        width: 100%;
+
+        margin-top: 10%;
+        margin-left: -100%;
+        position: absolute;
+    }
+    .card-form .formulario input{
+        width: 380px;
+
+    }
+}
+@media (min-width: 900px){
+    .posicioncard{
+        justify-content: center;
+        margin-top: 0%;
+    }
+    .card-one{
+        width: 60%;
+    }
+    .card-two{
+        width: 40%;
+    }
+    .container-form{
+        margin-top: 0%;
+        margin-left: 0%;
+        position: relative;
+    }
+    .card-form .formulario input{
+        width: 200px;
+
+    }
+}
+@media (max-width:1300px){
+    .formulario input{
+        width: 200px;
+    }
+    .card-form{
+        height: 40%;
+    }
+
+
+}
+@media (min-width: 1300px){
+    .card-form .formulario input{
+        width: 250px;
+        border-radius: 10px;
+        height: 20px;
+        font-size: 15px;
+        padding-top: 15px;
+        padding-left: 15px;
+    }
+    .card-form{
+        height: 60%;
+    }
+    .button-iniciar{
+        font-size: 15px;
+        width: 200px;
+    }
+}
+@media (min-width:1510px){
+    .formulario{
+        width: 100%;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .card-form{
+        height: 60%;
+    }
+    .button-iniciar{
+        padding: 20px 50px 20px 50px;
+    }
+    .card-form .formulario input{
+        width: 450px;
+        border-radius: 10px;
+        height: 50px;
+        font-size: 30px;
+        padding-top: 20px;
+        padding-left: 20px;
+    }
+    .information{
+        font-size: 30px;
+    }
+    .posicioncard img{
+        width: 100px;
+        height: 100px;
+    }
+    .posicioncard h2{
+        font-size: 50px;
+    }
+    .text-form{
+        font-size: 30px;
+    }
+    .button-iniciar{
+        font-size: 30px;
+
+        width: 400px;
+    }
+    .input-class{
+        width: 500px;
+
+    }
+
+}
+
+/* crear cuenta */
+.container-signup{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .card-signup{
-    font-family: Arial;
-    background-color: white;
-    border-radius: 7px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     width: 40%;
     height: 80vh;
-    -webkit-box-shadow: 0px 0px 12px 5px rgba(199,199,199,0.52);
-    box-shadow: 0px 0px 12px 5px rgba(199,199,199,0.52);
-}
-.card-signup h2{
-    font-family: Arial;
-}
-.text-singup{
-    margin-left: 40px;
-    margin-top: 20px;
-}
-.text-singup p{
-    font-family: Arial;
-    font-size: 15px;
-    color: #666666;
-}
-
-/* estilos del formulariuo sing up */
-
-.container-img-user{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
-.container-img-user img{
-    margin-top: 20px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-.content-item-signup{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 15px 5px rgba(156, 156, 156, 0.45);
+    box-shadow: 0px 0px 15px 5px rgba(201, 201, 201, 0.45);
 }
 .form-singup{
+    width: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    width: 100%;
+    padding: 10px;
 }
 .signup-button{
-    background-color: #0c7cfa;
-    border: none;
-    border-radius: 7px;
-    padding-left: 100px;
-    padding-right: 100px;
-    padding-top: 15px;
-    padding-bottom: 15px;
+    width: 90%;
+    border-radius: 5px;
+    background-color: blue;
     color: white;
-    cursor: pointer;
+    padding: 10px;
+    border: none;
 }
 .form-singup input{
-    width: 70%;
     padding: 10px;
-    border-radius: 5px;
-    margin: 10px;
-    border: 1px solid #afafaf;
 }
