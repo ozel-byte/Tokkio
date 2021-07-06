@@ -1,15 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6b57b519-5c4f-463b-a90b-c51289c975c5" name="Default Changelist" comment="componente crear cuenta">
-      <change afterPath="$PROJECT_DIR$/src/pages/dashBoardv2.js" afterDir="false" />
+    <list default="true" id="6b57b519-5c4f-463b-a90b-c51289c975c5" name="Default Changelist" comment="no se que poner">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/componentes/cardSignUp.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/componentes/cardSignUp.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/custom.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/custom.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/vistaPrincipal.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/vistaPrincipal.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/pages/dashBoardv2.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/dashBoardv2.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +14,7 @@
   <component name="DaemonCodeAnalyzer">
     <disable_hints>
       <file url="file://$PROJECT_DIR$/src/pages/dashBoardv2.js" />
+      <file url="file://$PROJECT_DIR$/src/pages/vistaPrincipal.js" />
     </disable_hints>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -33,6 +29,7 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/pages/vistaPrincipal.js" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/src/pages/dashBoardv2.js" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1uEn2DB8Ub5tVUs7qeBHST1tVpq" />
@@ -74,7 +71,8 @@
       <workItem from="1625333352116" duration="492000" />
       <workItem from="1625334171512" duration="2883000" />
       <workItem from="1625509558263" duration="1432000" />
-      <workItem from="1625538147106" duration="5221000" />
+      <workItem from="1625538147106" duration="15607000" />
+      <workItem from="1625578526014" duration="908000" />
     </task>
     <task id="LOCAL-00001" summary="se quito el scroll">
       <created>1625076833619</created>
@@ -104,7 +102,21 @@
       <option name="project" value="LOCAL" />
       <updated>1625089022546</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="dashboard">
+      <created>1625543592930</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1625543592931</updated>
+    </task>
+    <task id="LOCAL-00006" summary="no se que poner">
+      <created>1625557955340</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1625557955341</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -127,6 +139,8 @@
     <MESSAGE value="login listo" />
     <MESSAGE value="imgs listos" />
     <MESSAGE value="componente crear cuenta" />
-    <option name="LAST_COMMIT_MESSAGE" value="componente crear cuenta" />
+    <MESSAGE value="dashboard" />
+    <MESSAGE value="no se que poner" />
+    <option name="LAST_COMMIT_MESSAGE" value="no se que poner" />
   </component>
 </project>

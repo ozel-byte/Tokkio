@@ -330,7 +330,15 @@
 .list-users h1{
     font-size: 20px;
 }
+ul,ol {
+    list-style: none;
+}
+.nav > li{
+padding: 10px;
+}
+ 
 .list-user-conectados{
+    
     background-color: grey;
     width: 15%;
     height: 50vh;
@@ -338,6 +346,9 @@
     margin-left: 70%;
     margin-top: 4%;
     display: none;
+    overflow:hidden;
+     
+    overflow-y:scroll
 }
 .notificacion{
     background-color: pink;

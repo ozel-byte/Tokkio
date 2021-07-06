@@ -23,8 +23,6 @@ class VistaPrincipal extends React.Component{
 
     onChange(e){
         let value = e.target.value;
-        console.log(value)
-        console.log(e.target.name)
         if (e.target.name === 'correo'){
             this.setState({
                 correo: value
@@ -37,15 +35,16 @@ class VistaPrincipal extends React.Component{
     }
 
     login(){
-       axios.get('http://167.172.146.90:3001/user/signIn',{
+       axios.get('http://localhost:3001/user/signIn',{
            params: {
                correo: this.state.correo,
                pass:this.state.pass
            }
        }).then((res) => {
+           console.log(res.data[0].username + "si llego")
            if (res.data[0].correo.length>0){
+              window.localStorage.setItem('usertokkio',res.data[0].username)
               this.props.history.push('/dashBoard');
-              window.localStorage.setItem('usertokkio',res.data[0])
            }
            alert(res.data)
        }).catch(e => {
