@@ -362,7 +362,7 @@ padding: 10px;
 /* media */
 @media (max-width: 1400px){
     .canva {
-        width: 80%;
+        width: 40%;
     }
     .btnCargarImg{
         width: 100px;
