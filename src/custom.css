@@ -209,6 +209,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .btnCargarImg{
     width: 300px;
     height: 25px;
@@ -348,4 +349,32 @@
     display: none;
 }
 /* media */
-
+@media (max-width: 1400px){
+    .canva {
+        width: 42%;
+    }
+    .btnCargarImg{
+        width: 100px;
+        height: 25px;
+        border-radius: 100px;
+        color: white;
+        border: none;
+        font-size: 10px;
+        background-color: #0c7cfa;
+        margin-top: 3px;
+    }
+    .btnElegirImg{
+        width: 100%;
+    }
+    .btnFiltro{
+        width: 15%;
+        height: 3vh;
+        margin-left: 3px;
+        margin-right: 3px;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        background-color: #0c7cfa;
+        font-size: 10px;
+    }
+}
