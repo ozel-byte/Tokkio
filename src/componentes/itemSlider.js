@@ -6,7 +6,7 @@ class ItemSlider extends React.Component{
     constructor() {
         super()
         this.state  = {
-            idSlider: 1
+            idSlider: 0
         }
 
     }
@@ -18,7 +18,7 @@ class ItemSlider extends React.Component{
         this.setState(update(this.state,{
             [field] : {$set : value}
         }))
-        this.idSlider.innerHTML = '* Campo obligatorio'
+       // this.idSlider.innerHTML = this.state.idSlider
 
     }
 
@@ -27,7 +27,7 @@ class ItemSlider extends React.Component{
             <div>
 
                 <div>
-                    <input type="range" id="idSlider" name="idSlider" min='1' max='100' value={this.state.idSlider} onChange={this.changeField.bind(this)} className="slider"/>
+                    <input type="range" id="idSlider" name="idSlider" min='-100' max='100' value={this.state.idSlider} onChange={this.changeField.bind(this)} className="slider"/>
                     <label ref={self=> this.idSlider = self}>{this.state.idSlider}</label>
                 </div>
             </div>
