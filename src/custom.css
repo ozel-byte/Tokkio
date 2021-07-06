@@ -25,10 +25,6 @@
     height: 100vh;
 }
 
-.cargarImagen img{
-    width: 800px;
-}
-
 .cargarImagen{
     display: flex;
     justify-content: center;
@@ -175,12 +171,6 @@
     cursor: pointer; /* Cursor al pasar el ratón por encima */
 }
 
-.filtros{
-    width: 100%;
-    height: 76.8vh;
-    border: solid 1px black;
-}
-
 /* codigo del dashboard */
 
 .container-windows-slider{
@@ -197,19 +187,135 @@
     background-color: black;
 }
 .windows-slider-img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 70vh;
-    background-color: blue;
+    background-color: mistyrose;
+}
+.canva {
+    width: 52%;
 }
 .windows-slider-configure{
+    display: flex;
     width: 100%;
     height: 20vh;
-    background-color: cadetblue;
+}
+.SubirImg{
+    display: flex;
+    width: 14%;
+    height: 19.8vh;
+    justify-content: center;
+    align-items: center;
+}
+.btnCargarImg{
+    width: 300px;
+    height: 25px;
+    border-radius: 100px;
+    color: white;
+    border: none;
+    font-size: 15px;
+    background-color: #0c7cfa;
+    margin-top: 3px;
+}
+.filtros{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 43%;
+    height: 19.8vh;
+}
+.divBotonesFiltro{
+    width: 100%;
+}
+.btnFiltro{
+    width: 20%;
+    height: 5vh;
+    margin-left: 5px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    background-color: #0c7cfa;
+    font-size: 20px;
+}
+.btnFiltro:hover{
+    -webkit-box-shadow: 0px 0px 16px -4px #000000;
+    box-shadow: 0px 0px 16px -4px #000000;
+}
+.divBotonesExtra{
+    width: 100%;
+}
+.btnOpciones{
+    width: 30%;
+    height: 5vh;
+    margin: 0px 10px 0px 10px;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-size: 20px;
+}
+
+.btnOpciones:hover{
+    -webkit-box-shadow: 0px 0px 16px -4px #000000;
+    box-shadow: 0px 0px 16px -4px #000000;
+}
+
+#btnDescargar{
+    background-color: dodgerblue;
+}
+#btnRevertir{
+    background-color: orangered;
 }
 .space-configure-img{
+    display: flex;
     width: 80%;
     height: 10vh;
-    background-color: red;
+    background-color: white;
+}
+.space-textos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20%;
+}
+.space-botones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+.space-botones button{
+    width: 45%;
+    height: 3vh;
+    border-radius: 100px;
+    margin-left: 2px;
+    margin-right: 2px;
+    border: solid 1px black;
+    background-color: white;
+    color: #0c7cfa;
+    font-size: 30px;
+}
+.space-botones button:hover{
+    -webkit-box-shadow: 0px 0px 16px -4px #000000;
+    box-shadow: 0px 0px 16px -4px #000000;
+}
+.contenerBotones{
+    width: 25%;
+}
+.centrarBotones{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.nombreParametro{
+    display: flex;
+    justify-content: center;
+}
+.space-textos label{
+    font-size: 30px;
+    color: #182e5d;
 }
 .list-users{
     width: 20%;
