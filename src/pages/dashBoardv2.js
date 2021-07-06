@@ -205,6 +205,7 @@ class DashBoardv2 extends React.Component{
        }
     }
     openModalNotificacion(){
+        window.localStorage.removeItem('usertokkio')
         console.log("hola 2");
         if (!this.state.aux2){
             let modalListUser = document.getElementsByClassName("list-user-conectados");

@@ -1,4 +1,6 @@
 import React from "react";
+import axios from 'axios';
+import {withRouter} from "react-router-dom";
 import NavBar from "../componentes/navBar";
 import Logo from "../componentes/logo";
 import PosicionUserCardInfo from "../componentes/posicionUserCardInfo";
@@ -7,7 +9,50 @@ import PosicionUserCardInfo from "../componentes/posicionUserCardInfo";
 class VistaPrincipal extends React.Component{
     constructor() {
         super();
+        this.state = {
+            correo: "",
+            pass: ""
+        }
     }
+
+    componentDidMount() {
+        if (window.localStorage.getItem('usertokkio')){
+            this.props.history.push('/dashBoard')
+        }
+    }
+
+    onChange(e){
+        let value = e.target.value;
+        console.log(value)
+        console.log(e.target.name)
+        if (e.target.name === 'correo'){
+            this.setState({
+                correo: value
+            })
+        }else{
+            this.setState({
+                pass: value
+            })
+        }
+    }
+
+    login(){
+       axios.get('http://167.172.146.90:3001/user/signIn',{
+           params: {
+               correo: this.state.correo,
+               pass:this.state.pass
+           }
+       }).then((res) => {
+           if (res.data[0].correo.length>0){
+              this.props.history.push('/dashBoard');
+              window.localStorage.setItem('usertokkio',res.data[0])
+           }
+           alert(res.data)
+       }).catch(e => {
+           alert(e)
+       })
+    }
+
     render() {
         return (
             <div className="container">
@@ -31,11 +76,11 @@ class VistaPrincipal extends React.Component{
                                 <p>No tienes cuenta? <a href="/signUp">Crear cuenta</a></p>
                             </div>
                             <div className="formulario">
-                                <input type="text" placeholder="Ingrese su correo" className="input-class"/>
-                                <input type="text" placeholder="Ingrese su password"/>
+                                <input type="text" name="correo"  placeholder="Ingrese su correo" className="input-class" onChange={this.onChange.bind(this)}/>
+                                <input type="text" name="pass"  placeholder="Ingrese su password" onChange={this.onChange.bind(this)}/>
                             </div>
                             <div>
-                                <button className="button-iniciar">Iniciar</button>
+                                <button className="button-iniciar" onClick={this.login.bind(this)}>Iniciar</button>
                             </div>
                         </div>
                     </div>
@@ -45,4 +90,4 @@ class VistaPrincipal extends React.Component{
     }
 }
 
-export default VistaPrincipal;
+export default withRouter(VistaPrincipal);
