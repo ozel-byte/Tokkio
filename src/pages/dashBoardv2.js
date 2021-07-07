@@ -1,5 +1,7 @@
 import React from 'react';
 import io from 'socket.io-client';
+import ItemInvitacion from "../componentes/itemInvitacion";
+import ItemAmigo from "../componentes/itemAmigo"
 
 class DashBoardv2 extends React.Component {
     constructor() {
@@ -314,9 +316,37 @@ class DashBoardv2 extends React.Component {
                                 </ul>
                             })
                         }
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
+                        <ItemInvitacion/>
                     </div>
                     <div className="notificacion" >
-
+                        <ItemAmigo/>
+                        <ItemAmigo/>
+                        <ItemAmigo/>
+                        <ItemAmigo/>
+                        <ItemAmigo/>
+                        <ItemAmigo/>
+                        <ItemAmigo/>
+                        <ItemAmigo/>
                     </div>
                     <div className="windows-slider-img">
                         <canvas id="canvaP" ref={canvasA => this.canvasA = canvasA} className="canva" />
