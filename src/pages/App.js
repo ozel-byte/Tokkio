@@ -3,7 +3,7 @@ import AgregarImagen from "./agregarImagen";
 import {BrowserRouter as Router, Route,Switch} from "react-router-dom";
 import VistaPrincipal from "./vistaPrincipal";
 import Logo from "../componentes/logo";
-import DashBoard from "./dashBoardv2";
+import DashBoard from "./dashBoardv3";
 import SignUp from "./signUp";
 class App extends React.Component{
     constructor(props){
