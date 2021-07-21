@@ -5,10 +5,11 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import Brightness6Icon from '@material-ui/icons/Brightness6';
 import ReplayIcon from '@material-ui/icons/Replay';
 import PeopleIcon from '@material-ui/icons/People';
+import ItemAmigo from '../componentes/itemAmigo';
 import axios from 'axios';
 import io from 'socket.io-client';
 
-class DashBoardv3 extends React.Component{
+class DashBoardv3 extends React.Component {
     constructor() {
         super();
         this.state = {
@@ -19,6 +20,7 @@ class DashBoardv3 extends React.Component{
             aux5: false,
             auxUser: false,
             auxAmigos: false,
+            sinImage: true,
             imgUser: '',
             username: '',
             user: []
@@ -27,12 +29,14 @@ class DashBoardv3 extends React.Component{
     }
 
     componentDidMount() {
+        let tamanoImg = document.getElementsByClassName("canva");
+        tamanoImg[0].style.maxHeight = "5%";
         this.getUserData();
         this.setState({imgUser: "https://cdn.dribbble.com/users/215/screenshots/15549385/media/1bc71b42034a8192729903deb2d3c0c0.png"})
         this.cargarImagen("https://image.flaticon.com/icons/png/512/1837/1837526.png")
     }
 
-    initSocket(){
+    initSocket() {
         const socket = io('http://localhost:3000');
         let username = window.localStorage.getItem('usertokkio');
         let objectUser = {
@@ -49,8 +53,9 @@ class DashBoardv3 extends React.Component{
             console.log(res[0]);
         });
     }
-    getUserData(){
-        axios.get("http://localhost:3000/user/getUserUsername",{
+
+    getUserData() {
+        axios.get("http://localhost:3000/user/getUserUsername", {
             params: {
                 username: window.localStorage.getItem('usertokkio')
             }
@@ -63,44 +68,48 @@ class DashBoardv3 extends React.Component{
             this.initSocket();
         }).catch(e => {
             console.log(e)
-        } )
+        })
     }
 
-    openModaFiltros(e){
+    openModaFiltros(e) {
         let mostrarFiltros = document.getElementsByClassName("contaierVistaFiltros");
         let ispaceImg = document.getElementsByClassName("containerImagen");
         let tamanoImg = document.getElementsByClassName("canva");
         let texto = document.getElementsByClassName("texto");
         let containerBtnFil = document.getElementsByClassName("containerBtnFil");
         let prueba = document.getElementsByClassName("prueba");
-        if (!this.state.aux){
+        if (!this.state.aux) {
             this.cerrarVentanas()
             mostrarFiltros[0].style.width = "20%";
             mostrarFiltros[0].style.display = "flex";
-            ispaceImg[0].style.width = "76%";
-            tamanoImg[0].style.maxHeight = "75%";
+            if (!this.state.sinImage) {
+                ispaceImg[0].style.width = "76%";
+                tamanoImg[0].style.maxHeight = "75%";
+            }
             texto[0].style.fontSize = "20px";
             containerBtnFil[0].style.width = "95%";
             containerBtnFil[0].style.height = "98vh";
             prueba[0].style.display = "block";
             console.log("verdadero");
             this.setState({aux: true});
-        }else {
+        } else {
             console.log("falso");
             mostrarFiltros[0].style.width = "0%";
             mostrarFiltros[0].style.display = "initial";
-            ispaceImg[0].style.width = "96%";
-            tamanoImg[0].style.maxHeight = "99.8%"
+            if (!this.state.sinImage) {
+                ispaceImg[0].style.width = "96%";
+                tamanoImg[0].style.maxHeight = "99.8%"
+            }
             texto[0].style.fontSize = "0px";
             containerBtnFil[0].style.width = "0%";
-            prueba[0].style.display = "block";
+            prueba[0].style.display = "none";
             this.setState({aux: false});
         }
     }
 
-    openModaUser(e){
+    openModaUser(e) {
         let detallesUser = document.getElementsByClassName("detallesUser");
-        if (!this.state.auxUser){
+        if (!this.state.auxUser) {
             this.cerrarVentanas();
             detallesUser[0].style.display = "block";
             this.setState({auxUser: true});
@@ -110,9 +119,9 @@ class DashBoardv3 extends React.Component{
         }
     }
 
-    openModaAmigos(e){
+    openModaAmigos(e) {
         let listaAmigos = document.getElementsByClassName("listaAmigos");
-        if (!this.state.auxAmigos){
+        if (!this.state.auxAmigos) {
             this.cerrarVentanas();
             listaAmigos[0].style.display = "block";
             this.setState({auxAmigos: true});
@@ -122,9 +131,9 @@ class DashBoardv3 extends React.Component{
         }
     }
 
-    openModaBotones(e){
+    openModaBotones(e) {
         let botonesBrillo = document.getElementsByClassName("botonesBillo");
-        if (!this.state.aux2){
+        if (!this.state.aux2) {
             this.cerrarVentanas();
             botonesBrillo[0].style.display = "block";
             this.setState({aux2: true});
@@ -133,9 +142,10 @@ class DashBoardv3 extends React.Component{
             this.setState({aux2: false});
         }
     }
-    openModaContraste(e){
+
+    openModaContraste(e) {
         let botonesContr = document.getElementsByClassName("botonesContr");
-        if (!this.state.aux3){
+        if (!this.state.aux3) {
             this.cerrarVentanas();
             botonesContr[0].style.display = "block";
             this.setState({aux3: true});
@@ -144,9 +154,10 @@ class DashBoardv3 extends React.Component{
             this.setState({aux3: false});
         }
     }
-    openModaSaturacion(e){
+
+    openModaSaturacion(e) {
         let botonesSatu = document.getElementsByClassName("botonesSatu");
-        if (!this.state.aux4){
+        if (!this.state.aux4) {
             this.cerrarVentanas();
             botonesSatu[0].style.display = "block";
             this.setState({aux4: true});
@@ -155,9 +166,10 @@ class DashBoardv3 extends React.Component{
             this.setState({aux4: false});
         }
     }
-    openModaBIlumna(e){
+
+    openModaBIlumna(e) {
         let botonesIlumina = document.getElementsByClassName("botonesIlumina");
-        if (!this.state.aux5){
+        if (!this.state.aux5) {
             this.cerrarVentanas();
             botonesIlumina[0].style.display = "flex";
             this.setState({aux5: true});
@@ -167,18 +179,18 @@ class DashBoardv3 extends React.Component{
         }
     }
 
-    cerrarVentanas(){
+    cerrarVentanas() {
         let botonesBrillo = document.getElementsByClassName("botonesBillo");
         let botonesContr = document.getElementsByClassName("botonesContr");
         let botonesSatu = document.getElementsByClassName("botonesSatu");
         let botonesIlumina = document.getElementsByClassName("botonesIlumina");
         let detallesUser = document.getElementsByClassName("detallesUser");
         let listaAmigos = document.getElementsByClassName("listaAmigos");
-        if (this.state.aux){
+        if (this.state.aux) {
             this.setState({aux: true})
             this.openModaFiltros();
         }
-        if (this.state.aux2 || this.state.aux3 || this.state.aux4 || this.state.aux5 || this.state.auxUser || this.state.auxAmigos){
+        if (this.state.aux2 || this.state.aux3 || this.state.aux4 || this.state.aux5 || this.state.auxUser || this.state.auxAmigos) {
             botonesContr[0].style.display = "none";
             botonesSatu[0].style.display = "none";
             botonesIlumina[0].style.display = "none";
@@ -189,7 +201,8 @@ class DashBoardv3 extends React.Component{
         }
     }
 
-    obtenerImagen(){
+    obtenerImagen() {
+        let tamanoImg = document.getElementsByClassName("canva");
         if (this.fileInput.current.files[0]) {
             this.setState((state, props) => ({
                 nombreImg: this.fileInput.current.files[0].name
@@ -206,6 +219,12 @@ class DashBoardv3 extends React.Component{
             reader.addEventListener("load", () => {
                 this.cargarImagen(reader.result)
             })
+            this.setState({sinImage: false});
+            if (!this.state.aux) {
+                tamanoImg[0].style.maxHeight = "99.8%"
+            } else {
+                tamanoImg[0].style.maxHeight = "75%";
+            }
         }
     }
 
@@ -358,166 +377,201 @@ class DashBoardv3 extends React.Component{
     }
 
     render() {
-        return(
+        return (
             <>
-              <div className="containerPrincipal">
-                  <div className="perfilUsuario" onClick={this.openModaUser.bind(this)}>
-                      <img src={this.state.imgUser}/>
-                  </div>
-                  <div className="detallesUser">
-                    <h2>{this.state.username}</h2>
-                  </div>
-                  <div className="mostraAmigos" onClick={this.openModaAmigos.bind(this)}>
-                      <PeopleIcon style={{ fontSize: 35 }}/>
-                  </div>
-                  <div className="listaAmigos">
+                <div className="containerPrincipal">
+                    <div className="perfilUsuario" onClick={this.openModaUser.bind(this)}>
+                        <img src={this.state.imgUser}/>
+                    </div>
+                    <div className="detallesUser">
+                        <h2>{this.state.username}</h2>
+                    </div>
+                    <div className="mostraAmigos" onClick={this.openModaAmigos.bind(this)}>
+                        <PeopleIcon style={{fontSize: 35}}/>
+                    </div>
+                    <div className="listaAmigos">
                         <ul>
-                        {
-                            this.state.user.map(item => {
-                                return (
-                                    <li>{item.user}</li>
-                                )
-                            })
-                        }
+                            {
+                                this.state.user.map(item => {
+                                    return (
+                                        <li><ItemAmigo user={item}/></li>
+                                    )
+                                })
+                            }
                         </ul>
-                  </div>
-                  <div className="containerFiltros">
-                      <div id="divBtnsFiltro">
-                          <div onClick={this.descargarImagenBtn.bind(this)}>
-                              <GetAppIcon/>
-                          </div>
-                          <br/>
-                          <div onClick={this.openModaFiltros.bind(this)}>
-                              <PhotoFilterIcon/>
-                          </div>
-                          <br/>
-                          <div>
-                              <label className="custom-file-upload">
-                                  <input type="file" onChange={this.obtenerImagen.bind(this)} ref={this.fileInput}/>
-                                  <PublishIcon/>
-                              </label>
-                          </div>
-                          <br/>
-                          <div onClick={this.revertir.bind(this)}>
-                              <ReplayIcon/>
-                          </div>
-                      </div>
-                  </div>
-                  <div id="filtros" className="contaierVistaFiltros">
-                      <div className="containerBtnFil">
-                          <div className="textoDiv">
-                              <br/>
-                              <h1 className="texto">FILTROS</h1>
-                          </div>
-                          <br/>
-                          <div className="prueba">
-                              <div className="centrarBotones2">
-                                  <button type="button" className="botonesFiltro filter-btn vintage btnFiltro2" onClick={this.filtros.bind(this)}>Vintage</button>
-                                  <button type="button" className="botonesFiltro filter-btn lomo btnFiltro2" onClick={this.filtros.bind(this)}>Lomo</button>
-                              </div>
-                              <br/>
-                              <div className="centrarBotones2">
-                                  <button type="button" className="botonesFiltro filter-btn clarity btnFiltro2" onClick={this.filtros}>Clarity</button>
-                                  <button type="button" className="botonesFiltro filter-btn sincity btnFiltro2" onClick={this.filtros}>Sin City</button>
-                              </div>
-                              <br/>
-                              <div className="centrarBotones2">
-                                  <button type="button" className="botonesFiltro filter-btn crossprocess btnFiltro2" onClick={this.filtros}>Cross Process</button>
-                                  <button type="button" className="botonesFiltro filter-btn pinhole btnFiltro2" onClick={this.filtros}>Pinhole</button>
-                              </div>
-                              <br/>
-                              <div className="centrarBotones2">
-                                  <button type="button" className="botonesFiltro filter-btn nostalgia btnFiltro2" onClick={this.filtros}>Nostalgia</button>
-                                  <button type="button" className="botonesFiltro filter-btn hermajesty btnFiltro2" onClick={this.filtros}>Her Majesty</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div id="espacioImagen" className="containerImagen">
-                      <div className="divCanva">
-                          <canvas id="canvaP" ref={canvasA => this.canvasA = canvasA} className="canva"/>
-                      </div>
-                  </div>
-                  <div className="containerHerramientas">
-                      <div id="herraminetas">
-                          <div onClick={this.openModaBotones.bind(this)}>
-                              <Brightness6Icon/>
-                          </div>
-                          <br/>
-                          <div onClick={this.openModaContraste.bind(this)}>
-                              <img src="https://image.flaticon.com/icons/png/512/570/570960.png" height="22px" width="22px"/>
-                          </div>
-                          <br/>
-                          <div onClick={this.openModaSaturacion.bind(this)}>
-                              <img src="https://image.flaticon.com/icons/png/512/587/587347.png" height="22.5px" width="22.5px"/>
-                          </div>
-                          <br/>
-                          <div onClick={this.openModaBIlumna.bind(this)}>
-                              <img src="https://image.flaticon.com/icons/png/512/73/73570.png" height="23px" width="23px"/>
-                          </div>
-                      </div>
-                  </div>
-                  <div className="botonesBillo">
-                      <div className="divMayor">
-                          <div>
-                              <div className="textoParametro">
-                                  <h1>Brillo</h1>
-                              </div>
-                              <div className="btnMasYmenos">
-                                  <button type="button" className="filter-btn removeBrillo btnParametro" onClick={this.brillo}>-</button>
-                              </div>
-                              <div className="btnMasYmenos">
-                                  <button type="button" className="filter-btn addBrillo btnParametro" onClick={this.brillo}>+</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div className="botonesContr">
-                      <div className="divMayor">
-                          <div>
-                              <div className="textoParametro">
-                                  <h1 id="ache">Contraste</h1>
-                              </div>
-                              <div className="btnMasYmenos">
-                                  <button type="button" className="filter-btn removeContraste btnParametro" onClick={this.contraste}>-</button>
-                              </div>
-                              <div className="btnMasYmenos">
-                                  <button type="button" className="filter-btn addContraste btnParametro" onClick={this.contraste}>+</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div className="botonesSatu">
-                      <div className="divMayor">
-                          <div>
-                              <div className="textoParametro">
-                                  <h1 id="ache">Saturacion</h1>
-                              </div>
-                              <div className="btnMasYmenos">
-                                  <button type="button" className="filter-btn removeSaturacion btnParametro" onClick={this.saturacion}>-</button>
-                              </div>
-                              <div className="btnMasYmenos">
-                                  <button type="button" className="filter-btn addSaturacion btnParametro" onClick={this.saturacion}>+</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-                  <div className="botonesIlumina">
-                      <div className="divMayor">
-                          <div>
-                              <div className="textoParametro">
-                                  <h1 id="ache">Matiz</h1>
-                              </div>
-                              <div className="btnMasYmenos">
-                                  <button type="button" className="filter-btn removeMatiz btnParametro" onClick={this.matiz}>-</button>
-                              </div>
-                              <div className="btnMasYmenos">
-                                  <button type="button" className="filter-btn addMatiz btnParametro" onClick={this.matiz}>+</button>
-                              </div>
-                          </div>
-                      </div>
-                  </div>
-              </div>
+                    </div>
+                    <div className="containerFiltros">
+                        <div id="divBtnsFiltro">
+                            <div onClick={this.descargarImagenBtn.bind(this)}>
+                                <GetAppIcon/>
+                            </div>
+                            <br/>
+                            <div onClick={this.openModaFiltros.bind(this)}>
+                                <PhotoFilterIcon/>
+                            </div>
+                            <br/>
+                            <div>
+                                <label className="custom-file-upload">
+                                    <input type="file" onChange={this.obtenerImagen.bind(this)} ref={this.fileInput}/>
+                                    <PublishIcon/>
+                                </label>
+                            </div>
+                            <br/>
+                            <div onClick={this.revertir.bind(this)}>
+                                <ReplayIcon/>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="filtros" className="contaierVistaFiltros">
+                        <div className="containerBtnFil">
+                            <div className="textoDiv">
+                                <br/>
+                                <h1 className="texto">FILTROS</h1>
+                            </div>
+                            <br/>
+                            <div className="prueba">
+                                <div className="centrarBotones2">
+                                    <button type="button" className="botonesFiltro filter-btn vintage btnFiltro2"
+                                            onClick={this.filtros.bind(this)}>Vintage
+                                    </button>
+                                    <button type="button" className="botonesFiltro filter-btn lomo btnFiltro2"
+                                            onClick={this.filtros.bind(this)}>Lomo
+                                    </button>
+                                </div>
+                                <br/>
+                                <div className="centrarBotones2">
+                                    <button type="button" className="botonesFiltro filter-btn clarity btnFiltro2"
+                                            onClick={this.filtros}>Clarity
+                                    </button>
+                                    <button type="button" className="botonesFiltro filter-btn sincity btnFiltro2"
+                                            onClick={this.filtros}>Sin City
+                                    </button>
+                                </div>
+                                <br/>
+                                <div className="centrarBotones2">
+                                    <button type="button" className="botonesFiltro filter-btn crossprocess btnFiltro2"
+                                            onClick={this.filtros}>Cross Process
+                                    </button>
+                                    <button type="button" className="botonesFiltro filter-btn pinhole btnFiltro2"
+                                            onClick={this.filtros}>Pinhole
+                                    </button>
+                                </div>
+                                <br/>
+                                <div className="centrarBotones2">
+                                    <button type="button" className="botonesFiltro filter-btn nostalgia btnFiltro2"
+                                            onClick={this.filtros}>Nostalgia
+                                    </button>
+                                    <button type="button" className="botonesFiltro filter-btn hermajesty btnFiltro2"
+                                            onClick={this.filtros}>Her Majesty
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="espacioImagen" className="containerImagen">
+                        <div className="divCanva">
+                            <canvas id="canvaP" ref={canvasA => this.canvasA = canvasA} className="canva"/>
+                        </div>
+                    </div>
+                    <div className="containerHerramientas">
+                        <div id="herraminetas">
+                            <div onClick={this.openModaBotones.bind(this)}>
+                                <Brightness6Icon/>
+                            </div>
+                            <br/>
+                            <div onClick={this.openModaContraste.bind(this)}>
+                                <img src="https://image.flaticon.com/icons/png/512/570/570960.png" height="22px"
+                                     width="22px"/>
+                            </div>
+                            <br/>
+                            <div onClick={this.openModaSaturacion.bind(this)}>
+                                <img src="https://image.flaticon.com/icons/png/512/587/587347.png" height="22.5px"
+                                     width="22.5px"/>
+                            </div>
+                            <br/>
+                            <div onClick={this.openModaBIlumna.bind(this)}>
+                                <img src="https://image.flaticon.com/icons/png/512/73/73570.png" height="23px"
+                                     width="23px"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="botonesBillo">
+                        <div className="divMayor">
+                            <div>
+                                <div className="textoParametro">
+                                    <h1>Brillo</h1>
+                                </div>
+                                <div className="btnMasYmenos">
+                                    <button type="button" className="filter-btn removeBrillo btnParametro"
+                                            onClick={this.brillo}>-
+                                    </button>
+                                </div>
+                                <div className="btnMasYmenos">
+                                    <button type="button" className="filter-btn addBrillo btnParametro"
+                                            onClick={this.brillo}>+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="botonesContr">
+                        <div className="divMayor">
+                            <div>
+                                <div className="textoParametro">
+                                    <h1 id="ache">Contraste</h1>
+                                </div>
+                                <div className="btnMasYmenos">
+                                    <button type="button" className="filter-btn removeContraste btnParametro"
+                                            onClick={this.contraste}>-
+                                    </button>
+                                </div>
+                                <div className="btnMasYmenos">
+                                    <button type="button" className="filter-btn addContraste btnParametro"
+                                            onClick={this.contraste}>+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="botonesSatu">
+                        <div className="divMayor">
+                            <div>
+                                <div className="textoParametro">
+                                    <h1 id="ache">Saturacion</h1>
+                                </div>
+                                <div className="btnMasYmenos">
+                                    <button type="button" className="filter-btn removeSaturacion btnParametro"
+                                            onClick={this.saturacion}>-
+                                    </button>
+                                </div>
+                                <div className="btnMasYmenos">
+                                    <button type="button" className="filter-btn addSaturacion btnParametro"
+                                            onClick={this.saturacion}>+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="botonesIlumina">
+                        <div className="divMayor">
+                            <div>
+                                <div className="textoParametro">
+                                    <h1 id="ache">Matiz</h1>
+                                </div>
+                                <div className="btnMasYmenos">
+                                    <button type="button" className="filter-btn removeMatiz btnParametro"
+                                            onClick={this.matiz}>-
+                                    </button>
+                                </div>
+                                <div className="btnMasYmenos">
+                                    <button type="button" className="filter-btn addMatiz btnParametro"
+                                            onClick={this.matiz}>+
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </>
         )
     }

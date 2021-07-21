@@ -211,13 +211,64 @@
     display: flex;
     justify-content: center;
 }
-.canva {
-    max-height: 99.8%;
-}
 .divCanva{
     display: flex;
     align-items: center;
     justify-content: center;
     width: 90%;
     height: 100vh;
+}
+
+@media (max-width: 1400px) {
+    .botonesBillo{
+        background-color: white;
+        width: 10%;
+        height: 9vh;
+        position: absolute;
+        margin-left: 85%;
+        margin-top: 39%;
+        border-radius: 20px;
+        border: solid 1px #EAEAEA;
+        display: none;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    }
+    .botonesContr{
+        background-color: white;
+        width: 10%;
+        height: 9vh;
+        position: absolute;
+        margin-left: 85%;
+        margin-top: 43%;
+        border-radius: 20px;
+        border: solid 1px #EAEAEA;
+        display: none;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    }
+    .botonesSatu{
+        background-color: white;
+        width: 10%;
+        height: 9vh;
+        position: absolute;
+        margin-left: 85%;
+        margin-top: 47%;
+        border-radius: 20px;
+        border: solid 1px #EAEAEA;
+        display: none;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    }
+    .botonesIlumina{
+        background-color: white;
+        width: 10%;
+        height: 9vh;
+        position: absolute;
+        margin-left: 85%;
+        margin-top: 50%;
+        border-radius: 20px;
+        border: solid 1px #EAEAEA;
+        display: none;
+        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    }
+    .textoParametro h1{
+        font-size: 20px;
+    }
 }
