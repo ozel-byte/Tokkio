@@ -1,0 +1,223 @@
+*{
+    padding: 0px;
+    margin: 0px;
+}
+.containerPrincipal{
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+/* 2, 20, 76, 2*/
+.containerFiltros{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2%;
+    height: 100vh;
+}
+.containerFiltros input[type="file"] {
+    display: none;
+}
+#divBtnsFiltro{
+    margin-right: 10%;
+}
+#divBtnsFiltro div:hover{
+    -webkit-box-shadow: 0px 0px 16px -4px #000000;
+    box-shadow: 0px 0px 16px -4px #000000;
+}
+.perfilUsuario{
+    position: absolute;
+    width: 2%;
+    margin-top: 10px;
+    margin-left: 4px;
+}
+.perfilUsuario img{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    border:1px solid #666;
+}
+.detallesUser{
+    position: absolute;
+    width: 15%;
+    height: 15vh;
+    border-radius: 20px;
+    margin-top: 15px;
+    margin-left: 50px;
+    background-color: white;
+    display: none;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+ }
+.mostraAmigos{
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 70px;
+}
+.listaAmigos{
+    background-color: white;
+    width: 15%;
+    height: 50vh;
+    position: absolute;
+    margin-left: 2.2%;
+    margin-top: 3%;
+    border-radius: 20px;
+    border: solid 2px #EAEAEA;
+    display: none;
+    overflow:hidden;
+    overflow-y:scroll;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.contaierVistaFiltros{
+    justify-content: center;
+    width: 0%;
+    margin-left: 10px;
+    height: 100vh;
+    background-color: white;
+}
+.containerBtnFil{
+    width: 0%;
+    margin-top: 1%;
+    border-radius: 20px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.textoDiv{
+    display: flex;
+    justify-content: center;
+}
+.texto{
+    font-size: 0px;
+}
+.prueba{
+    display: none;
+}
+.centrarBotones2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.btnFiltro2{
+    width: 45%;
+    height: 5vh;
+    margin-left: 3px;
+    margin-right: 3px;
+    border: none;
+    border-radius: 10px;
+    color: black;
+    background-color: white;
+    font-size: 20px;
+}
+.btnFiltro2:hover{
+    -webkit-box-shadow: 0px 0px 16px -4px #000000;
+    box-shadow: 0px 0px 16px -4px #000000;
+}
+.containerImagen{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 96%;
+    height: 100vh;
+    background-color: white;
+}
+.containerHerramientas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 2%;
+    height: 100vh;
+    background-color: white;
+}
+#herraminetas div:hover{
+    -webkit-box-shadow: 0px 0px 16px -4px #000000;
+    box-shadow: 0px 0px 16px -4px #000000;
+}
+.btnParametro{
+    width: 50%;
+    height: 2.5vh;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    border-radius: 10px;
+    border: none;
+    font-size: 30px;
+}
+.btnParametro:hover{
+    -webkit-box-shadow: 0px 0px 16px -4px #000000;
+    box-shadow: 0px 0px 16px -4px #000000;
+}
+.botonesBillo{
+    background-color: white;
+    width: 15%;
+    height: 10vh;
+    position: absolute;
+    margin-left: 82.5%;
+    margin-top: 20%;
+    border-radius: 20px;
+    border: solid 1px #EAEAEA;
+    display: none;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.botonesContr{
+    background-color: white;
+    width: 15%;
+    height: 10vh;
+    position: absolute;
+    margin-left: 82.5%;
+    margin-top: 22%;
+    border-radius: 20px;
+    border: solid 1px #EAEAEA;
+    display: none;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.botonesSatu{
+    background-color: white;
+    width: 15%;
+    height: 10vh;
+    position: absolute;
+    margin-left: 82.5%;
+    margin-top: 24%;
+    border-radius: 20px;
+    border: solid 1px #EAEAEA;
+    display: none;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.botonesIlumina{
+    background-color: white;
+    width: 15%;
+    height: 10vh;
+    position: absolute;
+    margin-left: 82.5%;
+    margin-top: 26%;
+    border-radius: 20px;
+    border: solid 1px #EAEAEA;
+    display: none;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+.divMayor{
+    width: 100%;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+.divMayor div{
+    width: 100%;
+}
+.textoParametro{
+    display: flex;
+    justify-content: center;
+}
+.btnMasYmenos{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.canva {
+    max-height: 99.8%;
+}
+.divCanva{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90%;
+    height: 100vh;
+}

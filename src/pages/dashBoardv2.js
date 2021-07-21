@@ -3,6 +3,7 @@ import io from 'socket.io-client';
 import ItemInvitacion from "../componentes/itemInvitacion";
 import ItemAmigo from "../componentes/itemAmigo"
 
+
 class DashBoardv2 extends React.Component {
     constructor() {
         super();
