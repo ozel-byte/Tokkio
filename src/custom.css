@@ -576,15 +576,20 @@ padding: 10px;
         font-size: 20px;
     }
     #imagenAmigo{
-        width:85px;
-        height:85px;
+        width:70px;
+        height:70px;
+        border-radius: 50%;
     }
     #tamañoLetra{
         font-size: 15px;
     }
     .botonInvitar{
-        height: 3vh;
-        font-size: 10px;
+        width: 90%;
+        height: 4vh;
+        font-size: 12px;
+    }
+    #divDatosIzq{
+        width: 90%;
     }
 }
 @media (min-width: 1400px){

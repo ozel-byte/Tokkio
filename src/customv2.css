@@ -223,58 +223,34 @@
 /* 1366x768*/
 @media (max-width: 1400px) {
     .botonesBillo{
-        background-color: white;
         width: 12%;
-        height: 11vh;
-        position: absolute;
+        height: 15vh;
         margin-left: 85%;
-        margin-top: 20.5%;
-        border-radius: 20px;
-        border: solid 1px #EAEAEA;
-        display: none;
-        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        margin-top: 12%;
     }
     .botonesContr{
-        background-color: white;
         width: 12%;
-        height: 11vh;
-        position: absolute;
+        height: 15vh;
         margin-left: 85%;
-        margin-top: 23.5%;
-        border-radius: 20px;
-        border: solid 1px #EAEAEA;
-        display: none;
-        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        margin-top: 15.5%;
     }
     .botonesSatu{
-        background-color: white;
         width: 12%;
-        height: 11vh;
-        position: absolute;
+        height: 15vh;
         margin-left: 85%;
-        margin-top: 27%;
-        border-radius: 20px;
-        border: solid 1px #EAEAEA;
-        display: none;
-        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        margin-top: 18.8%;
     }
     .botonesIlumina{
-        background-color: white;
         width: 12%;
-        height: 11vh;
-        position: absolute;
+        height: 15vh;
         margin-left: 85%;
-        margin-top: 30%;
-        border-radius: 20px;
-        border: solid 1px #EAEAEA;
-        display: none;
-        box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+        margin-top: 22%;
     }
     .textoParametro h1{
         font-size: 20px;
     }
     .canva{
-        max-width: 90%;
+        max-width: 85%;
     }
     .contaierVistaFiltros{
         margin-left: 3%;
@@ -283,14 +259,12 @@
         width: 40%;
         height: 5vh;
         margin: 3px 3px 3px 3px;
-        border: none;
-        border-radius: 10px;
-        color: black;
-        background-color: white;
         font-size: 15px
     }
     .btnParametro {
-        font-size: 20px;
+        font-size: 18px;
+        width: 80%;
+        height: 3.5vh;
     }
     .containerFiltros{
         display: flex;
