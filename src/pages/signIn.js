@@ -2,6 +2,8 @@ import React from 'react';
 import Logo from '../componentes/logo';
 import MessageError from '../componentes/messageError';
 import axios from 'axios';
+import { withRouter } from "react-router-dom";
+import Loading from '../componentes/loading';
 
 class SignIn extends React.Component{
     constructor(props) {
@@ -10,8 +12,13 @@ class SignIn extends React.Component{
             messageError: "",
             status_button: false,
             correo: "",
-            pass: ""
+            pass: "",
+            textaux: "Sign In"
         }
+    }
+
+    componentDidMount(){
+        
     }
 
     validacionInput(e){
@@ -21,7 +28,7 @@ class SignIn extends React.Component{
             this.setState({
                 correo: value
             });
-            if (this.state.password.length>0){
+            if (this.state.pass.length>0){
                 this.setState({
                     status_button:true
                 })
@@ -45,28 +52,30 @@ class SignIn extends React.Component{
         message[0].style.display = "none"
         this.changeColorBorderInputError(0);
     }
-    
+   
+
     signIn(){
-        axios.get('http://localhost:3000/user/signIn',{
+        this.setState({
+            textaux: ""
+        })
+        let load = document.getElementsByClassName("loading");
+        load[0].style.display = "block"
+        if (this.state.status_button && this.state.correo.length>0 && this.state.pass.length>0) {
+            axios.get('http://localhost:3000/user/signIn',{
             params: {
                 correo: this.state.correo,
                 pass:this.state.pass
             }
         }).then((res) => {
-            console.log(res.data[0].username + "si llego")
             if (res.data[0].correo.length>0){
-               window.localStorage.setItem('usertokkio',res.data[0].username)
-               this.props.history.push('/dashBoard');
-            }
+                window.localStorage.setItem('usertokkio',res.data[0].username);
+                load[0].style.display = "none"
+                this.props.history.push('/dashBoard');
+             }
+           
         }).catch(e => {
-            alert(e)
+            console.log("error")
         })
-     }
-
-    signIn(){
-        console.log("ey")
-        if (this.state.status_button && this.state.correo.length>0 && this.state.password.length>0) {
-            console.log("ey1")
         }else{
             this.changeColorBorderInputError(1);
             let messageErrorButton = document.getElementsByClassName("message-error-button");
@@ -106,7 +115,7 @@ class SignIn extends React.Component{
                             <br />
                             <input type="password" name="password"  className="input-mail" placeholder="write your password" onChange={this.validacionInput.bind(this)} onFocus={this.messageDisplayButton.bind(this)}/>
                             <p className="message-error">{this.state.messageError}</p>
-                            <button type="button" onClick={this.signIn.bind(this)} className="button-sign-in">Sign In</button>
+                            <button type="button" onClick={this.signIn.bind(this)} className="button-sign-in">{this.state.textaux}<Loading/></button>
                            <MessageError/>
                             <div className="seccion-Utils">
                                 <div><p>Olvidaste tu password?</p></div>
@@ -122,4 +131,4 @@ class SignIn extends React.Component{
     }
 }
 
-export default SignIn;
+export default withRouter(SignIn);

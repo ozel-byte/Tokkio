@@ -5,6 +5,8 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import Brightness6Icon from '@material-ui/icons/Brightness6';
 import ReplayIcon from '@material-ui/icons/Replay';
 import PeopleIcon from '@material-ui/icons/People';
+import axios from 'axios';
+import io from 'socket.io-client';
 
 class DashBoardv3 extends React.Component{
     constructor() {
@@ -17,14 +19,51 @@ class DashBoardv3 extends React.Component{
             aux5: false,
             auxUser: false,
             auxAmigos: false,
-            imgUser: ''
+            imgUser: '',
+            username: '',
+            user: []
         }
         this.fileInput = React.createRef();
     }
 
     componentDidMount() {
+        this.getUserData();
         this.setState({imgUser: "https://cdn.dribbble.com/users/215/screenshots/15549385/media/1bc71b42034a8192729903deb2d3c0c0.png"})
         this.cargarImagen("https://image.flaticon.com/icons/png/512/1837/1837526.png")
+    }
+
+    initSocket(){
+        const socket = io('http://localhost:3000');
+        let username = window.localStorage.getItem('usertokkio');
+        let objectUser = {
+            username: username,
+            imgUser: this.state.imgUser
+        }
+        console.log(this.state.imgUser + " ssssss")
+        socket.emit('message', objectUser)
+        socket.on('emitir', (res) => {
+            let auxvariabel = res;
+            this.setState({
+                user: res
+            })
+            console.log(res[0]);
+        });
+    }
+    getUserData(){
+        axios.get("http://localhost:3000/user/getUserUsername",{
+            params: {
+                username: window.localStorage.getItem('usertokkio')
+            }
+        }).then(res => {
+            console.log(res.data)
+            this.setState({
+                username: res.data[0].username,
+                imgUser: res.data[0].imgPerfil
+            })
+            this.initSocket();
+        }).catch(e => {
+            console.log(e)
+        } )
     }
 
     openModaFiltros(e){
@@ -326,13 +365,21 @@ class DashBoardv3 extends React.Component{
                       <img src={this.state.imgUser}/>
                   </div>
                   <div className="detallesUser">
-
+                    <h2>{this.state.username}</h2>
                   </div>
                   <div className="mostraAmigos" onClick={this.openModaAmigos.bind(this)}>
                       <PeopleIcon style={{ fontSize: 35 }}/>
                   </div>
                   <div className="listaAmigos">
-
+                        <ul>
+                        {
+                            this.state.user.map(item => {
+                                return (
+                                    <li>{item.user}</li>
+                                )
+                            })
+                        }
+                        </ul>
                   </div>
                   <div className="containerFiltros">
                       <div id="divBtnsFiltro">

@@ -3,7 +3,8 @@ import CardSignUp from "../componentes/cardSignUp";
 import Logo from "../componentes/logo";
 import MessageError from "../componentes/messageError";
 import axios from 'axios';
-
+import Loading from "../componentes/loading";
+import { withRouter } from "react-router-dom";
 class SignUp extends React.Component{
     constructor(props) {
         super(props);
@@ -85,7 +86,11 @@ class SignUp extends React.Component{
               pass: this.state.password,
               imgPerfil: res.data.url
           }
-        axios.post("http://localhost:3000/user/addUser",dataBody).then(data => console.log(data)).catch(e => console.log(e))
+        axios.post("http://localhost:3000/user/addUser",dataBody)
+        .then(data => {
+            this.props.history.push('/dashBoard');
+        })
+        .catch(e => console.log(e))
       })
     }
     
@@ -111,7 +116,7 @@ class SignUp extends React.Component{
                         <input type="password" name="password" className="input-password-signup" placeholder="password" onChange={this.onChangeInput.bind(this)} />
                     </div>
                     <div className="container-button-signUp">
-                        <button className="button-signUp" onClick={this.signUp.bind(this)}>{this.state.loading} <div className="loading"></div></button>
+                        <button className="button-signUp" onClick={this.signUp.bind(this)}>{this.state.loading} <Loading/></button>
                     </div>
                    <MessageError/>
                   </div>
@@ -120,4 +125,4 @@ class SignUp extends React.Component{
         )
     }
 }
-export default SignUp;
+export default withRouter(SignUp);
