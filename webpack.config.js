@@ -16,7 +16,8 @@ module.exports = {
           options: {
             presets: ['@babel/preset-env','@babel/preset-react'],
             plugins: [
-              "jsx-control-statements"
+              "jsx-control-statements",
+              "@babel/transform-runtime"
             ]
           }
         }

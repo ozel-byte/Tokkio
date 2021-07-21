@@ -1,10 +1,9 @@
 import React from "react";
-import AgregarImagen from "./agregarImagen";
 import {BrowserRouter as Router, Route,Switch} from "react-router-dom";
-import VistaPrincipal from "./vistaPrincipal";
 import Logo from "../componentes/logo";
 import DashBoard from "./dashBoardv3";
 import SignUp from "./signUp";
+import SignIn from "./signIn";
 class App extends React.Component{
     constructor(props){
         super(props);
@@ -14,7 +13,7 @@ class App extends React.Component{
         return(
            <Router>
                <Route exact path="/" >
-                   <VistaPrincipal/>
+                   <SignIn/>
                </Route>
                <Route path="/signUp">
                    <SignUp/>
