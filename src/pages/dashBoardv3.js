@@ -424,8 +424,9 @@ class DashBoardv3 extends React.Component {
                     </div>
                     <div id="filtros" className="contaierVistaFiltros">
                         <div className="containerBtnFil">
+                            <br/>
+                            <br/>
                             <div className="textoDiv">
-                                <br/>
                                 <h1 className="texto">FILTROS</h1>
                             </div>
                             <br/>

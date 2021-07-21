@@ -519,9 +519,6 @@ padding: 10px;
 }
 /* media */
 @media (max-width: 1400px){
-    .canva {
-        width: 40%;
-    }
     .btnCargarImg{
         width: 100px;
         height: 35px;
@@ -577,6 +574,17 @@ padding: 10px;
         background-color: white;
         color: #0c7cfa;
         font-size: 20px;
+    }
+    #imagenAmigo{
+        width:85px;
+        height:85px;
+    }
+    #tamañoLetra{
+        font-size: 15px;
+    }
+    .botonInvitar{
+        height: 3vh;
+        font-size: 10px;
     }
 }
 @media (min-width: 1400px){

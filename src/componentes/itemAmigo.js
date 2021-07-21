@@ -12,7 +12,7 @@ class ItemAmigo extends React.Component {
                 <div className="divBotonesListaAmigos">
                     <div id="divDatosIzq">
                         <div className="centrarNombreAmigo">
-                            <h2>{this.props.user.user}</h2>
+                            <h2 id="tamañoLetra">{this.props.user.user}</h2>
                         </div>
                         <br/>
                         <div className="centrarBotonInv">

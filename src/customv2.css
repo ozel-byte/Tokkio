@@ -219,14 +219,16 @@
     height: 100vh;
 }
 
+
+/* 1366x768*/
 @media (max-width: 1400px) {
     .botonesBillo{
         background-color: white;
-        width: 10%;
-        height: 9vh;
+        width: 12%;
+        height: 11vh;
         position: absolute;
         margin-left: 85%;
-        margin-top: 39%;
+        margin-top: 20.5%;
         border-radius: 20px;
         border: solid 1px #EAEAEA;
         display: none;
@@ -234,11 +236,11 @@
     }
     .botonesContr{
         background-color: white;
-        width: 10%;
-        height: 9vh;
+        width: 12%;
+        height: 11vh;
         position: absolute;
         margin-left: 85%;
-        margin-top: 43%;
+        margin-top: 23.5%;
         border-radius: 20px;
         border: solid 1px #EAEAEA;
         display: none;
@@ -246,11 +248,11 @@
     }
     .botonesSatu{
         background-color: white;
-        width: 10%;
-        height: 9vh;
+        width: 12%;
+        height: 11vh;
         position: absolute;
         margin-left: 85%;
-        margin-top: 47%;
+        margin-top: 27%;
         border-radius: 20px;
         border: solid 1px #EAEAEA;
         display: none;
@@ -258,11 +260,11 @@
     }
     .botonesIlumina{
         background-color: white;
-        width: 10%;
-        height: 9vh;
+        width: 12%;
+        height: 11vh;
         position: absolute;
         margin-left: 85%;
-        margin-top: 50%;
+        margin-top: 30%;
         border-radius: 20px;
         border: solid 1px #EAEAEA;
         display: none;
@@ -270,5 +272,43 @@
     }
     .textoParametro h1{
         font-size: 20px;
+    }
+    .canva{
+        max-width: 90%;
+    }
+    .contaierVistaFiltros{
+        margin-left: 3%;
+    }
+    .btnFiltro2{
+        width: 40%;
+        height: 5vh;
+        margin: 3px 3px 3px 3px;
+        border: none;
+        border-radius: 10px;
+        color: black;
+        background-color: white;
+        font-size: 15px
+    }
+    .btnParametro {
+        font-size: 20px;
+    }
+    .containerFiltros{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 4%;
+        height: 100vh;
+    }
+    .listaAmigos{
+        margin-left: 4.2%;
+        margin-top: 6%;
+    }
+    .detallesUser{
+        margin-top: 3%;
+        margin-left: 4.2%;
+    }
+    .detallesUser h2{
+        margin-top: 5%;
+        font-size: 15px;
     }
 }
