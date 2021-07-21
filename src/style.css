@@ -144,6 +144,13 @@
     padding: 10px;
     border-bottom: 2px solid #b7bbbe;
 }
+.container-input-validation{
+    display: flex;
+    flex-direction: column;
+}
+.container-input-loading{
+    display: flex;
+}
 .input-password-signup{
     margin-top: 5%;
     font-size: 16px;
@@ -192,4 +199,10 @@
     to{
         transform: rotate(360deg);
     }
+}
+
+
+.message-input-status{
+display: none;
+color: black;
 }

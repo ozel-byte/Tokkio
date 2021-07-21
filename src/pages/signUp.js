@@ -14,7 +14,9 @@ class SignUp extends React.Component{
             correo: "",
             username: "",
             password: "",
-            loading: "Sign Up"
+            loading: "Sign Up",
+            messageUsername: "",
+            messageCorreo: ""
         }
     }
     uploadImage(e) {
@@ -71,11 +73,82 @@ class SignUp extends React.Component{
         }
     }
 
-    validarCorreo(){
-
+  async  validarCorreo(){
+      
+    let load = document.getElementsByClassName("loading");
+    load[0].style.display = "block"
+        let response = await axios.get("http://localhost:3000/user/validationCorreo",{
+            params: {
+                correo: this.state.correo
+            }
+        });
+        if(response.status === 200){
+            let messageInputStatus = document.getElementsByClassName("message-input-status");
+            console.log(response.data.find);
+            load[0].style.display = "none"
+            switch (response.data.find) {
+                case "false":{
+                    messageInputStatus[0].style.display = "block";
+                    messageInputStatus[0].style.color = "#932939"   
+                    this.setState({
+                        messageUsername:response.data.body
+                    });
+                   
+                    
+                }  break;
+                case "true": {
+                    console.log("entro aquiiiiii")
+                    messageInputStatus[0].style.display = "block";
+                    messageInputStatus[0].style.color = "blue"  
+                this.setState({
+                    messageUsername:response.data.body
+                });
+                }break;
+            
+                default:
+                    break;
+            }
+        }else{
+            console.log("error")
+        }
     }
-    validarUsername(){
-        
+   async validarUsername(){
+    let load = document.getElementsByClassName("loading");
+    load[0].style.display = "block"
+        let response = await axios.get("http://localhost:3000/user/validationUsername",{
+            params: {
+                username: this.state.username
+            }
+        });
+        if(response.status === 200){
+            let messageInputStatus = document.getElementsByClassName("message-input-status");
+            console.log(response.data.find);
+            load[0].style.display = "none"
+            switch (response.data.find) {
+                case "false":{
+                    messageInputStatus[0].style.display = "block";
+                    messageInputStatus[0].style.color = "#932939"   
+                    this.setState({
+                        messageUsername:response.data.body
+                    });
+                   
+                    
+                }  break;
+                case "true": {
+                    console.log("entro aquiiiiii")
+                    messageInputStatus[0].style.display = "block";
+                    messageInputStatus[0].style.color = "blue"  
+                this.setState({
+                    messageUsername:response.data.body
+                });
+                }break;
+            
+                default:
+                    break;
+            }
+        }else{
+            console.log("error")
+        }
     }
 
     signUp(){
@@ -101,7 +174,7 @@ class SignUp extends React.Component{
                 
                   <div className="card">
                     <h2>Crear Cuenta</h2>
-                    <p>ya tienes una cuenta? <a href="/SignIn"> Sign In</a></p>
+                    <p>ya tienes una cuenta? <a href="/"> Sign In</a></p>
                     <div>
                        <div className="container-img-input">
                            <div className="select-img">
@@ -109,9 +182,22 @@ class SignUp extends React.Component{
                            </div>
                        <input type="file" onChange={this.uploadImage.bind(this)}/>
                        </div>
-                       <input type="text" name="username" placeholder="username"  className="input-correo-signUp" onChange={this.onChangeInput.bind(this)}/>
+                      <div className="container-input-validation">
+                     <div className="container-input-loading">
+                     <input type="text" name="username" placeholder="username"  className="input-correo-signUp" onBlur={this.validarUsername.bind(this)} onChange={this.onChangeInput.bind(this)}/>
+                       <Loading/>
+                     </div>
+                       <div className="message-input-status"><p>{this.state.messageUsername}</p></div>
+                      </div>
                         <br />  
-                        <input type="text" name="correo" placeholder="correo" className="input-correo-signUp" onChange={this.onChangeInput.bind(this)}/>
+                        <div className="container-input-validation">
+                     <div className="container-input-loading">
+                     <input type="text" name="correo" placeholder="correo" className="input-correo-signUp" onBlur={this.validarCorreo.bind(this)} onChange={this.onChangeInput.bind(this)}/>
+                       <Loading/>
+                     </div>
+                       <div className="message-input-status"><p>{this.state.messageUsername}</p></div>
+                      </div>
+                       
                         <br />
                         <input type="password" name="password" className="input-password-signup" placeholder="password" onChange={this.onChangeInput.bind(this)} />
                     </div>
