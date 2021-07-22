@@ -73,10 +73,9 @@ class SignUp extends React.Component{
         }
     }
 
-  async  validarCorreo(){
-      
+  async validarCorreo(){
     let load = document.getElementsByClassName("loading");
-    load[0].style.display = "block"
+    load[1].style.display = "block"
         let response = await axios.get("http://localhost:3000/user/validationCorreo",{
             params: {
                 correo: this.state.correo
@@ -85,11 +84,11 @@ class SignUp extends React.Component{
         if(response.status === 200){
             let messageInputStatus = document.getElementsByClassName("message-input-status");
             console.log(response.data.find);
-            load[0].style.display = "none"
+            load[1].style.display = "none"
             switch (response.data.find) {
                 case "false":{
-                    messageInputStatus[0].style.display = "block";
-                    messageInputStatus[0].style.color = "#932939"   
+                    messageInputStatus[1].style.display = "block";
+                    messageInputStatus[1].style.color = "#932939"   
                     this.setState({
                         messageUsername:response.data.body
                     });
@@ -98,8 +97,8 @@ class SignUp extends React.Component{
                 }  break;
                 case "true": {
                     console.log("entro aquiiiiii")
-                    messageInputStatus[0].style.display = "block";
-                    messageInputStatus[0].style.color = "blue"  
+                    messageInputStatus[1].style.display = "block";
+                    messageInputStatus[1].style.color = "blue"  
                 this.setState({
                     messageUsername:response.data.body
                 });

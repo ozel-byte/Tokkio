@@ -4,6 +4,8 @@ import Logo from "../componentes/logo";
 import DashBoard from "./dashBoardv3";
 import SignUp from "./signUp";
 import SignIn from "./signIn";
+import SignInV2 from "./signInv2";
+import Splascreen from "./splascreen";
 class App extends React.Component{
     constructor(props){
         super(props);
@@ -13,7 +15,13 @@ class App extends React.Component{
         return(
            <Router>
                <Route exact path="/" >
-                   <SignIn/>
+                   <SignInV2/>
+               </Route>
+               <Route exact path="/splascreen">
+            <Splascreen/>
+               </Route>
+               <Route exact path="/signIn">
+                <SignIn/>
                </Route>
                <Route path="/signUp">
                    <SignUp/>
