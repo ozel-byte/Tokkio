@@ -59,14 +59,33 @@
     width: 15%;
     height: 50vh;
     position: absolute;
-    margin-left: 2.2%;
+    margin-left: 2.5%;
     margin-top: 3%;
     border-radius: 20px;
     border: solid 2px #EAEAEA;
     display: none;
     overflow:hidden;
     overflow-y:scroll;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    box-shadow: rgb(38, 57, 77) 0px 10px 20px -10px;
+}
+.mostrarNotify{
+    position: absolute;
+    margin-left: 5px;
+    margin-top: 125px;
+}
+.notificaciones{
+    background-color: white;
+    width: 15%;
+    height: 50vh;
+    position: absolute;
+    margin-left: 2.5%;
+    margin-top: 6%;
+    border-radius: 20px;
+    border: solid 2px #EAEAEA;
+    display: none;
+    overflow:hidden;
+    overflow-y:scroll;
+    box-shadow: rgb(38, 57, 77) 0px 10px 20px -10px;
 }
 .contaierVistaFiltros{
     justify-content: center;
