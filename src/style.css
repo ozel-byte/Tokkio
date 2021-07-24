@@ -441,11 +441,13 @@
     .home-list-image-filtros > li {
       margin-top: 10px;
     background-color: rgb(44, 44, 44);
-     
+     display: flex;
+     justify-content: space-around;
       padding: 10px;
       color: white;
       font-family: Arial, Helvetica, sans-serif;
     }
+    
 
     .home-list-image-filtros > li:hover{
      border: 1px solid #107cfa;
@@ -489,7 +491,21 @@
       display: flex;
       font-size: .8rem;
       align-items: center;
-      padding: 1.2em;
+      padding: 1em;
+    }
+    .home-list-icons-ajustes li:hover{
+      transition: 1s ease-out;
+      background-color: #107cfa;
+
+    }
+    .home-sublist-icons-ajustes li button{
+      color: white;
+      width: 2em;
+      height: 2em;
+      margin-left: 5px;
+      background-color: transparent;
+      border: 2px solid blue;
+      border-radius: 50%;
     }
     .side-bar-ajustes-etc h2{
       margin-top: .5em;
@@ -498,5 +514,34 @@
     .home-list-icons-ajustes li p{
       margin-left: .5em;
     }
-    
+    .loader-filtro{
+      width: 10px;
+      display: none;
+      height: 10px;
+      border-bottom: 3px solid grey;
+      border-top: 3px solid grey;
+      border-left: 3px solid grey;
+      border-right: 3px solid #107cfa;
+      border-radius: 50%;
+      animation: animationloaderfiltro 2s  ease-out infinite;
+    }
+    @keyframes animationloaderfiltro {
+      from{
+        transform: rotate(0deg);
+      }
+      to{
+        transform: rotate(360deg);
+      }
+    }
+    .home-list-icons-ajustes  li.item-container-buttons-brillo{
+      display: none;
+      background-color: #107cfa;
+    }
+
+    .buttons-brillo{
+
+      width: 80%;
+      height: auto;
+      background-color: #27343b;
+    }
 }
