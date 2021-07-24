@@ -640,4 +640,67 @@
       background-color: white;
       color: black;
     }
+    /* Vista de las notificaciones */
+    .home-windows-view-notificaciones{
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background-color:transparent;
+    }
+    .window-notificaciones{
+        width: 60%;
+        height: 60vh;
+        border-radius: 30px;
+        background-color: white;
+    }
+    .head-notificaciones{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    .head-notificaciones h2{
+        padding-left: 12px;
+        padding-top: 2px;
+    }
+    .head-notificaciones div {
+        padding-right: 12px;
+        padding-top: 2px;
+    }
+    .window-notificaciones ul{
+        margin-top: 10px;
+        height: 650px;
+        overflow:hidden;
+        overflow-y:scroll;
+    }
+
+    /* Vista de las personas conectadas */
+    .home-window-view-amigos{
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+        display: none;
+        justify-content: center;
+        align-items: center;
+        background-color:transparent;
+    }
+    .div-buscador{
+        width: 100%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .div-buscador ul{
+        margin-top: 10px;
+        height: 600px;
+        overflow:hidden;
+        overflow-y:scroll;
+    }
+    .buscar-amigo{
+        width: 80%;
+        height: 3vh;
+    }
 }

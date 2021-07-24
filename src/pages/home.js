@@ -14,6 +14,7 @@ import ExposureOutlinedIcon from '@material-ui/icons/ExposureOutlined';
 import GradientOutlinedIcon from '@material-ui/icons/GradientOutlined';
 import ExposurePlus1OutlinedIcon from '@material-ui/icons/ExposurePlus1Outlined';
 import ExposureNeg1OutlinedIcon from '@material-ui/icons/ExposureNeg1Outlined';
+import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -21,6 +22,8 @@ class Home extends React.Component {
             aux: false,
             aux2: false,
             bandera: false,
+            auxNotify: false,
+            auxAmigo: false,
             auxAjustesbrillo: false,
             auxAjustesSaturacion: false,
             auxAjustesContraste: false,
@@ -185,6 +188,36 @@ class Home extends React.Component {
         }
     }
 
+    openWindowNotify(){
+        let notify = document.getElementsByClassName("home-windows-view-notificaciones");
+        if (!this.state.auxNotify){
+            notify[0].style.display = "flex";
+            this.setState({
+                auxNotify: true
+            })
+        } else {
+            notify[0].style.display = "none";
+            this.setState({
+                auxNotify: false
+            })
+        }
+    }
+
+    openWindowAmigo(){
+        let amigos = document.getElementsByClassName("home-window-view-amigos");
+        if (!this.state.auxAmigo){
+            amigos[0].style.display = "flex";
+            this.setState({
+                auxAmigo: true
+            })
+        } else {
+            amigos[0].style.display = "none";
+            this.setState({
+                auxAmigo: false
+            })
+        }
+    }
+
     opensideBarItemButtos(typeItem, clastype) {
         let d = document.getElementsByClassName(clastype);
         switch (typeItem) {
@@ -255,17 +288,17 @@ class Home extends React.Component {
         });
     }
     downSaturacion(){
-        Caman("#canvaP", function () {
+        Caman("#canvas", function () {
             this.saturation(-2).render();
         });
     }
     downContraste(){
-        Caman("#canvaP", function () {
+        Caman("#canvas", function () {
             this.contrast(-2).render();
         });
     }
     downMatiz(){
-        Caman("#canvaP", function () {
+        Caman("#canvas", function () {
             this.hue(-2).render();
         });
     }
@@ -287,17 +320,17 @@ class Home extends React.Component {
         });
     }
     upSaturacion(){
-        Caman("#canvaP", function () {
+        Caman("#canvas", function () {
             this.saturation(2).render();
         });
     }
     upContraste(){
-        Caman("#canvaP", function () {
+        Caman("#canvas", function () {
             this.contrast(2).render();
         });
     }
     upMatiz(){
-        Caman("#canvaP", function () {
+        Caman("#canvas", function () {
             this.hue(2).render();
         });
     }
@@ -318,10 +351,10 @@ class Home extends React.Component {
                     <div className="home-side-bar-filtro">
                         <div className="home-image-user">
                             <div className="home-side-bar-filtro-circle-image-avatar"></div>
-                            <div className="home-side-bar-filtro-icon-users">
+                            <div className="home-side-bar-filtro-icon-users" onClick={this.openWindowAmigo.bind(this)} >
                                 <GroupAddIcon style={{ fontSize: 25 }} />
                             </div>
-                            <div className="home-side-bar-filtro-icon-notification">
+                            <div className="home-side-bar-filtro-icon-notification" onClick={this.openWindowNotify.bind(this)}>
                                 <NotificationsIcon style={{ fontSize: 25 }} />
                             </div>
                         </div>
@@ -348,6 +381,94 @@ class Home extends React.Component {
                             }
                         </ul>
                     </div>
+                    <div className="home-windows-view-notificaciones">
+                        <div className="window-notificaciones">
+                            <div className="head-notificaciones">
+                                <h2>NOTIFICACIONES</h2>
+                                <div onClick={this.openWindowNotify.bind(this)}>
+                                    <CloseOutlinedIcon style={{ fontSize: 30 }}/>
+                                </div>
+                            </div>
+                            <ul>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                                <li><h1>Aqui esta una lista</h1></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div className="home-window-view-amigos">
+                        <div className="window-notificaciones">
+                            <div className="head-notificaciones">
+                                <h2>AMIGOS</h2>
+                                <div onClick={this.openWindowAmigo.bind(this)}>
+                                    <CloseOutlinedIcon style={{ fontSize: 30 }}/>
+                                </div>
+                            </div>
+                            <br/>
+                            <div className="div-buscador">
+                                <input className="buscar-amigo" placeholder="Busca a un amigo"/>
+                                <ul>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                    <li><h1>Aqui esta una lista</h1></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                     <div className="home-side-bar-imagen">
                         <div className="home-side-bar-imagen-message-imagen"><h3>seleciona una imagen</h3></div>
                         <canvas id="canvas" width="100%" height="100vh"></canvas>
@@ -358,29 +479,29 @@ class Home extends React.Component {
                             <li onClick={() => this.opensideBarItemButtos("brillo", "item-container-buttons-brillo")}><BrightnessMediumOutlinedIcon /><p>Brillo</p></li>
                             <li className="item-container-buttons-brillo">
                                 <div className="buttons-brillo">
-                                    <button className="button-remove-brillo" onClick={() => this.downButton("brillo")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.upButton("brillo")}/></button>
+                                    <button className="button-remove-brillo" onClick={() => this.upButton("brillo")}><ExposurePlus1OutlinedIcon /></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("brillo")}/></button>
                                 </div>
                             </li>
                             <li onClick={() => this.opensideBarItemButtos("saturacion", "item-container-buttons-saturacion")}><BarChartOutlinedIcon /><p>Saturacion</p></li>
                             <li className="item-container-buttons-saturacion">
                                 <div className="buttons-saturacion">
-                                    <button className="button-remove-saturacion" onClick={() => this.downButton("saturacion")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.upButton("saturacion")}/></button>
+                                    <button className="button-remove-saturacion" onClick={() => this.upButton("saturacion")}><ExposurePlus1OutlinedIcon /></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("saturacion")}/></button>
                                 </div>
                             </li>
                             <li onClick={() => this.opensideBarItemButtos("contraste", "item-container-buttons-contraste")}><ExposureOutlinedIcon /><p>contraste</p></li>
                             <li className="item-container-buttons-contraste">
                                 <div className="buttons-contraste">
-                                    <button className="button-remove-contraste" onClick={() => this.downButton("contraste")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.upButton("contraste")}/></button>
+                                    <button className="button-remove-contraste" onClick={() => this.upButton("contraste")}><ExposurePlus1OutlinedIcon /></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("contraste")}/></button>
                                 </div>
                             </li>
                             <li onClick={() => this.opensideBarItemButtos("matiz", "item-container-buttons-matiz")}><GradientOutlinedIcon /><p>Matiz</p></li>
                             <li className="item-container-buttons-matiz">
                                 <div className="buttons-matiz">
-                                    <button className="button-remove-matiz" onClick={() => this.downButton("matiz")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.upButton("matiz")}/></button>
+                                    <button className="button-remove-matiz" onClick={() => this.upButton("matiz")}><ExposurePlus1OutlinedIcon /></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("matiz")}/></button>
                                 </div>
                             </li>
                         </ul>
