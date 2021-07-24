@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import PhotoFilterIcon from '@material-ui/icons/PhotoFilter';
@@ -8,6 +8,11 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import PlayForWorkIcon from '@material-ui/icons/PlayForWork';
 import Brightness5Icon from '@material-ui/icons/Brightness5';
+import BrightnessMediumOutlinedIcon from '@material-ui/icons/BrightnessMediumOutlined';
+import BarChartOutlinedIcon from '@material-ui/icons/BarChartOutlined';
+import ExposureOutlinedIcon from '@material-ui/icons/ExposureOutlined';
+import GradientOutlinedIcon from '@material-ui/icons/GradientOutlined';
+
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -15,7 +20,7 @@ class Home extends React.Component {
             aux: false,
             aux2: false,
             bandera: false,
-            arrayImgFiltros: ["BW","Sepia","vintaje"]
+            arrayImgFiltros: ["vintage","lomo","clarity","sincity","crossprocess","pinhole","nostalgia","hermajesty"]
         }
 
     }
@@ -44,27 +49,55 @@ class Home extends React.Component {
 
     /* filtros */
 
-    filtrobw() {
-        let canvas = document.getElementById("canvas");
-        let context = canvas.getContext('2d');
-        var imageData = context.getImageData(0, 0, canvas.width, canvas.height),
-            pixels = imageData.data,
-            numPixels = imageData.width * imageData.height;
-
-        for (var i = 0; i < numPixels; i++) {
-            var r = pixels[i * 4];
-            var g = pixels[i * 4 + 1];
-            var b = pixels[i * 4 + 2];
-
-            var grey = (r + g + b) / 3;
-
-            pixels[i * 4] = grey;
-            pixels[i * 4 + 1] = grey;
-            pixels[i * 4 + 2] = grey;
+    filtros(typefilter){
+        
+        console.log("entro")
+        switch (typefilter) {
+            case "vintage": {
+                Caman("#canvas", function () {
+                    this.vintage().render();
+                });
+            } break;
+            case "lomo": {
+                Caman("#canvas", function () {
+                    this.lomo().render();
+                });
+            }break;
+            case "clarity": {
+                Caman("#canvas", function () {
+                    this.clarity().render();
+                });
+            }break;
+            case "sincity": {
+                Caman("#canvas", function () {
+                    this.sinCity().render();
+                });
+            }break;
+            case "crossprocess": {
+                Caman("#canvas", function () {
+                    this.crossProcess().render();
+                });
+            }break;
+            case "pinhole": {
+                Caman("#canvas", function () {
+                    this.pinhole().render();
+                });
+            }break;
+            case "nostalgia": {
+                Caman("#canvas", function () {
+                    this.nostalgia().render();
+                });
+            }break;
+            case "hermajesty" : {
+                Caman("#canvas", function () {
+                    this.herMajesty().render();
+                });
+            }break;
+            default:
+                break;
         }
-
-        context.putImageData(imageData, 0, 0);
     }
+  
 
     openwindowAjustes(){
         if(!this.state.aux2){
@@ -156,7 +189,7 @@ class Home extends React.Component {
                           {
                               this.state.arrayImgFiltros.map(item => {
                                   return (
-                                      <li onClick={() => this.selectfiltro(item)} >{item}</li>
+                                      <li onClick={() => this.filtros(item)} >{item}</li>
                                   )
                               })
                           }
@@ -168,8 +201,11 @@ class Home extends React.Component {
                     </div>
                     <div className="side-bar-ajustes-etc">
                             <h2>Ajustes</h2>
-                            <ul>
-                                <li></li>
+                            <ul className="home-list-icons-ajustes">
+                                <li><BrightnessMediumOutlinedIcon/><p>Brillo</p></li>
+                                <li><BarChartOutlinedIcon/><p>Saturacion</p></li>
+                                <li><ExposureOutlinedIcon/><p>contraste</p></li>
+                                <li><GradientOutlinedIcon/><p>Matiz</p></li>
                             </ul>
                     </div>
                     <div className="home-side-bar-settings">

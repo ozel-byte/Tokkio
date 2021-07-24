@@ -485,5 +485,18 @@
       height: 25%;
       background-color: black;
     }
+    .home-list-icons-ajustes li{
+      display: flex;
+      font-size: .8rem;
+      align-items: center;
+      padding: 1.2em;
+    }
+    .side-bar-ajustes-etc h2{
+      margin-top: .5em;
+      margin-left: 1em;
+    }
+    .home-list-icons-ajustes li p{
+      margin-left: .5em;
+    }
     
 }
