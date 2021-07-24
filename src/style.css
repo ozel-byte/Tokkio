@@ -495,7 +495,7 @@
     }
     .home-list-icons-ajustes li:hover{
       transition: 1s ease-out;
-      background-color: #107cfa;
+    
 
     }
     .home-sublist-icons-ajustes li button{
@@ -533,15 +533,111 @@
         transform: rotate(360deg);
       }
     }
+
+    /* brillo styles*/
     .home-list-icons-ajustes  li.item-container-buttons-brillo{
       display: none;
-      background-color: #107cfa;
+      background-color: black;
     }
 
     .buttons-brillo{
-
-      width: 80%;
+      text-align: center;
+      width: 100%;
       height: auto;
-      background-color: #27343b;
+      display: flex;
+      justify-content: space-around;
+    }
+    .buttons-brillo button{
+      width: 30px;
+      height: 30px;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      background-color: #272829;
+    }
+    .buttons-brillo button:hover{
+      transition: 1s ease-out;
+      background-color: white;
+      color: black;
+    }
+    
+
+    /* saturacion styles*/
+    .home-list-icons-ajustes  li.item-container-buttons-saturacion{
+      display: none;
+      background-color: black;
+    }
+    .buttons-saturacion{
+      text-align: center;
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: space-around;
+    }
+
+    .buttons-saturacion button{
+      width: 30px;
+      height: 30px;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      background-color: #272829;
+    }
+    .buttons-saturacion button:hover{
+      transition: 1s ease-out;
+      background-color: white;
+      color: black;
+    }
+
+    /* contraste styles*/
+    .home-list-icons-ajustes  li.item-container-buttons-contraste{
+      display: none;
+      background-color: black;
+    }
+    .buttons-contraste{
+      text-align: center;
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: space-around;
+    }
+    .buttons-contraste button{
+      width: 30px;
+      height: 30px;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      background-color: #272829;
+    }
+    .buttons-contraste button:hover{
+      transition: 1s ease-out;
+      background-color: white;
+      color: black;
+    }
+
+    /* matiz style */
+    .home-list-icons-ajustes  li.item-container-buttons-matiz{
+      display: none;
+      background-color: black;
+    }
+    .buttons-matiz{
+      text-align: center;
+      width: 100%;
+      height: auto;
+      display: flex;
+      justify-content: space-around;
+    }
+    .buttons-matiz button{
+      width: 30px;
+      height: 30px;
+      border: none;
+      color: white;
+      border-radius: 50%;
+      background-color: #272829;
+    }
+    .buttons-matiz button:hover{
+      transition: 1s ease-out;
+      background-color: white;
+      color: black;
     }
 }
