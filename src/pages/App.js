@@ -6,6 +6,7 @@ import SignUp from "./signUp";
 import SignIn from "./signIn";
 import SignInV2 from "./signInv2";
 import Splascreen from "./splascreen";
+import Home from "./home";
 class App extends React.Component{
     constructor(props){
         super(props);
@@ -15,7 +16,7 @@ class App extends React.Component{
         return(
            <Router>
                <Route exact path="/" >
-                   <SignInV2/>
+                   <Home/>
                </Route>
                <Route exact path="/splascreen">
             <Splascreen/>

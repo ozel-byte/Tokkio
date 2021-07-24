@@ -13,7 +13,6 @@ class Splascreen extends React.Component{
     }
 
     componentDidMount(){
-        console.log("jejejei")
        this.timeSplascreen()
     }
 

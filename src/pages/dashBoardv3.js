@@ -5,6 +5,7 @@ import GetAppIcon from '@material-ui/icons/GetApp';
 import Brightness6Icon from '@material-ui/icons/Brightness6';
 import ReplayIcon from '@material-ui/icons/Replay';
 import PeopleIcon from '@material-ui/icons/People';
+import NotificationsIcon from '@material-ui/icons/Notifications';
 import ItemAmigo from '../componentes/itemAmigo';
 import axios from 'axios';
 import io from 'socket.io-client';
@@ -388,6 +389,9 @@ class DashBoardv3 extends React.Component {
                     </div>
                     <div className="mostraAmigos" onClick={this.openModaAmigos.bind(this)}>
                         <PeopleIcon style={{fontSize: 35}}/>
+                    </div>
+                    <div>
+                        <NotificationsIcon  style={{fontSize: 35}}/>
                     </div>
                     <div className="listaAmigos">
                         <ul>
