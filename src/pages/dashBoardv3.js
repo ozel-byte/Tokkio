@@ -7,6 +7,7 @@ import ReplayIcon from '@material-ui/icons/Replay';
 import PeopleIcon from '@material-ui/icons/People';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import ItemAmigo from '../componentes/itemAmigo';
+import NotificationsActiveIcon from '@material-ui/icons/NotificationsActive';
 import axios from 'axios';
 import io from 'socket.io-client';
 
@@ -22,6 +23,7 @@ class DashBoardv3 extends React.Component {
             auxUser: false,
             auxAmigos: false,
             sinImage: true,
+            auxNoty: false,
             imgUser: '',
             username: '',
             user: []
@@ -132,6 +134,18 @@ class DashBoardv3 extends React.Component {
         }
     }
 
+    openModaNotify(){
+        let notificaciones = document.getElementsByClassName("notificaciones");
+        if (!this.state.auxNoty){
+            this.cerrarVentanas();
+            notificaciones[0].style.display = "block";
+            this.setState({auxNoty: true});
+        } else {
+            notificaciones[0].style.display = "none";
+            this.setState({auxNoty: false});
+        }
+    }
+
     openModaBotones(e) {
         let botonesBrillo = document.getElementsByClassName("botonesBillo");
         if (!this.state.aux2) {
@@ -187,18 +201,20 @@ class DashBoardv3 extends React.Component {
         let botonesIlumina = document.getElementsByClassName("botonesIlumina");
         let detallesUser = document.getElementsByClassName("detallesUser");
         let listaAmigos = document.getElementsByClassName("listaAmigos");
+        let notificaciones = document.getElementsByClassName("notificaciones");
         if (this.state.aux) {
             this.setState({aux: true})
             this.openModaFiltros();
         }
-        if (this.state.aux2 || this.state.aux3 || this.state.aux4 || this.state.aux5 || this.state.auxUser || this.state.auxAmigos) {
+        if (this.state.aux2 || this.state.aux3 || this.state.aux4 || this.state.aux5 || this.state.auxUser || this.state.auxAmigos || this.state.auxNoty) {
             botonesContr[0].style.display = "none";
             botonesSatu[0].style.display = "none";
             botonesIlumina[0].style.display = "none";
             botonesBrillo[0].style.display = "none";
             detallesUser[0].style.display = "none";
             listaAmigos[0].style.display = "none";
-            this.setState({aux2: false, aux3: false, aux4: false, aux5: false, auxUser: false, auxAmigos: false});
+            notificaciones[0].style.display = "none";
+            this.setState({aux2: false, aux3: false, aux4: false, aux5: false, auxUser: false, auxAmigos: false, auxNoty: false});
         }
     }
 
@@ -403,6 +419,12 @@ class DashBoardv3 extends React.Component {
                                 })
                             }
                         </ul>
+                    </div>
+                    <div className="mostrarNotify" onClick={this.openModaNotify.bind(this)}>
+                        <NotificationsActiveIcon style={{fontSize: 35}}/>
+                    </div>
+                    <div className="notificaciones">
+
                     </div>
                     <div className="containerFiltros">
                         <div id="divBtnsFiltro">
