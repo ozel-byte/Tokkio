@@ -15,6 +15,8 @@ import GradientOutlinedIcon from '@material-ui/icons/GradientOutlined';
 import ExposurePlus1OutlinedIcon from '@material-ui/icons/ExposurePlus1Outlined';
 import ExposureNeg1OutlinedIcon from '@material-ui/icons/ExposureNeg1Outlined';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
+import axios from 'axios';
+import io from 'socket.io-client';
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -29,9 +31,49 @@ class Home extends React.Component {
             auxAjustesContraste: false,
             auxAjustesMatiz: false,
             nombreImg: "",
+            imgUser: '',
+            user: [],
             arrayImgFiltros: ["vintage", "lomo", "clarity", "sincity", "crossprocess", "pinhole", "nostalgia", "hermajesty"]
         }
 
+    }
+
+    componentDidMount(){
+        this.getUserData();
+    }
+    getUserData() {
+        axios.get("http://localhost:3000/user/getUserUsername", {
+            params: {
+                username: window.localStorage.getItem('usertokkio')
+            }
+        }).then(res => {
+            console.log(res.data)
+            this.setState({
+                username: res.data[0].username,
+                imgUser: res.data[0].imgPerfil
+            })
+            this.initSocket();
+        }).catch(e => {
+            console.log(e)
+        })
+    }
+
+    initSocket() {
+        const socket = io('http://localhost:3000');
+        let username = window.localStorage.getItem('usertokkio');
+        let objectUser = {
+            username: username,
+            imgUser: this.state.imgUser
+        }
+        console.log(this.state.imgUser + " ssssss")
+        socket.emit('message', objectUser)
+        socket.on('emitir', (res) => {
+            let auxvariabel = res;
+            this.setState({
+                user: res
+            })
+            console.log(res[0]);
+        });
     }
 
     uploadImage() {
@@ -350,7 +392,7 @@ class Home extends React.Component {
                 <div className="container-home">
                     <div className="home-side-bar-filtro">
                         <div className="home-image-user">
-                            <div className="home-side-bar-filtro-circle-image-avatar"></div>
+                            <div className="home-side-bar-filtro-circle-image-avatar"> <img src={this.state.imgUser} alt="avtar" /></div>
                             <div className="home-side-bar-filtro-icon-users" onClick={this.openWindowAmigo.bind(this)} >
                                 <GroupAddIcon style={{ fontSize: 25 }} />
                             </div>
@@ -435,36 +477,13 @@ class Home extends React.Component {
                             <div className="div-buscador">
                                 <input className="buscar-amigo" placeholder="Busca a un amigo"/>
                                 <ul>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
-                                    <li><h1>Aqui esta una lista</h1></li>
+                                   {
+                                       this.state.user.map(item => {
+                                           return (
+                                               <li><div className="container-item-user"><img src={item.imgUser} width="40px" height="40px" alt="" /> <p>{item.user}</p></div></li>
+                                           )
+                                       })
+                                   }
                                 </ul>
                             </div>
                         </div>

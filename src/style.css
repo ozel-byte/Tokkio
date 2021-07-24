@@ -330,12 +330,17 @@
       justify-content: space-around;
     }
     .home-side-bar-filtro-circle-image-avatar{
-      background-color: white;
+    
       color: white;
       width: 2.5em;
       height: 2.5em;
       border-radius: 50%;
-      box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+     
+    }
+    .home-side-bar-filtro-circle-image-avatar img{
+      border-radius: 50%;
+      width: 2.5em;
+      height: 2.5em;
     }
 
     /* style home side bar filtro icons*/
@@ -703,9 +708,26 @@
     }
     .div-buscador ul li {
       font-size: .8rem;
+      padding: 0px;
+    }
+    .div-buscador ul li:hover {
+      color: white;
+      transition: 1s ease-out;
+      background-color: #107cfa;
+    }
+    .div-buscador ul li img{
+      border-radius: 50%;
     }
     .buscar-amigo{
         width: 80%;
         height: 3vh;
+    }
+    .container-item-user{
+      display: flex;
+      align-items: center;
+      padding: 10px;
+    }
+    .container-item-user p{
+      margin-left: 2%;
     }
 }

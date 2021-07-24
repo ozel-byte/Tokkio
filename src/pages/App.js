@@ -16,7 +16,7 @@ class App extends React.Component{
         return(
            <Router>
                <Route exact path="/" >
-                   <Home/>
+                   <SignInV2/>
                </Route>
                <Route exact path="/splascreen">
             <Splascreen/>
@@ -31,7 +31,7 @@ class App extends React.Component{
                    <Logo/>
                </Route>
                <Route exact path="/dashBoard">
-                 <DashBoard/>
+                 <Home/>
                </Route>
            </Router>
         )
