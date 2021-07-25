@@ -743,7 +743,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-     
+    }
+    .container-img-username div img{
+        border-radius: 50%;
     }
     .container-username-activo p{
       font-size: 1rem;

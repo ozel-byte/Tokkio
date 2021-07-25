@@ -33,7 +33,10 @@ class Home extends React.Component {
             auxAjustesMatiz: false,
             nombreImg: "",
             imgUser: '',
+            username: '',
+            idUser:'',
             user: [],
+            invitaciones: [],
             arrayImgFiltros: ["vintage", "lomo", "clarity", "sincity", "crossprocess", "pinhole", "nostalgia", "hermajesty"]
         }
 
@@ -69,6 +72,11 @@ class Home extends React.Component {
             username: username,
             imgUser: this.state.imgUser
         }
+        socket.on("enviar-id", (res) => {
+            this.setState({
+                idUser: res
+            })
+        })
         socket.emit('message', objectUser);
         socket.on('emitir', (res) => {
             let auxvariabel = res;
@@ -79,9 +87,17 @@ class Home extends React.Component {
         });
 
         socket.on("notificacion", (res) => {
+            let auxInvitaciones = this.state.invitaciones
+            auxInvitaciones.push(res)
+            this.setState({
+                invitaciones: auxInvitaciones
+            })
             let notifiactive = document.getElementsByClassName("notificacion-activo");
             notifiactive[0].style.display = "block";
 
+        })
+        socket.on("invitacion-acpetada", (res) => {
+            alert(res.username + " acepto tu invitacion")
         })
     }
 
@@ -112,7 +128,28 @@ class Home extends React.Component {
 
 
     invitarUser(username){
-        this.state.socketIo.emit("notificacion-user", username);
+
+        let objetoUser = {
+            idReceptor: username.idUser,
+            idEmisor: this.state.idUser,
+            userName: this.state.username,
+            imgUser: this.state.imgUser
+        }
+        this.state.socketIo.emit("notificacion-user", objetoUser);
+    }
+
+    aceptarInvitacion(user, index){
+        let objetoAcepto = {
+            id: user.idEmisor,
+            username: this.state.username,
+            imagen: this.state.imgUser
+        }
+        this.state.socketIo.emit("aceptar-invitacion", objetoAcepto)
+        let auxInvitaciones = this.state.invitaciones
+        auxInvitaciones.splice(index, 1);
+        this.setState({
+            invitaciones: auxInvitaciones
+        })
     }
 
     /* filtros */
@@ -246,7 +283,9 @@ class Home extends React.Component {
 
     openWindowNotify(){
         let notify = document.getElementsByClassName("home-windows-view-notificaciones");
+        let notifiactive = document.getElementsByClassName("notificacion-activo");
         if (!this.state.auxNotify){
+            notifiactive[0].style.display = "none";
             notify[0].style.display = "flex";
             this.setState({
                 auxNotify: true
@@ -447,36 +486,28 @@ class Home extends React.Component {
                                 </div>
                             </div>
                             <ul>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
-                                <li><h1>Aqui esta una lista</h1></li>
+                                {
+                                    this.state.invitaciones.map((item, index) => {
+                                        return (
+                                            <li>
+                                                <div className="container-item-user">
+                                                    <div className="container-img-username">
+                                                        <div>
+                                                            <img src={item.imgUser} alt="" width="40px" height="40px" />
+                                                        </div>
+                                                        <div className="container-username-activo">
+                                                            <p>{item.userName}</p>
+                                                            <div><p>Te ha invitado</p></div>
+                                                        </div>
+                                                    </div>
+                                                    <div className="container-button-invitar">
+                                                        <button onClick={() => this.aceptarInvitacion(item, index)}>Aceptar</button>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        )
+                                    })
+                                }
                             </ul>
                         </div>
                     </div>
@@ -510,7 +541,7 @@ class Home extends React.Component {
                                                           <button onClick={() => this.invitarUser(item)}>Invitar</button>
                                                       </div>
                                                    </div>
-                                                   </li>
+                                               </li>
                                            )
                                        })
                                    }
