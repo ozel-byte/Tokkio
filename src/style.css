@@ -265,9 +265,16 @@
     }
 }
 
-@media (min-width: 1400px ) {
+@media (min-width: 1600px ) {
     .container-signIn-Data-info{
         width: 70%;
+    }
+    /* imagen del invitado en mi pantalla*/
+    .home-side-bar-filtro-circle-image-invitado{
+        margin-left: 100px;
+        position: relative;
+        margin-top: 100px;
+        border: solid 1px white;
     }
 }
 
@@ -346,7 +353,7 @@
         display: none;
         color: white;
         position: absolute;
-        margin-top: -160px;
+        margin-top: -80px;
         width: 2.5em;
         height: 2.5em;
         border-radius: 50%;
