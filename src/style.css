@@ -342,6 +342,21 @@
       width: 2.5em;
       height: 2.5em;
     }
+    .home-side-bar-filtro-circle-image-invitado{
+        display: none;
+        color: white;
+        position: absolute;
+        margin-top: -160px;
+        width: 2.5em;
+        height: 2.5em;
+        border-radius: 50%;
+    }
+    .home-side-bar-filtro-circle-image-invitado img{
+        color: white;
+        width: 2.5em;
+        height: 2.5em;
+        border-radius: 50%;
+    }
 
     /* style home side bar filtro icons*/
     .home-side-bar-filtro-icons{

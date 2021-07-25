@@ -33,6 +33,7 @@ class Home extends React.Component {
             auxAjustesMatiz: false,
             nombreImg: "",
             imgUser: '',
+            imgInvitado: '',
             username: '',
             idUser:'',
             user: [],
@@ -97,6 +98,8 @@ class Home extends React.Component {
 
         })
         socket.on("invitacion-acpetada", (res) => {
+            let imagenInvitado = document.getElementsByClassName("home-side-bar-filtro-circle-image-invitado");
+            imagenInvitado[0].style.display = "block";
             alert(res.username + " acepto tu invitacion")
         })
     }
@@ -128,7 +131,7 @@ class Home extends React.Component {
 
 
     invitarUser(username){
-
+        this.asignarImagen(username.imgUser)
         let objetoUser = {
             idReceptor: username.idUser,
             idEmisor: this.state.idUser,
@@ -136,6 +139,12 @@ class Home extends React.Component {
             imgUser: this.state.imgUser
         }
         this.state.socketIo.emit("notificacion-user", objetoUser);
+    }
+
+    asignarImagen(imagenUser){
+        this.setState({
+            imgInvitado: imagenUser
+        })
     }
 
     aceptarInvitacion(user, index){
@@ -150,6 +159,9 @@ class Home extends React.Component {
         this.setState({
             invitaciones: auxInvitaciones
         })
+        this.asignarImagen(user.imgUser);
+        let imagenInvitado = document.getElementsByClassName("home-side-bar-filtro-circle-image-invitado");
+        imagenInvitado[0].style.display = "block";
     }
 
     /* filtros */
@@ -446,6 +458,7 @@ class Home extends React.Component {
                     <div className="home-side-bar-filtro">
                         <div className="home-image-user">
                             <div className="home-side-bar-filtro-circle-image-avatar"> <img src={this.state.imgUser} alt="avtar" /></div>
+                            <div className="home-side-bar-filtro-circle-image-invitado"> <img src={this.state.imgInvitado} alt="avtar" /></div>
                             <div className="home-side-bar-filtro-icon-users" onClick={this.openWindowAmigo.bind(this)} >
                                 <GroupAddIcon style={{ fontSize: 25 }} />
                             </div>
