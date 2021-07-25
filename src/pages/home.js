@@ -37,7 +37,7 @@ class Home extends React.Component {
             username: '',
             idUser: '',
             user: [],
-           
+
             auxInvitar: false,
             invitaciones: [],
             arrayImgFiltros: ["vintage", "lomo", "clarity", "sincity", "crossprocess", "pinhole", "nostalgia", "hermajesty"]
@@ -66,6 +66,7 @@ class Home extends React.Component {
     }
 
     initSocket() {
+        let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
         const socket = io('http://localhost:3000');
         this.setState({
             socketIo: socket
@@ -85,8 +86,10 @@ class Home extends React.Component {
             let auxvariabel = res;
             this.setState({
                 user: res
-            })
-            console.log(res[0]);
+            });
+
+            imagenInvitado[0].style.display = "none";
+
         });
 
         socket.on("notificacion", (res) => {
@@ -100,7 +103,6 @@ class Home extends React.Component {
 
         })
         socket.on("invitacion-acpetada", (res) => {
-            let imagenInvitado = document.getElementsByClassName("home-side-bar-filtro-circle-image-invitado");
             imagenInvitado[0].style.display = "block";
             alert(res.username + " acepto tu invitacion")
         })
@@ -132,7 +134,7 @@ class Home extends React.Component {
     }
 
 
-    invitarUser(username,index) {
+    invitarUser(username, index) {
         if (!this.state.auxInvitar) {
             this.asignarImagen(username.imgUser);
             let objetoUser = {
@@ -142,7 +144,7 @@ class Home extends React.Component {
                 imgUser: this.state.imgUser
             }
             this.state.socketIo.emit("notificacion-user", objetoUser);
-         
+
             let styleButtonInvitar = document.getElementsByClassName("style-button-invitar");
             styleButtonInvitar[index].style.backgroundColor = "grey";
         } else {
@@ -169,7 +171,7 @@ class Home extends React.Component {
             invitaciones: auxInvitaciones
         })
         this.asignarImagen(user.imgUser);
-        let imagenInvitado = document.getElementsByClassName("home-side-bar-filtro-circle-image-invitado");
+        let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
         imagenInvitado[0].style.display = "block";
     }
 
@@ -466,8 +468,10 @@ class Home extends React.Component {
                 <div className="container-home">
                     <div className="home-side-bar-filtro">
                         <div className="home-image-user">
-                            <div className="home-side-bar-filtro-circle-image-avatar"> <img src={this.state.imgUser} alt="avtar" /></div>
-                            <div className="home-side-bar-filtro-circle-image-invitado"> <img src={this.state.imgInvitado} alt="avtar" /></div>
+                            <div className="container-list-user-conected">
+                                <div className="home-side-bar-filtro-circle-image-avatar"> <img src={this.state.imgUser} alt="avtar" /></div>
+                                <div className="home-side-bar-user-invited"><img src={this.state.imgInvitado} alt="" /></div>
+                            </div>
                             <div className="home-side-bar-filtro-icon-users" onClick={this.openWindowAmigo.bind(this)} >
                                 <GroupAddIcon style={{ fontSize: 25 }} />
                             </div>
@@ -548,22 +552,26 @@ class Home extends React.Component {
                                     {
                                         this.state.user.map((item, index) => {
                                             return (
-                                                <li>
-                                                    <div className="container-item-user">
-                                                        <div className="container-img-username">
-                                                            <div>
-                                                                <img src={item.imgUser} alt="" width="40px" height="40px" />
+                                                <If condition={item.user != this.state.username}>
+                                                    <li>
+                                                        <div className="container-item-user">
+                                                            <div className="container-img-username">
+                                                                <div>
+                                                                    <img src={item.imgUser} alt="" width="40px" height="40px" />
+                                                                </div>
+                                                                <div className="container-username-activo">
+                                                                    <p>{item.user}</p>
+                                                                    <div> <p>Activo</p></div>
+                                                                </div>
                                                             </div>
-                                                            <div className="container-username-activo">
-                                                                <p>{item.user}</p>
-                                                                <div> <p>Activo</p></div>
+                                                            <div className="container-button-invitar">
+                                                                <button onClick={() => this.invitarUser(item, index)} className="style-button-invitar">Invitar</button>
                                                             </div>
                                                         </div>
-                                                        <div className="container-button-invitar">
-                                                            <button onClick={() => this.invitarUser(item, index)} className="style-button-invitar">Invitar</button>
-                                                        </div>
-                                                    </div>
-                                                </li>
+                                                    </li>
+
+                                                </If>
+
                                             )
                                         })
                                     }
