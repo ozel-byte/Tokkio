@@ -35,15 +35,17 @@ class Home extends React.Component {
             imgUser: '',
             imgInvitado: '',
             username: '',
-            idUser:'',
+            idUser: '',
             user: [],
+           
+            auxInvitar: false,
             invitaciones: [],
             arrayImgFiltros: ["vintage", "lomo", "clarity", "sincity", "crossprocess", "pinhole", "nostalgia", "hermajesty"]
         }
 
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getUserData();
     }
     getUserData() {
@@ -130,24 +132,31 @@ class Home extends React.Component {
     }
 
 
-    invitarUser(username){
-        this.asignarImagen(username.imgUser)
-        let objetoUser = {
-            idReceptor: username.idUser,
-            idEmisor: this.state.idUser,
-            userName: this.state.username,
-            imgUser: this.state.imgUser
+    invitarUser(username,index) {
+        if (!this.state.auxInvitar) {
+            this.asignarImagen(username.imgUser);
+            let objetoUser = {
+                idReceptor: username.idUser,
+                idEmisor: this.state.idUser,
+                userName: this.state.username,
+                imgUser: this.state.imgUser
+            }
+            this.state.socketIo.emit("notificacion-user", objetoUser);
+         
+            let styleButtonInvitar = document.getElementsByClassName("style-button-invitar");
+            styleButtonInvitar[index].style.backgroundColor = "grey";
+        } else {
+
         }
-        this.state.socketIo.emit("notificacion-user", objetoUser);
     }
 
-    asignarImagen(imagenUser){
+    asignarImagen(imagenUser) {
         this.setState({
             imgInvitado: imagenUser
         })
     }
 
-    aceptarInvitacion(user, index){
+    aceptarInvitacion(user, index) {
         let objetoAcepto = {
             id: user.idEmisor,
             username: this.state.username,
@@ -293,10 +302,10 @@ class Home extends React.Component {
         }
     }
 
-    openWindowNotify(){
+    openWindowNotify() {
         let notify = document.getElementsByClassName("home-windows-view-notificaciones");
         let notifiactive = document.getElementsByClassName("notificacion-activo");
-        if (!this.state.auxNotify){
+        if (!this.state.auxNotify) {
             notifiactive[0].style.display = "none";
             notify[0].style.display = "flex";
             this.setState({
@@ -310,9 +319,9 @@ class Home extends React.Component {
         }
     }
 
-    openWindowAmigo(){
+    openWindowAmigo() {
         let amigos = document.getElementsByClassName("home-window-view-amigos");
-        if (!this.state.auxAmigo){
+        if (!this.state.auxAmigo) {
             amigos[0].style.display = "flex";
             this.setState({
                 auxAmigo: true
@@ -394,17 +403,17 @@ class Home extends React.Component {
             this.brightness(-2).render();
         });
     }
-    downSaturacion(){
+    downSaturacion() {
         Caman("#canvas", function () {
             this.saturation(-2).render();
         });
     }
-    downContraste(){
+    downContraste() {
         Caman("#canvas", function () {
             this.contrast(-2).render();
         });
     }
-    downMatiz(){
+    downMatiz() {
         Caman("#canvas", function () {
             this.hue(-2).render();
         });
@@ -412,7 +421,7 @@ class Home extends React.Component {
 
     downButton(typeButton) {
         switch (typeButton) {
-            case "brillo": this.downBrillo();break;
+            case "brillo": this.downBrillo(); break;
             case "saturacion": this.downSaturacion(); break;
             case "contraste": this.downContraste(); break;
             case "matiz": this.downMatiz(); break;
@@ -421,29 +430,29 @@ class Home extends React.Component {
         }
     }
 
-    upBrillo(){
+    upBrillo() {
         Caman("#canvas", function () {
             this.brightness(2).render();
         });
     }
-    upSaturacion(){
+    upSaturacion() {
         Caman("#canvas", function () {
             this.saturation(2).render();
         });
     }
-    upContraste(){
+    upContraste() {
         Caman("#canvas", function () {
             this.contrast(2).render();
         });
     }
-    upMatiz(){
+    upMatiz() {
         Caman("#canvas", function () {
             this.hue(2).render();
         });
     }
-    upButton(typeButton){
+    upButton(typeButton) {
         switch (typeButton) {
-            case "brillo": this.upBrillo();break;
+            case "brillo": this.upBrillo(); break;
             case "saturacion": this.upSaturacion(); break;
             case "contraste": this.upContraste(); break;
             case "matiz": this.upMatiz(); break;
@@ -495,7 +504,7 @@ class Home extends React.Component {
                             <div className="head-notificaciones">
                                 <h2>NOTIFICACIONES</h2>
                                 <div onClick={this.openWindowNotify.bind(this)}>
-                                    <CloseOutlinedIcon style={{ fontSize: 30 }}/>
+                                    <CloseOutlinedIcon style={{ fontSize: 30 }} />
                                 </div>
                             </div>
                             <ul>
@@ -529,35 +538,35 @@ class Home extends React.Component {
                             <div className="head-notificaciones">
                                 <h2>Amigos</h2>
                                 <div onClick={this.openWindowAmigo.bind(this)}>
-                                    <CloseOutlinedIcon style={{ fontSize: 20 }}/>
+                                    <CloseOutlinedIcon style={{ fontSize: 20 }} />
                                 </div>
                             </div>
-                           
+
                             <div className="div-buscador">
-                                <input className="buscar-amigo" placeholder="Busca a un amigo"/>
+                                <input className="buscar-amigo" placeholder="Busca a un amigo" />
                                 <ul>
-                                   {
-                                       this.state.user.map(item => {
-                                           return (
-                                               <li>
-                                                   <div className="container-item-user">
-                                                      <div className="container-img-username">
-                                                          <div>
-                                                              <img src={item.imgUser} alt="" width="40px" height="40px" />
-                                                          </div>
-                                                          <div className="container-username-activo">
-                                                            <p>{item.user}</p>
-                                                           <div> <p>Activo</p></div>
-                                                          </div>
-                                                      </div>
-                                                      <div className="container-button-invitar">
-                                                          <button onClick={() => this.invitarUser(item)}>Invitar</button>
-                                                      </div>
-                                                   </div>
-                                               </li>
-                                           )
-                                       })
-                                   }
+                                    {
+                                        this.state.user.map((item, index) => {
+                                            return (
+                                                <li>
+                                                    <div className="container-item-user">
+                                                        <div className="container-img-username">
+                                                            <div>
+                                                                <img src={item.imgUser} alt="" width="40px" height="40px" />
+                                                            </div>
+                                                            <div className="container-username-activo">
+                                                                <p>{item.user}</p>
+                                                                <div> <p>Activo</p></div>
+                                                            </div>
+                                                        </div>
+                                                        <div className="container-button-invitar">
+                                                            <button onClick={() => this.invitarUser(item, index)} className="style-button-invitar">Invitar</button>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            )
+                                        })
+                                    }
                                 </ul>
                             </div>
                         </div>
@@ -573,28 +582,28 @@ class Home extends React.Component {
                             <li className="item-container-buttons-brillo">
                                 <div className="buttons-brillo">
                                     <button className="button-remove-brillo" onClick={() => this.upButton("brillo")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("brillo")}/></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("brillo")} /></button>
                                 </div>
                             </li>
                             <li onClick={() => this.opensideBarItemButtos("saturacion", "item-container-buttons-saturacion")}><BarChartOutlinedIcon /><p>Saturacion</p></li>
                             <li className="item-container-buttons-saturacion">
                                 <div className="buttons-saturacion">
                                     <button className="button-remove-saturacion" onClick={() => this.upButton("saturacion")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("saturacion")}/></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("saturacion")} /></button>
                                 </div>
                             </li>
                             <li onClick={() => this.opensideBarItemButtos("contraste", "item-container-buttons-contraste")}><ExposureOutlinedIcon /><p>contraste</p></li>
                             <li className="item-container-buttons-contraste">
                                 <div className="buttons-contraste">
                                     <button className="button-remove-contraste" onClick={() => this.upButton("contraste")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("contraste")}/></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("contraste")} /></button>
                                 </div>
                             </li>
                             <li onClick={() => this.opensideBarItemButtos("matiz", "item-container-buttons-matiz")}><GradientOutlinedIcon /><p>Matiz</p></li>
                             <li className="item-container-buttons-matiz">
                                 <div className="buttons-matiz">
                                     <button className="button-remove-matiz" onClick={() => this.upButton("matiz")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("matiz")}/></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("matiz")} /></button>
                                 </div>
                             </li>
                         </ul>
