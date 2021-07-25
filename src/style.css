@@ -656,24 +656,32 @@
         background-color:transparent;
     }
     .window-notificaciones{
-        width: 60%;
-        height: 60vh;
-        border-radius: 30px;
-        background-color: white;
+        width: 40%;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        border-radius: 10px;
+        background-color: #191919;
     }
     .head-notificaciones{
         width: 100%;
+        height: 20%;
+        color: white;
         display: flex;
         justify-content: space-between;
+        align-items: center; 
     }
+    
     .head-notificaciones h2{
-        padding-left: 12px;
-        padding-top: 2px;
+      font-size: 1rem ;
+      margin-left: 1em;
+      color: white;
+      font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     }
-    .head-notificaciones div {
-        padding-right: 12px;
-        padding-top: 2px;
+    .head-notificaciones div{
+      margin-right: 1em;
     }
+    
     .window-notificaciones ul{
         margin-top: 10px;
         height: 650px;
@@ -697,10 +705,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-       
+   
+    }
+    .div-buscador input{
+      background-color: white;
+      border: none;
+      padding: 1em;
     }
     .div-buscador ul{
-        margin-top: 10px;
         height: 100%;
         width: 100%;
         overflow:hidden;
@@ -710,11 +722,7 @@
       font-size: .8rem;
       padding: 0px;
     }
-    .div-buscador ul li:hover {
-      color: white;
-      transition: 1s ease-out;
-      background-color: #107cfa;
-    }
+   
     .div-buscador ul li img{
       border-radius: 50%;
     }
@@ -725,9 +733,47 @@
     .container-item-user{
       display: flex;
       align-items: center;
-      padding: 10px;
+     justify-content: space-around;
     }
     .container-item-user p{
       margin-left: 2%;
+    }
+    .container-img-username{
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+     
+    }
+    .container-username-activo p{
+      font-size: 1rem;
+      color: white;
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+   .container-username-activo div p {
+     color: green;
+   }
+   .notificacion-activo{
+     width: 10px;
+     display: none;
+     height: 10px;
+     position: relative;
+     background-color: red;
+     border-radius: 50%;
+     margin-top: -.8em;
+   }
+    .container-button-invitar{
+      width: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    
+    }
+    .container-button-invitar button{
+      background-color: white;
+      border: none;
+      color: black;
+      padding: 8px;
+      border-radius: 3px;
     }
 }

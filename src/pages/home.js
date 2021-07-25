@@ -21,6 +21,7 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            socketIo: null,
             aux: false,
             aux2: false,
             bandera: false,
@@ -60,13 +61,15 @@ class Home extends React.Component {
 
     initSocket() {
         const socket = io('http://localhost:3000');
+        this.setState({
+            socketIo: socket
+        })
         let username = window.localStorage.getItem('usertokkio');
         let objectUser = {
             username: username,
             imgUser: this.state.imgUser
         }
-        console.log(this.state.imgUser + " ssssss")
-        socket.emit('message', objectUser)
+        socket.emit('message', objectUser);
         socket.on('emitir', (res) => {
             let auxvariabel = res;
             this.setState({
@@ -74,6 +77,12 @@ class Home extends React.Component {
             })
             console.log(res[0]);
         });
+
+        socket.on("notificacion", (res) => {
+            let notifiactive = document.getElementsByClassName("notificacion-activo");
+            notifiactive[0].style.display = "block";
+
+        })
     }
 
     uploadImage() {
@@ -99,6 +108,11 @@ class Home extends React.Component {
             context.drawImage(imageObj, 0, 0)
         }
         imageObj.src = img
+    }
+
+
+    invitarUser(username){
+        this.state.socketIo.emit("notificacion-user", username);
     }
 
     /* filtros */
@@ -398,6 +412,7 @@ class Home extends React.Component {
                             </div>
                             <div className="home-side-bar-filtro-icon-notification" onClick={this.openWindowNotify.bind(this)}>
                                 <NotificationsIcon style={{ fontSize: 25 }} />
+                                <div className="notificacion-activo"></div>
                             </div>
                         </div>
                         <div className="home-side-bar-filtro-icons">
@@ -468,19 +483,34 @@ class Home extends React.Component {
                     <div className="home-window-view-amigos">
                         <div className="window-notificaciones">
                             <div className="head-notificaciones">
-                                <h2>AMIGOS</h2>
+                                <h2>Amigos</h2>
                                 <div onClick={this.openWindowAmigo.bind(this)}>
-                                    <CloseOutlinedIcon style={{ fontSize: 30 }}/>
+                                    <CloseOutlinedIcon style={{ fontSize: 20 }}/>
                                 </div>
                             </div>
-                            <br/>
+                           
                             <div className="div-buscador">
                                 <input className="buscar-amigo" placeholder="Busca a un amigo"/>
                                 <ul>
                                    {
                                        this.state.user.map(item => {
                                            return (
-                                               <li><div className="container-item-user"><img src={item.imgUser} width="40px" height="40px" alt="" /> <p>{item.user}</p></div></li>
+                                               <li>
+                                                   <div className="container-item-user">
+                                                      <div className="container-img-username">
+                                                          <div>
+                                                              <img src={item.imgUser} alt="" width="40px" height="40px" />
+                                                          </div>
+                                                          <div className="container-username-activo">
+                                                            <p>{item.user}</p>
+                                                           <div> <p>Activo</p></div>
+                                                          </div>
+                                                      </div>
+                                                      <div className="container-button-invitar">
+                                                          <button onClick={() => this.invitarUser(item)}>Invitar</button>
+                                                      </div>
+                                                   </div>
+                                                   </li>
                                            )
                                        })
                                    }

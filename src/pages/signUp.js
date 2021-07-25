@@ -160,6 +160,7 @@ class SignUp extends React.Component{
           }
         axios.post("http://localhost:3000/user/addUser",dataBody)
         .then(data => {
+            console.log("userfue exito")
             this.props.history.push('/dashBoard');
         })
         .catch(e => console.log(e))
