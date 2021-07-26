@@ -18,6 +18,7 @@ import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
 import ReplayOutlinedIcon from '@material-ui/icons/ReplayOutlined';
 import axios from 'axios';
 import io from 'socket.io-client';
+import swal from 'sweetalert';
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -115,7 +116,8 @@ class Home extends React.Component {
                 idInvitado: res.idReceptor
             })
             this.sendImageUserConectedRoom(res);
-            alert(res.username + " acepto tu invitacion");
+            swal(res.username, "Acepto tu Invitacion");
+            
         });
 
         socket.on("send-image-user-conected-room-catch", (res) => {
