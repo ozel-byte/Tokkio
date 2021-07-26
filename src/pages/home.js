@@ -92,7 +92,8 @@ class Home extends React.Component {
         socket.on('emitir', (res) => {
             let auxvariabel = res;
             this.setState({
-                user: res
+                user: res,
+                auxInvitar: false
             });
 
             imagenInvitado[0].style.display = "none";
