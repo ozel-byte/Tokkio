@@ -32,12 +32,15 @@ class Home extends React.Component {
             auxAjustesSaturacion: false,
             auxAjustesContraste: false,
             auxAjustesMatiz: false,
+            auxInvitado: false,
             nombreImg: "",
             imgUser: '',
             imgInvitado: '',
             username: '',
             userNameInv: '',
             idUser: '',
+            idInvitado: '',
+            idEmisor: '',
             user: [],
             imgSendUser: "",
             imgReceivedUser: "",
@@ -108,7 +111,8 @@ class Home extends React.Component {
         socket.on("invitacion-acpetada", (res) => {
             imagenInvitado[0].style.display = "block";
             this.setState({
-                userNameInv: res.username
+                userNameInv: res.username,
+                idInvitado: res.idReceptor
             })
             alert(res.username + " acepto tu invitacion");
             this.sendImageUserConectedRoom(res);
@@ -118,6 +122,20 @@ class Home extends React.Component {
             alert(res.imgSend + " ey");
             this.changeImageUserReceived(res.imgSend);
            
+        })
+        socket.on("recibeParametros", (res) => {
+            if (res.tipoP === 1){
+                if (res.upORdown){
+                    this.upButton(res.valorP, 2)
+                } else {
+                    this.downButton(res.valorP, 2)
+                }
+            } else if (res.tipoP === 2) {
+                this.filtros(res.valorP, 2)
+                alert("es filtro")
+            } else {
+                this.revertir(2)
+            }
         })
     }
 
@@ -142,7 +160,8 @@ class Home extends React.Component {
         imageObj.src = res;
 
         this.setState({
-            imgSendUser: res
+            imgSendUser: res,
+            bandera: true
         })
         
         loading[0].style.display = "none";
@@ -234,16 +253,23 @@ class Home extends React.Component {
         auxInvitaciones.splice(index, 1);
         this.setState({
             invitaciones: auxInvitaciones,
-            userNameInv: user.userName
+            userNameInv: user.userName,
+            idEmisor: user.idEmisor,
+            auxInvitado: true
         })
         this.asignarImagen(user.imgUser);
         let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
+        let notify = document.getElementsByClassName("home-windows-view-notificaciones");
         imagenInvitado[0].style.display = "block";
+        notify[0].style.display = "none";
+        this.setState({
+            auxNotify: false
+        })
     }
 
     /* filtros */
 
-    filtros(typefilter) {
+    filtros(typefilter, emitir) {
         console.log("entro");
         let loaderfiltross = document.getElementsByClassName("loader-filtro");
         loaderfiltross[typefilter.index].style.display = "block";
@@ -299,7 +325,24 @@ class Home extends React.Component {
             default:
                 break;
         }
+        if (emitir === 1){this.enviarParametrosFiltro(2, typefilter, false)}
 
+    }
+    enviarParametrosFiltro(tipo, valores, upORdown){
+        let id;
+        if (!this.state.auxInvitado){
+            id = this.state.idInvitado
+        } else {
+            id = this.state.idEmisor
+            alert("soy invitado")
+        }
+        let datos = {
+            id: id,
+            tipoP: tipo,
+            valorP: valores,
+            upORdown: upORdown
+        }
+        this.state.socketIo.emit("enviandoParametros", datos)
     }
 
     asiganarNombreDescargaImagen() {
@@ -487,12 +530,12 @@ class Home extends React.Component {
         });
     }
 
-    downButton(typeButton) {
+    downButton(typeButton, emitir) {
         switch (typeButton) {
-            case "brillo": this.downBrillo(); break;
-            case "saturacion": this.downSaturacion(); break;
-            case "contraste": this.downContraste(); break;
-            case "matiz": this.downMatiz(); break;
+            case "brillo": this.downBrillo(); if (emitir === 1){this.enviarParametros(1, typeButton, false)} break;
+            case "saturacion": this.downSaturacion(); if (emitir === 1){this.enviarParametros(1, typeButton, false)} break;
+            case "contraste": this.downContraste(); if (emitir === 1){this.enviarParametros(1, typeButton, false)} break;
+            case "matiz": this.downMatiz(); if (emitir === 1){this.enviarParametros(1, typeButton, false)} break;
             default:
                 break;
         }
@@ -518,21 +561,39 @@ class Home extends React.Component {
             this.hue(2).render();
         });
     }
-    upButton(typeButton) {
+    upButton(typeButton, emitir) {
         switch (typeButton) {
-            case "brillo": this.upBrillo(); break;
-            case "saturacion": this.upSaturacion(); break;
-            case "contraste": this.upContraste(); break;
-            case "matiz": this.upMatiz(); break;
+            case "brillo": this.upBrillo(); if (emitir === 1){this.enviarParametros(1, typeButton, true)}; break;
+            case "saturacion": this.upSaturacion(); if (emitir === 1){this.enviarParametros(1, typeButton, true)}; break;
+            case "contraste": this.upContraste(); if (emitir === 1){this.enviarParametros(1, typeButton, true)}; break;
+            case "matiz": this.upMatiz(); if (emitir === 1){this.enviarParametros(1, typeButton, true)}; break;
             default:
                 break;
         }
     }
+    
+    enviarParametros(tipo, valor, upORdown){
+        let id;
+        if (!this.state.auxInvitado){
+            id = this.state.idInvitado
+        } else {
+            id = this.state.idEmisor
+            alert("soy invitado")
+        }
+        let datos = {
+            id: id,
+            tipoP: tipo,
+            valorP: valor,
+            upORdown: upORdown
+        }
+        this.state.socketIo.emit("enviandoParametros", datos)
+    }
 
-    revertir() {
+    revertir(emitir) {
         Caman("#canvas", function () {
             this.revert();
         });
+        if (emitir === 1){this.enviarParametrosFiltro(3, "revertir", false)}
     }
 
     render() {
@@ -558,7 +619,7 @@ class Home extends React.Component {
                                 <li onClick={this.viewHomeSideBarImagen.bind(this)}> <PhotoFilterIcon style={{ fontSize: 25 }} /></li>
                                 <li onClick={this.viewHomeSideBarImagen.bind(this)}> <TextFormatIcon style={{ fontSize: 25 }} /></li>
                                 <li onClick={this.viewHomeSideBarImagen.bind(this)}><ArrowDownwardIcon style={{ fontSize: 25 }} /></li>
-                                <li onClick={this.revertir.bind(this)}><ReplayOutlinedIcon style={{ fontSize: 25 }} /></li>
+                                <li onClick={() => this.revertir(1)}><ReplayOutlinedIcon style={{ fontSize: 25 }} /></li>
                             </ul>
                         </div>
                         <div className="home-side-bar-filtro-ajustes">
@@ -571,7 +632,7 @@ class Home extends React.Component {
                             {
                                 this.state.arrayImgFiltros.map((item, index) => {
                                     return (
-                                        <li onClick={() => this.filtros({ index, item })} >{item}<div className="loader-filtro"></div></li>
+                                        <li onClick={() => this.filtros({ index, item}, 1)} >{item}<div className="loader-filtro"></div></li>
                                     )
                                 })
                             }
@@ -666,29 +727,29 @@ class Home extends React.Component {
                             <li onClick={() => this.opensideBarItemButtos("brillo", "item-container-buttons-brillo")}><BrightnessMediumOutlinedIcon /><p>Brillo</p></li>
                             <li className="item-container-buttons-brillo">
                                 <div className="buttons-brillo">
-                                    <button className="button-remove-brillo" onClick={() => this.upButton("brillo")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("brillo")} /></button>
+                                    <button className="button-remove-brillo" onClick={() => this.upButton("brillo", 1)}><ExposurePlus1OutlinedIcon /></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("brillo", 1)} /></button>
                                 </div>
                             </li>
                             <li onClick={() => this.opensideBarItemButtos("saturacion", "item-container-buttons-saturacion")}><BarChartOutlinedIcon /><p>Saturacion</p></li>
                             <li className="item-container-buttons-saturacion">
                                 <div className="buttons-saturacion">
-                                    <button className="button-remove-saturacion" onClick={() => this.upButton("saturacion")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("saturacion")} /></button>
+                                    <button className="button-remove-saturacion" onClick={() => this.upButton("saturacion", 1)}><ExposurePlus1OutlinedIcon /></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("saturacion", 1)} /></button>
                                 </div>
                             </li>
                             <li onClick={() => this.opensideBarItemButtos("contraste", "item-container-buttons-contraste")}><ExposureOutlinedIcon /><p>contraste</p></li>
                             <li className="item-container-buttons-contraste">
                                 <div className="buttons-contraste">
-                                    <button className="button-remove-contraste" onClick={() => this.upButton("contraste")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("contraste")} /></button>
+                                    <button className="button-remove-contraste" onClick={() => this.upButton("contraste", 1)}><ExposurePlus1OutlinedIcon /></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("contraste", 1)} /></button>
                                 </div>
                             </li>
                             <li onClick={() => this.opensideBarItemButtos("matiz", "item-container-buttons-matiz")}><GradientOutlinedIcon /><p>Matiz</p></li>
                             <li className="item-container-buttons-matiz">
                                 <div className="buttons-matiz">
-                                    <button className="button-remove-matiz" onClick={() => this.upButton("matiz")}><ExposurePlus1OutlinedIcon /></button>
-                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("matiz")} /></button>
+                                    <button className="button-remove-matiz" onClick={() => this.upButton("matiz", 1)}><ExposurePlus1OutlinedIcon /></button>
+                                    <button><ExposureNeg1OutlinedIcon onClick={() => this.downButton("matiz", 1)} /></button>
                                 </div>
                             </li>
                         </ul>
