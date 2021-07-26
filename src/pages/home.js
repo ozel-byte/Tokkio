@@ -15,6 +15,7 @@ import GradientOutlinedIcon from '@material-ui/icons/GradientOutlined';
 import ExposurePlus1OutlinedIcon from '@material-ui/icons/ExposurePlus1Outlined';
 import ExposureNeg1OutlinedIcon from '@material-ui/icons/ExposureNeg1Outlined';
 import CloseOutlinedIcon from '@material-ui/icons/CloseOutlined';
+import ReplayOutlinedIcon from '@material-ui/icons/ReplayOutlined';
 import axios from 'axios';
 import io from 'socket.io-client';
 class Home extends React.Component {
@@ -129,11 +130,12 @@ class Home extends React.Component {
     }
 
     changeCloudbinary(img){
+        let loading = document.getElementsByClassName("divloading");
+        loading[0].style.display = "flex";
         const fData = new FormData();
         fData.append("file", img);
         fData.append("upload_preset","rhvqjres");
         axios.post('https://api.cloudinary.com/v1_1/dv5fwf13g/image/upload',fData).then(response => {
-           
             let canvas = document.getElementById("canvas");
             let context = canvas.getContext('2d');
             let imageObj = new Image();
@@ -142,7 +144,9 @@ class Home extends React.Component {
                 canvas.height = imageObj.height;
                 context.drawImage(imageObj, 0, 0)
             }
+            imageObj.crossOrigin = "Anonymous";
             imageObj.src = response.data.url;
+            loading[0].style.display = "none";
         }).catch("error");
     }
 
@@ -475,6 +479,13 @@ class Home extends React.Component {
                 break;
         }
     }
+
+    revertir() {
+        Caman("#canvas", function () {
+            this.revert();
+        });
+    }
+
     render() {
         return (
             <>
@@ -498,6 +509,7 @@ class Home extends React.Component {
                                 <li onClick={this.viewHomeSideBarImagen.bind(this)}> <PhotoFilterIcon style={{ fontSize: 25 }} /></li>
                                 <li onClick={this.viewHomeSideBarImagen.bind(this)}> <TextFormatIcon style={{ fontSize: 25 }} /></li>
                                 <li onClick={this.viewHomeSideBarImagen.bind(this)}><ArrowDownwardIcon style={{ fontSize: 25 }} /></li>
+                                <li onClick={this.revertir.bind(this)}><ReplayOutlinedIcon style={{ fontSize: 25 }} /></li>
                             </ul>
                         </div>
                         <div className="home-side-bar-filtro-ajustes">
@@ -595,6 +607,9 @@ class Home extends React.Component {
                     <div className="home-side-bar-imagen">
                         <div className="home-side-bar-imagen-message-imagen"><h3>seleciona una imagen</h3></div>
                         <canvas id="canvas" width="100%" height="100vh"></canvas>
+                    </div>
+                    <div className="divloading">
+                        <div className="loadingImg"></div>
                     </div>
                     <div className="side-bar-ajustes-etc">
                         <h2>Ajustes</h2>
