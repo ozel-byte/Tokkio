@@ -4,7 +4,7 @@ class MessageError extends React.Component{
     render() {
         return (
              <>
-              <div className="message-error-button"><p>completa los inputs</p></div>
+              <div className="message-error-button"><p>faltan campos</p></div>
              </>
         );
     }

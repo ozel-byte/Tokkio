@@ -4,7 +4,7 @@ import MessageError from '../componentes/messageError';
 import axios from 'axios';
 import { withRouter } from "react-router-dom";
 import Loading from '../componentes/loading';
-
+import swal from 'sweetalert';
 class SignIn extends React.Component{
     constructor(props) {
         super(props);
@@ -67,11 +67,19 @@ class SignIn extends React.Component{
                 pass:this.state.pass
             }
         }).then((res) => {
-            if (res.data[0].correo.length>0){
-                window.localStorage.setItem('usertokkio',res.data[0].username);
+            console.log(res.data.find);
+            console.log(res.data.message);
+            if(res.data.find === "true"){
+                window.localStorage.setItem('usertokkio',res.data.body[0].username);
                 load[0].style.display = "none"
                 this.props.history.push('/dashBoard');
-             }
+            }else{
+                swal(res.data.message, "Intentelo de nuevo!", "error");
+               load[0].style.display = "none";
+               this.setState({
+                textaux: "Sign in"
+            })
+            }
            
         }).catch(e => {
             console.log("error")
