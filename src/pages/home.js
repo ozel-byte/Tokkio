@@ -35,9 +35,9 @@ class Home extends React.Component {
             imgUser: '',
             imgInvitado: '',
             username: '',
+            userNameInv: '',
             idUser: '',
             user: [],
-
             auxInvitar: false,
             invitaciones: [],
             arrayImgFiltros: ["vintage", "lomo", "clarity", "sincity", "crossprocess", "pinhole", "nostalgia", "hermajesty"]
@@ -104,6 +104,9 @@ class Home extends React.Component {
         })
         socket.on("invitacion-acpetada", (res) => {
             imagenInvitado[0].style.display = "block";
+            this.setState({
+                userNameInv: res.username
+            })
             alert(res.username + " acepto tu invitacion")
         })
     }
@@ -177,7 +180,8 @@ class Home extends React.Component {
         let auxInvitaciones = this.state.invitaciones
         auxInvitaciones.splice(index, 1);
         this.setState({
-            invitaciones: auxInvitaciones
+            invitaciones: auxInvitaciones,
+            userNameInv: user.userName
         })
         this.asignarImagen(user.imgUser);
         let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
@@ -561,7 +565,7 @@ class Home extends React.Component {
                                     {
                                         this.state.user.map((item, index) => {
                                             return (
-                                                <If condition={item.user != this.state.username}>
+                                                <If condition={item.user != this.state.username && item.user != this.state.userNameInv}>
                                                     <li>
                                                         <div className="container-item-user">
                                                             <div className="container-img-username">
