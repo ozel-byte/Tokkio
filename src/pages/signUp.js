@@ -84,7 +84,7 @@ class SignUp extends React.Component {
     async validarCorreo() {
         let load = document.getElementsByClassName("loading-signUp");
         load[1].style.display = "block"
-        let response = await axios.get("http://167.172.146.90:3000/user/validationCorreo", {
+        let response = await axios.get("http://localhost:3000/user/validationCorreo", {
             params: {
                 correo: this.state.correo
             }
@@ -123,7 +123,7 @@ class SignUp extends React.Component {
     async validarUsername() {
         let load = document.getElementsByClassName("loading-signUp");
         load[0].style.display = "block"
-        let response = await axios.get("http://167.172.146.90:3000/user/validationUsername", {
+        let response = await axios.get("http://localhost:3000/user/validationUsername", {
             params: {
                 username: this.state.username
             }
@@ -170,7 +170,7 @@ class SignUp extends React.Component {
                 pass: this.state.password,
                 imgPerfil: res.data.url
             }
-            axios.post("http://167.172.146.90:3000/user/addUser", dataBody)
+            axios.post("http://localhost:3000/user/addUser", dataBody)
                 .then(data => {
                     let loa = document.getElementsByClassName("loading");
                     loa[0].style.display = "none";
