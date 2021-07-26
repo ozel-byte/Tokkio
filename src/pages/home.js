@@ -54,7 +54,7 @@ class Home extends React.Component {
                 username: window.localStorage.getItem('usertokkio')
             }
         }).then(res => {
-            console.log(res.data)
+           
             this.setState({
                 username: res.data[0].username,
                 imgUser: res.data[0].imgPerfil
@@ -108,31 +108,40 @@ class Home extends React.Component {
         })
     }
 
-    uploadImage() {
+  uploadImage() {
         this.setState({
             bandera: true
         })
         let homeSideBarImagenMessageImagen = document.getElementsByClassName("home-side-bar-imagen-message-imagen");
         homeSideBarImagenMessageImagen[0].style.display = "none";
         let fileimageblob = document.getElementById("file");
-        let canvas = document.getElementById("canvas");
         canvas.style.display = "block";
-        let context = canvas.getContext('2d');
         const selectedImage = fileimageblob.files[0];
         this.setState({
             nombreImg: fileimageblob.files[0].name
         })
-        const img = URL.createObjectURL(selectedImage);
+        this.changeCloudbinary(selectedImage);
 
-        let imageObj = new Image();
-        imageObj.onload = () => {
-            canvas.width = imageObj.width;
-            canvas.height = imageObj.height;
-            context.drawImage(imageObj, 0, 0)
-        }
-        imageObj.src = img
+
     }
 
+    changeCloudbinary(img){
+        const fData = new FormData();
+        fData.append("file", img);
+        fData.append("upload_preset","rhvqjres");
+        axios.post('https://api.cloudinary.com/v1_1/dv5fwf13g/image/upload',fData).then(response => {
+           
+            let canvas = document.getElementById("canvas");
+            let context = canvas.getContext('2d');
+            let imageObj = new Image();
+            imageObj.onload = () => {
+                canvas.width = imageObj.width;
+                canvas.height = imageObj.height;
+                context.drawImage(imageObj, 0, 0)
+            }
+            imageObj.src = response.data.url;
+        }).catch("error");
+    }
 
     invitarUser(username, index) {
         if (!this.state.auxInvitar) {
