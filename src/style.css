@@ -390,7 +390,7 @@
     height: 40%;
    
     display: flex;
-    background-color: #932939;
+    background-color: black;
     align-items: center;
     justify-content: space-evenly;
   }
@@ -414,7 +414,7 @@
   .home-side-bar-filtro-ajustes {
     color: white;
     width: 100%;
-    background-color: #4b7dfa;
+    background-color: black;
     height: 25%;
     display: flex;
     flex-direction: column;

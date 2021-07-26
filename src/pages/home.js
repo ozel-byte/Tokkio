@@ -39,6 +39,8 @@ class Home extends React.Component {
             userNameInv: '',
             idUser: '',
             user: [],
+            imgSendUser: "",
+            imgReceivedUser: "",
             auxInvitar: false,
             invitaciones: [],
             arrayImgFiltros: ["vintage", "lomo", "clarity", "sincity", "crossprocess", "pinhole", "nostalgia", "hermajesty"]
@@ -108,8 +110,49 @@ class Home extends React.Component {
             this.setState({
                 userNameInv: res.username
             })
-            alert(res.username + " acepto tu invitacion")
+            alert(res.username + " acepto tu invitacion");
+            this.sendImageUserConectedRoom(res);
+        });
+
+        socket.on("send-image-user-conected-room-catch", (res) => {
+            alert(res.imgSend + " ey");
+            this.changeImageUserReceived(res.imgSend);
+           
         })
+    }
+
+    changeImageUserReceived(res){
+        let homeSideBarImagenMessageImagen = document.getElementsByClassName("home-side-bar-imagen-message-imagen");
+        homeSideBarImagenMessageImagen[0].style.display = "none";
+        alert("holaaa")
+        let loading = document.getElementsByClassName("divloading");
+        loading[0].style.display = "flex";
+        let canvas = document.getElementById("canvas");
+        canvas.style.display = "block";
+        let context = canvas.getContext('2d');
+        let imageObj = new Image();
+
+        imageObj.onload = () => {
+            canvas.width = imageObj.width;
+            canvas.height = imageObj.height;
+            context.drawImage(imageObj, 0, 0)
+        }
+
+        imageObj.crossOrigin = "Anonymous";
+        imageObj.src = res;
+
+        this.setState({
+            imgSendUser: res
+        })
+        
+        loading[0].style.display = "none";
+    }
+    sendImageUserConectedRoom(res){
+            let objectRes = {
+                id: res.idReceptor,
+                imgSend: this.state.imgSendUser
+            }
+            this.state.socketIo.emit("send-image-user-conected-room", objectRes);
     }
 
   uploadImage() {
@@ -119,14 +162,12 @@ class Home extends React.Component {
         let homeSideBarImagenMessageImagen = document.getElementsByClassName("home-side-bar-imagen-message-imagen");
         homeSideBarImagenMessageImagen[0].style.display = "none";
         let fileimageblob = document.getElementById("file");
-        canvas.style.display = "block";
+      
         const selectedImage = fileimageblob.files[0];
         this.setState({
             nombreImg: fileimageblob.files[0].name
         })
         this.changeCloudbinary(selectedImage);
-
-
     }
 
     changeCloudbinary(img){
@@ -137,6 +178,7 @@ class Home extends React.Component {
         fData.append("upload_preset","rhvqjres");
         axios.post('https://api.cloudinary.com/v1_1/dv5fwf13g/image/upload',fData).then(response => {
             let canvas = document.getElementById("canvas");
+            canvas.style.display = "block";
             let context = canvas.getContext('2d');
             let imageObj = new Image();
             imageObj.onload = () => {
@@ -144,8 +186,14 @@ class Home extends React.Component {
                 canvas.height = imageObj.height;
                 context.drawImage(imageObj, 0, 0)
             }
+    
             imageObj.crossOrigin = "Anonymous";
             imageObj.src = response.data.url;
+    
+            this.setState({
+                imgSendUser: response.data.url
+            })
+            
             loading[0].style.display = "none";
         }).catch("error");
     }
@@ -177,6 +225,7 @@ class Home extends React.Component {
     aceptarInvitacion(user, index) {
         let objetoAcepto = {
             id: user.idEmisor,
+            idReceptor: user.idReceptor,
             username: this.state.username,
             imagen: this.state.imgUser
         }
