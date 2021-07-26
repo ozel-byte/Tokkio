@@ -55,7 +55,7 @@ class Home extends React.Component {
         this.getUserData();
     }
     getUserData() {
-        axios.get("http://localhost:3000/user/getUserUsername", {
+        axios.get("http://167.172.146.90:3000/user/getUserUsername", {
             params: {
                 username: window.localStorage.getItem('usertokkio')
             }
@@ -73,7 +73,7 @@ class Home extends React.Component {
 
     initSocket() {
         let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
-        const socket = io('http://localhost:3000');
+        const socket = io('http://167.172.146.90:3000');
         this.setState({
             socketIo: socket
         })
@@ -114,12 +114,11 @@ class Home extends React.Component {
                 userNameInv: res.username,
                 idInvitado: res.idReceptor
             })
-            alert(res.username + " acepto tu invitacion");
             this.sendImageUserConectedRoom(res);
+            alert(res.username + " acepto tu invitacion");
         });
 
         socket.on("send-image-user-conected-room-catch", (res) => {
-            alert(res.imgSend + " ey");
             this.changeImageUserReceived(res.imgSend);
            
         })
@@ -132,7 +131,6 @@ class Home extends React.Component {
                 }
             } else if (res.tipoP === 2) {
                 this.filtros(res.valorP, 2)
-                alert("es filtro")
             } else {
                 this.revertir(2)
             }
@@ -142,7 +140,6 @@ class Home extends React.Component {
     changeImageUserReceived(res){
         let homeSideBarImagenMessageImagen = document.getElementsByClassName("home-side-bar-imagen-message-imagen");
         homeSideBarImagenMessageImagen[0].style.display = "none";
-        alert("holaaa")
         let loading = document.getElementsByClassName("divloading");
         loading[0].style.display = "flex";
         let canvas = document.getElementById("canvas");
@@ -334,7 +331,6 @@ class Home extends React.Component {
             id = this.state.idInvitado
         } else {
             id = this.state.idEmisor
-            alert("soy invitado")
         }
         let datos = {
             id: id,
@@ -578,7 +574,6 @@ class Home extends React.Component {
             id = this.state.idInvitado
         } else {
             id = this.state.idEmisor
-            alert("soy invitado")
         }
         let datos = {
             id: id,

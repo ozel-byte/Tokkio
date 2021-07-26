@@ -61,7 +61,7 @@ class SignIn extends React.Component{
         let load = document.getElementsByClassName("loading");
         load[0].style.display = "block"
         if (this.state.status_button && this.state.correo.length>0 && this.state.pass.length>0) {
-            axios.get('http://localhost:3000/user/signIn',{
+            axios.get('http://167.172.146.90:3000/user/signIn',{
             params: {
                 correo: this.state.correo,
                 pass:this.state.pass
