@@ -47,6 +47,7 @@ class Home extends React.Component {
             imgReceivedUser: "",
             auxInvitar: false,
             invitaciones: [],
+            tipoUser: "user",
             auxSendImageLoad: false,
             arrayImgFiltros: ["vintage", "lomo", "clarity", "sincity", "crossprocess", "pinhole", "nostalgia", "hermajesty"]
         }
@@ -56,13 +57,35 @@ class Home extends React.Component {
     componentDidMount() {
         this.getUserData();
     }
+
+    mousemoveuser(e) {
+
+        let x = e.clientX;
+        let y = e.clientY;
+        if (this.state.tipoUser === "invitado") {
+            let movepointerUser = {
+                id: this.state.idEmisor,
+                posicionx: x,
+                posiciony: y
+            }
+            this.state.socketIo.emit("moveponteruser", movepointerUser)
+        } else {
+            let movepointerUser = {
+                id: this.state.idInvitado,
+                posicionx: x,
+                posiciony: y
+            }
+            this.state.socketIo.emit("moveponteruser", movepointerUser)
+        }
+
+    }
     getUserData() {
         axios.get("http://localhost:3000/user/getUserUsername", {
             params: {
                 username: window.localStorage.getItem('usertokkio')
             }
         }).then(res => {
-           
+
             this.setState({
                 username: res.data[0].username,
                 imgUser: res.data[0].imgPerfil
@@ -94,7 +117,7 @@ class Home extends React.Component {
             this.setState({
                 user: res,
                 auxInvitar: false,
-                auxSendImageLoad:false
+                auxSendImageLoad: false
             });
 
             imagenInvitado[0].style.display = "none";
@@ -116,25 +139,28 @@ class Home extends React.Component {
             this.setState({
                 userNameInv: res.username,
                 idInvitado: res.idReceptor
-            })
+            });
+            const usermove = document.getElementById("moveobj");
+            usermove.style.display = "flex";
             swal(res.username, "Acepto tu Invitacion");
-            if(this.state.auxSendImageLoad){
+            if (this.state.auxSendImageLoad) {
                 this.sendImageUserConectedRoom(res.idReceptor);
-            }else{
+            } else {
                 this.setState({
-                    auxSendImageLoad:true
+                    auxSendImageLoad: true
                 });
-               
+
             }
         });
 
         /* recibiendo imagen del otro user*/
         socket.on("send-image-user-conected-room-catch", (res) => {
+            swal("kiii", "llegar chang");
             this.changeImageUserReceived(res.imgSend);
         })
         socket.on("recibeParametros", (res) => {
-            if (res.tipoP === 1){
-                if (res.upORdown){
+            if (res.tipoP === 1) {
+                if (res.upORdown) {
                     this.upButton(res.valorP, 2)
                 } else {
                     this.downButton(res.valorP, 2)
@@ -145,10 +171,19 @@ class Home extends React.Component {
                 this.revertir(2)
             }
         })
+        socket.on("movepointerUser", data => {
+            const usermove = document.getElementById("moveobj");
+            usermove.style.display = "flex";
+            let l = document.getElementById("moveobj");
+            let x = data.posicionx;
+            let y = data.posiciony;
+            l.style.left = (x + 20) + "px";
+            l.style.top = (y) + "px";
+        })
     }
 
-    changeImageUserReceived(res){
-     
+    changeImageUserReceived(res) {
+
         let homeSideBarImagenMessageImagen = document.getElementsByClassName("home-side-bar-imagen-message-imagen");
         homeSideBarImagenMessageImagen[0].style.display = "none";
         let loading = document.getElementsByClassName("divloading");
@@ -171,26 +206,26 @@ class Home extends React.Component {
             imgSendUser: res,
             bandera: true
         })
-        
+
         loading[0].style.display = "none";
     }
 
-    sendImageUserConectedRoom(res){
-            let objectRes = {
-                id: res,
-                imgSend: this.state.imgSendUser
-            }
-            this.state.socketIo.emit("send-image-user-conected-room", objectRes);
+    sendImageUserConectedRoom(res) {
+        let objectRes = {
+            id: res,
+            imgSend: this.state.imgSendUser
+        }
+        this.state.socketIo.emit("send-image-user-conected-room", objectRes);
     }
 
-  uploadImage() {
+    uploadImage() {
         this.setState({
             bandera: true
         })
         let homeSideBarImagenMessageImagen = document.getElementsByClassName("home-side-bar-imagen-message-imagen");
         homeSideBarImagenMessageImagen[0].style.display = "none";
         let fileimageblob = document.getElementById("file");
-      
+
         const selectedImage = fileimageblob.files[0];
         this.setState({
             nombreImg: fileimageblob.files[0].name
@@ -198,13 +233,13 @@ class Home extends React.Component {
         this.changeCloudbinary(selectedImage);
     }
 
-    changeCloudbinary(img){
+    changeCloudbinary(img) {
         let loading = document.getElementsByClassName("divloading");
         loading[0].style.display = "flex";
         const fData = new FormData();
         fData.append("file", img);
-        fData.append("upload_preset","rhvqjres");
-        axios.post('https://api.cloudinary.com/v1_1/dv5fwf13g/image/upload',fData).then(response => {
+        fData.append("upload_preset", "rhvqjres");
+        axios.post('https://api.cloudinary.com/v1_1/dv5fwf13g/image/upload', fData).then(response => {
             let canvas = document.getElementById("canvas");
             canvas.style.display = "block";
             let context = canvas.getContext('2d');
@@ -214,30 +249,25 @@ class Home extends React.Component {
                 canvas.height = imageObj.height;
                 context.drawImage(imageObj, 0, 0)
             }
-    
+
             imageObj.crossOrigin = "Anonymous";
             imageObj.src = response.data.url;
-    
+
             this.setState({
                 imgSendUser: response.data.url
             });
 
-            if(this.state.auxSendImageLoad){
-                let id;
-                if (!this.state.auxInvitado){
-                    id = this.state.idInvitado
-                } else {
-                    id = this.state.idEmisor
-                }
-                //let id = this.state.idInvitado;
+            if (this.state.auxSendImageLoad) {
+                let id = this.state.idInvitado;
+
                 this.sendImageUserConectedRoom(id);
-               
-            }else{
+
+            } else {
                 this.setState({
-                    auxSendImageLoad:true
+                    auxSendImageLoad: true
                 })
             }
-            
+
             loading[0].style.display = "none";
         }).catch("error");
     }
@@ -267,6 +297,7 @@ class Home extends React.Component {
     }
 
     aceptarInvitacion(user, index) {
+
         let objetoAcepto = {
             id: user.idEmisor,
             idReceptor: user.idReceptor,
@@ -281,7 +312,7 @@ class Home extends React.Component {
             userNameInv: user.userName,
             idEmisor: user.idEmisor,
             auxInvitado: true,
-            auxSendImageLoad: true
+            tipoUser: "invitado"
         })
         this.asignarImagen(user.imgUser);
         let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
@@ -351,12 +382,12 @@ class Home extends React.Component {
             default:
                 break;
         }
-        if (emitir === 1){this.enviarParametrosFiltro(2, typefilter, false)}
+        if (emitir === 1) { this.enviarParametrosFiltro(2, typefilter, false) }
 
     }
-    enviarParametrosFiltro(tipo, valores, upORdown){
+    enviarParametrosFiltro(tipo, valores, upORdown) {
         let id;
-        if (!this.state.auxInvitado){
+        if (!this.state.auxInvitado) {
             id = this.state.idInvitado
         } else {
             id = this.state.idEmisor
@@ -557,10 +588,10 @@ class Home extends React.Component {
 
     downButton(typeButton, emitir) {
         switch (typeButton) {
-            case "brillo": this.downBrillo(); if (emitir === 1){this.enviarParametros(1, typeButton, false)} break;
-            case "saturacion": this.downSaturacion(); if (emitir === 1){this.enviarParametros(1, typeButton, false)} break;
-            case "contraste": this.downContraste(); if (emitir === 1){this.enviarParametros(1, typeButton, false)} break;
-            case "matiz": this.downMatiz(); if (emitir === 1){this.enviarParametros(1, typeButton, false)} break;
+            case "brillo": this.downBrillo(); if (emitir === 1) { this.enviarParametros(1, typeButton, false) } break;
+            case "saturacion": this.downSaturacion(); if (emitir === 1) { this.enviarParametros(1, typeButton, false) } break;
+            case "contraste": this.downContraste(); if (emitir === 1) { this.enviarParametros(1, typeButton, false) } break;
+            case "matiz": this.downMatiz(); if (emitir === 1) { this.enviarParametros(1, typeButton, false) } break;
             default:
                 break;
         }
@@ -588,18 +619,18 @@ class Home extends React.Component {
     }
     upButton(typeButton, emitir) {
         switch (typeButton) {
-            case "brillo": this.upBrillo(); if (emitir === 1){this.enviarParametros(1, typeButton, true)}; break;
-            case "saturacion": this.upSaturacion(); if (emitir === 1){this.enviarParametros(1, typeButton, true)}; break;
-            case "contraste": this.upContraste(); if (emitir === 1){this.enviarParametros(1, typeButton, true)}; break;
-            case "matiz": this.upMatiz(); if (emitir === 1){this.enviarParametros(1, typeButton, true)}; break;
+            case "brillo": this.upBrillo(); if (emitir === 1) { this.enviarParametros(1, typeButton, true) }; break;
+            case "saturacion": this.upSaturacion(); if (emitir === 1) { this.enviarParametros(1, typeButton, true) }; break;
+            case "contraste": this.upContraste(); if (emitir === 1) { this.enviarParametros(1, typeButton, true) }; break;
+            case "matiz": this.upMatiz(); if (emitir === 1) { this.enviarParametros(1, typeButton, true) }; break;
             default:
                 break;
         }
     }
-    
-    enviarParametros(tipo, valor, upORdown){
+
+    enviarParametros(tipo, valor, upORdown) {
         let id;
-        if (!this.state.auxInvitado){
+        if (!this.state.auxInvitado) {
             id = this.state.idInvitado
         } else {
             id = this.state.idEmisor
@@ -617,13 +648,13 @@ class Home extends React.Component {
         Caman("#canvas", function () {
             this.revert();
         });
-        if (emitir === 1){this.enviarParametrosFiltro(3, "revertir", false)}
+        if (emitir === 1) { this.enviarParametrosFiltro(3, "revertir", false) }
     }
 
     render() {
         return (
             <>
-                <div className="container-home">
+                <div className="container-home" onMouseMove={this.mousemoveuser.bind(this)}>
                     <div className="home-side-bar-filtro">
                         <div className="home-image-user">
                             <div className="container-list-user-conected">
@@ -656,7 +687,7 @@ class Home extends React.Component {
                             {
                                 this.state.arrayImgFiltros.map((item, index) => {
                                     return (
-                                        <li onClick={() => this.filtros({ index, item}, 1)} >{item}<div className="loader-filtro"></div></li>
+                                        <li onClick={() => this.filtros({ index, item }, 1)} >{item}<div className="loader-filtro"></div></li>
                                     )
                                 })
                             }
@@ -784,6 +815,10 @@ class Home extends React.Component {
                             <div><Brightness5Icon /></div>
                         </div>
                         <div className="espacio"></div>
+                    </div>
+                    <div id="moveobj">
+                        <div id="poniter"><img src="https://images.unsplash.com/photo-1627001158153-0aa8feead297?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="" /><h2>{this.state.userNameInv}</h2></div>
+                        <div className="line"></div>
                     </div>
                 </div>
             </>
