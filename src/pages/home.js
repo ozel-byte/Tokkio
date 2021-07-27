@@ -130,7 +130,6 @@ class Home extends React.Component {
 
         /* recibiendo imagen del otro user*/
         socket.on("send-image-user-conected-room-catch", (res) => {
-            swal("kiii", "llegar chang");
             this.changeImageUserReceived(res.imgSend);
         })
         socket.on("recibeParametros", (res) => {
@@ -224,8 +223,13 @@ class Home extends React.Component {
             });
 
             if(this.state.auxSendImageLoad){
-                let id = this.state.idInvitado;
-            
+                let id;
+                if (!this.state.auxInvitado){
+                    id = this.state.idInvitado
+                } else {
+                    id = this.state.idEmisor
+                }
+                //let id = this.state.idInvitado;
                 this.sendImageUserConectedRoom(id);
                
             }else{
@@ -276,7 +280,8 @@ class Home extends React.Component {
             invitaciones: auxInvitaciones,
             userNameInv: user.userName,
             idEmisor: user.idEmisor,
-            auxInvitado: true
+            auxInvitado: true,
+            auxSendImageLoad: true
         })
         this.asignarImagen(user.imgUser);
         let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
