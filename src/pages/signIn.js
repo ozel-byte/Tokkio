@@ -82,7 +82,11 @@ class SignIn extends React.Component{
             }
            
         }).catch(e => {
-            console.log("error")
+            swal(res.data.message, "Intentelo de nuevo!", "error");
+            load[0].style.display = "none";
+               this.setState({
+                textaux: "Sign in"
+            })
         })
         }else{
             this.changeColorBorderInputError(1);

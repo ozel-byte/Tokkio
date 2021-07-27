@@ -47,6 +47,7 @@ class Home extends React.Component {
             imgReceivedUser: "",
             auxInvitar: false,
             invitaciones: [],
+            auxSendImageLoad: false,
             arrayImgFiltros: ["vintage", "lomo", "clarity", "sincity", "crossprocess", "pinhole", "nostalgia", "hermajesty"]
         }
 
@@ -90,10 +91,10 @@ class Home extends React.Component {
         })
         socket.emit('message', objectUser);
         socket.on('emitir', (res) => {
-            let auxvariabel = res;
             this.setState({
                 user: res,
-                auxInvitar: false
+                auxInvitar: false,
+                auxSendImageLoad:false
             });
 
             imagenInvitado[0].style.display = "none";
@@ -116,14 +117,21 @@ class Home extends React.Component {
                 userNameInv: res.username,
                 idInvitado: res.idReceptor
             })
-            this.sendImageUserConectedRoom(res);
             swal(res.username, "Acepto tu Invitacion");
-            
+            if(this.state.auxSendImageLoad){
+                this.sendImageUserConectedRoom(res.idReceptor);
+            }else{
+                this.setState({
+                    auxSendImageLoad:true
+                });
+               
+            }
         });
 
+        /* recibiendo imagen del otro user*/
         socket.on("send-image-user-conected-room-catch", (res) => {
+            swal("kiii", "llegar chang");
             this.changeImageUserReceived(res.imgSend);
-           
         })
         socket.on("recibeParametros", (res) => {
             if (res.tipoP === 1){
@@ -141,6 +149,7 @@ class Home extends React.Component {
     }
 
     changeImageUserReceived(res){
+     
         let homeSideBarImagenMessageImagen = document.getElementsByClassName("home-side-bar-imagen-message-imagen");
         homeSideBarImagenMessageImagen[0].style.display = "none";
         let loading = document.getElementsByClassName("divloading");
@@ -166,9 +175,10 @@ class Home extends React.Component {
         
         loading[0].style.display = "none";
     }
+
     sendImageUserConectedRoom(res){
             let objectRes = {
-                id: res.idReceptor,
+                id: res,
                 imgSend: this.state.imgSendUser
             }
             this.state.socketIo.emit("send-image-user-conected-room", objectRes);
@@ -211,7 +221,18 @@ class Home extends React.Component {
     
             this.setState({
                 imgSendUser: response.data.url
-            })
+            });
+
+            if(this.state.auxSendImageLoad){
+                let id = this.state.idInvitado;
+            
+                this.sendImageUserConectedRoom(id);
+               
+            }else{
+                this.setState({
+                    auxSendImageLoad:true
+                })
+            }
             
             loading[0].style.display = "none";
         }).catch("error");
