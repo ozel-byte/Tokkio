@@ -42,4 +42,7 @@ module.exports = {
         filename: "index.html"
     }),
   ],
+  performance: {
+    hints: false
+  }
 };
