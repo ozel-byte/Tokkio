@@ -3,39 +3,8 @@
 }
 
 
-/* marcador user conectado*/
-#moveobj{
-  position: absolute;
-    box-sizing: border-box;
-    display: none;
-    flex-direction: column;
-}
-#poniter{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: .8rem;
-  position: absolute;
-  box-sizing: border-box;
-  width: 7em;
-  height: 3em;
-  padding: 5px;
-  text-align: center;
 
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  display: flex;
-  align-items: center;
-  background-color: pink;
-}
-.line{
-  width: 3px;
-  height: 50px;
-  background-color: pink;
-}
-#poniter img{
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-}
+
 
 
 

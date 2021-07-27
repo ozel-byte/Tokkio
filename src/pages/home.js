@@ -58,27 +58,7 @@ class Home extends React.Component {
         this.getUserData();
     }
 
-    mousemoveuser(e) {
-
-        let x = e.clientX;
-        let y = e.clientY;
-        if (this.state.tipoUser === "invitado") {
-            let movepointerUser = {
-                id: this.state.idEmisor,
-                posicionx: x,
-                posiciony: y
-            }
-            this.state.socketIo.emit("moveponteruser", movepointerUser)
-        } else {
-            let movepointerUser = {
-                id: this.state.idInvitado,
-                posicionx: x,
-                posiciony: y
-            }
-            this.state.socketIo.emit("moveponteruser", movepointerUser)
-        }
-
-    }
+   
     getUserData() {
         axios.get("http://167.172.146.90:3000/user/getUserUsername", {
             params: {
@@ -140,8 +120,6 @@ class Home extends React.Component {
                 userNameInv: res.username,
                 idInvitado: res.idReceptor
             });
-            const usermove = document.getElementById("moveobj");
-            usermove.style.display = "flex";
             swal(res.username, "Acepto tu Invitacion");
             if (this.state.auxSendImageLoad) {
                 this.sendImageUserConectedRoom(res.idReceptor);
@@ -171,15 +149,7 @@ class Home extends React.Component {
                 this.revertir(2)
             }
         })
-        socket.on("movepointerUser", data => {
-            const usermove = document.getElementById("moveobj");
-            usermove.style.display = "flex";
-            let l = document.getElementById("moveobj");
-            let x = data.posicionx;
-            let y = data.posiciony;
-            l.style.left = (x + 20) + "px";
-            l.style.top = (y) + "px";
-        })
+       
     }
 
     changeImageUserReceived(res) {
@@ -816,10 +786,7 @@ class Home extends React.Component {
                         </div>
                         <div className="espacio"></div>
                     </div>
-                    <div id="moveobj">
-                        <div id="poniter"><img src="https://images.unsplash.com/photo-1627001158153-0aa8feead297?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="" /><h2>{this.state.userNameInv}</h2></div>
-                        <div className="line"></div>
-                    </div>
+                    
                 </div>
             </>
         );
