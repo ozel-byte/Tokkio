@@ -4,7 +4,7 @@ module.exports = {
   entry: './src/index.js',
   output: {
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'public'),
   },
   module: {
     rules: [
@@ -41,9 +41,14 @@ module.exports = {
   
     new HtmlWebpackPlugin({
         inject:true,
-        template: "dist/index.html",
+        template: "public/index.html",
         filename: "index.html"
     }),
   ],
+  devServer: {
+    historyApiFallback: true,
+    contentBase: './',
+    hot: true
+  },
   
 };
