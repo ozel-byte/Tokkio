@@ -80,7 +80,7 @@ class Home extends React.Component {
 
     }
     getUserData() {
-        axios.get("http://localhost:3000/user/getUserUsername", {
+        axios.get("http://167.172.146.90:3000/user/getUserUsername", {
             params: {
                 username: window.localStorage.getItem('usertokkio')
             }
@@ -98,7 +98,7 @@ class Home extends React.Component {
 
     initSocket() {
         let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
-        const socket = io('http://localhost:3000');
+        const socket = io('http://167.172.146.90:3000');
         this.setState({
             socketIo: socket
         })
