@@ -133,7 +133,6 @@ class Home extends React.Component {
 
         /* recibiendo imagen del otro user*/
         socket.on("send-image-user-conected-room-catch", (res) => {
-            swal("kiii", "llegar chang");
             this.changeImageUserReceived(res.imgSend);
         })
         socket.on("recibeParametros", (res) => {
@@ -258,6 +257,7 @@ class Home extends React.Component {
         } else {
 
         }
+        swal("Invitación enviada a: ", username.user, "success");
     }
 
     asignarImagen(imagenUser) {
