@@ -97,7 +97,8 @@ class Home extends React.Component {
             this.setState({
                 user: res,
                 auxInvitar: false,
-                auxSendImageLoad: false
+                auxSendImageLoad: false,
+                auxInvitado: false
             });
 
             imagenInvitado[0].style.display = "none";
@@ -227,10 +228,13 @@ class Home extends React.Component {
             });
 
             if (this.state.auxSendImageLoad) {
-                let id = this.state.idInvitado;
-
+                let id = 0;
+                if(!this.state.auxInvitado){
+                   id = this.state.idInvitado
+                }else{
+                    id = this.state.idEmisor
+                }
                 this.sendImageUserConectedRoom(id);
-
             } else {
                 this.setState({
                     auxSendImageLoad: true
@@ -252,7 +256,6 @@ class Home extends React.Component {
                 imgUser: this.state.imgUser
             }
             this.state.socketIo.emit("notificacion-user", objetoUser);
-
             let styleButtonInvitar = document.getElementsByClassName("style-button-invitar");
             styleButtonInvitar[index].style.backgroundColor = "grey";
         }
@@ -280,6 +283,7 @@ class Home extends React.Component {
             userNameInv: user.userName,
             idEmisor: user.idEmisor,
             auxInvitado: true,
+            auxSendImageLoad: true,
             tipoUser: "invitado"
         })
         this.asignarImagen(user.imgUser);
