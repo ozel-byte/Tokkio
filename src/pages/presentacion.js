@@ -1,7 +1,7 @@
 import React from 'react';
 import { withRouter } from "react-router-dom";
 
-class SignInV2 extends React.Component{
+class Presentacion extends React.Component{
 
     constructor(props) {
         super(props);
@@ -27,4 +27,4 @@ class SignInV2 extends React.Component{
     }
 }
 
-export default withRouter(SignInV2);
+export default withRouter(Presentacion);

@@ -2,8 +2,6 @@ import React from 'react'
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import NotificationsIcon from '@material-ui/icons/Notifications';
 import PhotoFilterIcon from '@material-ui/icons/PhotoFilter';
-import TextFormatIcon from '@material-ui/icons/TextFormat';
-import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import PlayForWorkIcon from '@material-ui/icons/PlayForWork';
@@ -58,41 +56,46 @@ class Home extends React.Component {
         this.getUserData();
     }
 
-
-    getUserData() {
-        axios.get("http://localhost:3000/user/getUserUsername", {
+    /*Metodo para obtener la informacion del usuario que entro sesion */
+   async getUserData() {
+    let response =  await axios.get("http://localhost:3000/user/getUserUsername", {
             params: {
                 username: window.localStorage.getItem('usertokkio')
             }
-        }).then(res => {
-
+        })
+        if(response.status === 200){
             this.setState({
-                username: res.data[0].username,
-                imgUser: res.data[0].imgPerfil
+                username: response.data[0].username,
+                imgUser:  response.data[0].imgPerfil
             })
             this.initSocket();
-        }).catch(e => {
-
-        })
+        }
     }
 
+    /*Metodo para iniciar el socket */
     initSocket() {
         let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
         const socket = io('http://localhost:3000');
         this.setState({
             socketIo: socket
         })
+
         let username = window.localStorage.getItem('usertokkio');
         let objectUser = {
             username: username,
             imgUser: this.state.imgUser
         }
+        /*Evento que espera el id del socket */
         socket.on("enviar-id", (res) => {
             this.setState({
                 idUser: res
             })
         })
+
+        /*Evento que emite informacion de usuario */
         socket.emit('message', objectUser);
+
+        /*Evento que escucha ocualta la foto del user */
         socket.on('emitir', (res) => {
             this.setState({
                 user: res,
@@ -104,6 +107,7 @@ class Home extends React.Component {
 
         });
 
+        /*Evento que esucha la notificacion */
         socket.on("notificacion", (res) => {
             let auxInvitaciones = this.state.invitaciones
             auxInvitaciones.push(res)
@@ -113,7 +117,9 @@ class Home extends React.Component {
             let notifiactive = document.getElementsByClassName("notificacion-activo");
             notifiactive[0].style.display = "block";
 
-        })
+        });
+
+        /*Evento que escucha cuando la invitacion fue aceptada */
         socket.on("invitacion-acpetada", (res) => {
             imagenInvitado[0].style.display = "block";
             this.setState({
@@ -134,7 +140,9 @@ class Home extends React.Component {
         /* recibiendo imagen del otro user*/
         socket.on("send-image-user-conected-room-catch", (res) => {
             this.changeImageUserReceived(res.imgSend);
-        })
+        });
+
+        /*Evento que escucha los parametros de la foto */
         socket.on("recibeParametros", (res) => {
             if (res.tipoP === 1) {
                 if (res.upORdown) {
@@ -151,8 +159,8 @@ class Home extends React.Component {
        
     }
 
+    /*Metodo para cargar la imagen recibida del usuario */
     changeImageUserReceived(res) {
-
         let homeSideBarImagenMessageImagen = document.getElementsByClassName("home-side-bar-imagen-message-imagen");
         homeSideBarImagenMessageImagen[0].style.display = "none";
         let loading = document.getElementsByClassName("divloading");
@@ -179,6 +187,7 @@ class Home extends React.Component {
         loading[0].style.display = "none";
     }
 
+    /*Metodo parea mandar la imagen al usuario invitado  */
     sendImageUserConectedRoom(res) {
         let objectRes = {
             id: res,
@@ -187,6 +196,7 @@ class Home extends React.Component {
         this.state.socketIo.emit("send-image-user-conected-room", objectRes);
     }
 
+    /*Metodo para cargar Imagen */
     uploadImage() {
         this.setState({
             bandera: true
@@ -199,16 +209,22 @@ class Home extends React.Component {
         this.setState({
             nombreImg: fileimageblob.files[0].name
         })
-        this.changeCloudbinary(selectedImage);
+        this.changeCloudinary(selectedImage);
     }
 
-    changeCloudbinary(img) {
+    /*Metodo para subir imagen cargada a cloudinary */
+  async changeCloudinary(img) {
+
         let loading = document.getElementsByClassName("divloading");
         loading[0].style.display = "flex";
+
         const fData = new FormData();
         fData.append("file", img);
         fData.append("upload_preset", "rhvqjres");
-        axios.post('https://api.cloudinary.com/v1_1/dv5fwf13g/image/upload', fData).then(response => {
+
+        let response = await axios.post('https://api.cloudinary.com/v1_1/dv5fwf13g/image/upload', fData);
+
+        if(response.status === 200){
             let canvas = document.getElementById("canvas");
             canvas.style.display = "block";
             let context = canvas.getContext('2d');
@@ -239,9 +255,10 @@ class Home extends React.Component {
                     auxSendImageLoad: true
                 })
             }
-
             loading[0].style.display = "none";
-        }).catch("error");
+        }else{
+            swal("algo ocurrio mal", "intentelo de nuevo", "error");
+        }
     }
 
     //Metodo para poder invitar a un amigo

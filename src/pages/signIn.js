@@ -17,10 +17,9 @@ class SignIn extends React.Component{
         }
     }
 
-    componentDidMount(){
-        
-    }
+    
 
+    /*validando input */
     validacionInput(e){
         let name = e.target.name;
         let value = e.target.value;
@@ -45,45 +44,49 @@ class SignIn extends React.Component{
         }
     }
 
+    /*Metodo para mostrar mensaje de error */
     messageDisplayButton(e){
         let message = document.getElementsByClassName("message-error-button");
         message[0].style.display = "none"
         this.changeColorBorderInputError(0);
     }
    
-
-    signIn(){
+    /*Metodo la el login */
+  async  signIn(){
         this.setState({
             textaux: ""
         })
         let load = document.getElementsByClassName("loading");
         load[0].style.display = "block"
         if (this.state.status_button && this.state.correo.length>0 && this.state.pass.length>0) {
-            axios.get('http://localhost:3000/user/signIn',{
+           
+           let response = await axios.get('http://localhost:3000/user/signIn',{
             params: {
                 correo: this.state.correo,
                 pass:this.state.pass
             }
-        }).then((res) => {
-            if(res.data.find === "true"){
-                window.localStorage.setItem('usertokkio',res.data.body[0].username);
-                load[0].style.display = "none"
-                this.props.history.push('/dashBoard');
+            });
+            if(response.status === 200){
+                if(response.data.find === "true"){
+                    window.localStorage.setItem('usertokkio',response.data.body[0].username);
+                    load[0].style.display = "none"
+                    this.props.history.push('/home');
+                }else{
+                    swal(response.data.message, "Intentelo de nuevo!", "error");
+                   load[0].style.display = "none";
+                   this.setState({
+                    textaux: "Sign in"
+                })
+                }
             }else{
-                swal(res.data.message, "Intentelo de nuevo!", "error");
-               load[0].style.display = "none";
-               this.setState({
-                textaux: "Sign in"
-            })
+                swal(response.data.message, "Intentelo de nuevo!", "error");
+                load[0].style.display = "none";
+                   this.setState({
+                    textaux: "Sign in"
+                })
             }
+            
            
-        }).catch(e => {
-            swal(res.data.message, "Intentelo de nuevo!", "error");
-            load[0].style.display = "none";
-               this.setState({
-                textaux: "Sign in"
-            })
-        })
         }else{
             this.changeColorBorderInputError(1);
             let messageErrorButton = document.getElementsByClassName("message-error-button");

@@ -1,6 +1,4 @@
 import React from "react";
-import CardSignUp from "../componentes/cardSignUp";
-import Logo from "../componentes/logo";
 import MessageError from "../componentes/messageError";
 import axios from 'axios';
 import Loading from "../componentes/loading";
@@ -22,6 +20,7 @@ class SignUp extends React.Component {
             banderaValidacionCampoCorreo: false
         }
     }
+    /*Metodo para cargar imagen */
     uploadImage(e) {
         let messageError = document.getElementsByClassName("message-error-button");
         messageError[0].style.display = "none"
@@ -35,6 +34,7 @@ class SignUp extends React.Component {
 
     }
 
+    /*Metodo para guardar el valor de los inputs */
     onChangeInput(e) {
         switch (e.target.name) {
             case "correo": {
@@ -58,6 +58,7 @@ class SignUp extends React.Component {
         }
     }
 
+    /*Metodo para cargar imagen a cloudinary */
     async changeImageCloudinary() {
         if (this.state.imagePerfilSend != null && this.state.correo.length > 0 && this.state.password.length > 0 && this.state.username.length > 0) {
             if(this.state.banderaValidacionCampoCorreo && this.state.banderaValidacionCampoUsername){
@@ -69,6 +70,7 @@ class SignUp extends React.Component {
             });
             let load = document.getElementsByClassName("loading");
             load[0].style.display = "block"
+
             let response = await axios.post('https://api.cloudinary.com/v1_1/dv5fwf13g/image/upload', fData);
             return await response;
             }else{
@@ -78,8 +80,9 @@ class SignUp extends React.Component {
             let messageError = document.getElementsByClassName("message-error-button");
             messageError[0].style.display = "block"
         }
-    }
+    }   
 
+    /*Metodo para validar correo existente */
     async validarCorreo() {
         let load = document.getElementsByClassName("loading-signUp");
         load[1].style.display = "block"
@@ -118,6 +121,7 @@ class SignUp extends React.Component {
         } else {
         }
     }
+    /*Metodo para validar username existente */
     async validarUsername() {
         let load = document.getElementsByClassName("loading-signUp");
         load[0].style.display = "block"
@@ -158,25 +162,33 @@ class SignUp extends React.Component {
         }
     }
 
-    signUp() {
-        this.changeImageCloudinary().then(res => {
+    /*Metodo para inicio de sesion */
+   async signUp() {
+        this.changeImageCloudinary().then(res  => {
             const dataBody = {
                 correo: this.state.correo,
                 username: this.state.username,
                 pass: this.state.password,
                 imgPerfil: res.data.url
             }
-            axios.post("http://localhost:3000/user/addUser", dataBody)
-                .then(data => {
-                    let loa = document.getElementsByClassName("loading");
-                    loa[0].style.display = "none";
-                    this.setState({
-                        loading: "Sign Up"
-                    });
-                    swal("se creo con exito", "disfrute la edicion de fotos :9", "success");
-                    this.props.history.push("/signIn")
-                })
-                .catch(e => console.log(e))
+
+             axios.post('http://localhost:3000/user/addUser', dataBody).then(data => {
+                let loa = document.getElementsByClassName("loading");
+                loa[0].style.display = "none";
+                this.setState({
+                    loading: "Sign Up"
+                });
+               if(data.find === "true"){
+                swal("se creo con exito", "disfrute la edicion de fotos :9", "success");
+                this.props.history.push("/signIn")
+               }else{
+                swal("no se creo la cuenta", "intentelo de nuevo", "error")
+               }
+            }).catch(e => {
+                swal("no se creo la cuenta", "intentelo de nuevo", "error")
+            });
+
+            
         })
     }
 
