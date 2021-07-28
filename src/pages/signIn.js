@@ -34,12 +34,10 @@ class SignIn extends React.Component{
                 })
             }
         }else{
-            console.log("entra e validacion password")
             this.setState({
                 pass:value
             });
             if (this.state.correo.length>0){
-                console.log("correo entra")
                 this.setState({
                     status_button:true
                 })
@@ -67,8 +65,6 @@ class SignIn extends React.Component{
                 pass:this.state.pass
             }
         }).then((res) => {
-            console.log(res.data.find);
-            console.log(res.data.message);
             if(res.data.find === "true"){
                 window.localStorage.setItem('usertokkio',res.data.body[0].username);
                 load[0].style.display = "none"

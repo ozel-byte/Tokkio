@@ -72,7 +72,7 @@ class Home extends React.Component {
             })
             this.initSocket();
         }).catch(e => {
-            console.log(e)
+
         })
     }
 
@@ -299,7 +299,6 @@ class Home extends React.Component {
     /* filtros */
 
     filtros(typefilter, emitir) {
-        console.log("entro");
         let loaderfiltross = document.getElementsByClassName("loader-filtro");
         loaderfiltross[typefilter.index].style.display = "block";
         switch (typefilter.item) {

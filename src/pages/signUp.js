@@ -26,7 +26,6 @@ class SignUp extends React.Component {
         let messageError = document.getElementsByClassName("message-error-button");
         messageError[0].style.display = "none"
         let image = e.target.files[0];
-        console.log(e.target.files[0]);
         this.setState({
             imagePerfilSend: e.target.files[0]
         })
@@ -117,7 +116,6 @@ class SignUp extends React.Component {
                     break;
             }
         } else {
-            console.log("error")
         }
     }
     async validarUsername() {
@@ -131,10 +129,8 @@ class SignUp extends React.Component {
         if (response.status === 200) {
             load[0].style.display = "none";
             let messageInputStatus = document.getElementsByClassName("message-validacion-username");
-            console.log(response.data)
             switch (response.data.find) {
                 case "false": {
-                    console.log("entro en false")
                     messageInputStatus[0].style.display = "block";
                     messageInputStatus[0].style.color = "#932939"
                     this.setState({
@@ -158,7 +154,7 @@ class SignUp extends React.Component {
             }
             load[0].style.display = "none";
         } else {
-            console.log("error")
+
         }
     }
 
