@@ -97,8 +97,7 @@ class Home extends React.Component {
             this.setState({
                 user: res,
                 auxInvitar: false,
-                auxSendImageLoad: false,
-                auxInvitado: false
+                auxSendImageLoad: false
             });
 
             imagenInvitado[0].style.display = "none";
@@ -253,7 +252,8 @@ class Home extends React.Component {
                 idReceptor: username.idUser,
                 idEmisor: this.state.idUser,
                 userName: this.state.username,
-                imgUser: this.state.imgUser
+                imgUser: this.state.imgUser,
+                auxInvitado: false
             }
             this.state.socketIo.emit("notificacion-user", objetoUser);
             let styleButtonInvitar = document.getElementsByClassName("style-button-invitar");
