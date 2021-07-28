@@ -1,6 +1,6 @@
 import React from 'react';
 import Loading from './loading';
-
+import imglogo from "../imgs/paleta.png";
 
 class LogoV2 extends React.Component{
     constructor(props) {
@@ -17,7 +17,7 @@ class LogoV2 extends React.Component{
              <>
              <div className="logov2">
             <div className="icon">
-            <img src="src/imgs/paleta.png" alt="icon" width="60px" height="60px"/>
+            <img src={imglogo} alt="icon" width="60px" height="60px"/>
              <h2>TokkioEdit</h2>
             </div>
              <div className="logo-loading"><Loading/></div>

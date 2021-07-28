@@ -5,6 +5,9 @@ import SignIn from "./signIn";
 import Splascreen from "./splascreen";
 import Presentacion from "./presentacion";
 import Home from "./home";
+import "../style.css";
+import "../custom.css";
+import "../customv2.css"
 class App extends React.Component{
     constructor(props){
         super(props);
@@ -22,7 +25,7 @@ class App extends React.Component{
                <Route exact path="/signIn">
                 <SignIn/>
                </Route>
-               <Route path="/signUp">
+               <Route exact path="/signUp">
                    <SignUp/>
                </Route>
                <Route exact path="/home">
