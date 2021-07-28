@@ -242,6 +242,7 @@ class Home extends React.Component {
     }
 
     invitarUser(username, index) {
+        swal("Invitación enviada a: ", username.user, "success");
         if (!this.state.auxInvitar) {
             this.asignarImagen(username.imgUser);
             let objetoUser = {
@@ -254,10 +255,7 @@ class Home extends React.Component {
 
             let styleButtonInvitar = document.getElementsByClassName("style-button-invitar");
             styleButtonInvitar[index].style.backgroundColor = "grey";
-        } else {
-
         }
-        swal("Invitación enviada a: ", username.user, "success");
     }
 
     asignarImagen(imagenUser) {
