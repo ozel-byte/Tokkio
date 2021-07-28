@@ -179,7 +179,6 @@ class SignUp extends React.Component {
                 this.setState({
                     loading: "Sign Up"
                 });
-                swal(response.data.find,"aaa","error")
                 if(response.data.find === "true"){
                     swal("se creo con exito", "disfrute la edicion de fotos :9", "success");
                     this.props.history.push("/signIn");
