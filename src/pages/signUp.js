@@ -4,11 +4,12 @@ import axios from 'axios';
 import Loading from "../componentes/loading";
 import { withRouter } from "react-router-dom";
 import swal from 'sweetalert';
+import imgperfil from '../imgs/saliut.jpg'
 class SignUp extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            imagePerfil: "src/imgs/saliut.jpg",
+            imagePerfil: imgperfil,
             imagePerfilSend: null,
             correo: "",
             username: "",
