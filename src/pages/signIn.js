@@ -64,7 +64,7 @@ class SignIn extends React.Component{
             params: {
                 correo: this.state.correo,
                 pass:this.state.pass
-            }
+            },
             });
             if(response.status === 200){
                 if(response.data.find === "true"){

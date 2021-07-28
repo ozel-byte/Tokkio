@@ -17,6 +17,7 @@ import ReplayOutlinedIcon from '@material-ui/icons/ReplayOutlined';
 import axios from 'axios';
 import io from 'socket.io-client';
 import swal from 'sweetalert';
+import { withRouter } from "react-router-dom";
 class Home extends React.Component {
     constructor(props) {
         super(props);
@@ -676,7 +677,7 @@ class Home extends React.Component {
 
     cerrarSesion(){
         window.localStorage.removeItem('usertokkio');
-        this.props.history.push('/')
+        this.props.history.push('/');
     }
 
     render() {
@@ -848,4 +849,4 @@ class Home extends React.Component {
     }
 }
 
-export default Home;
+export default withRouter(Home);
