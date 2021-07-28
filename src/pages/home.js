@@ -58,7 +58,7 @@ class Home extends React.Component {
         this.getUserData();
     }
 
-   
+
     getUserData() {
         axios.get("http://localhost:3000/user/getUserUsername", {
             params: {
@@ -244,6 +244,7 @@ class Home extends React.Component {
         }).catch("error");
     }
 
+    //Metodo para poder invitar a un amigo
     invitarUser(username, index) {
         swal("Invitación enviada a: ", username.user, "success");
         if (!this.state.auxInvitar) {
@@ -261,12 +262,14 @@ class Home extends React.Component {
         }
     }
 
+    //Metodo para asignar imagen amostrar al aceptar o enviar una invitacio
     asignarImagen(imagenUser) {
         this.setState({
             imgInvitado: imagenUser
         })
     }
 
+    //Metodo para aceptar la invitación recibida
     aceptarInvitacion(user, index) {
 
         let objetoAcepto = {
@@ -297,7 +300,7 @@ class Home extends React.Component {
     }
 
     /* filtros */
-
+    //Metodo para aplicar uno de los filtros seleccionado
     filtros(typefilter, emitir) {
         let loaderfiltross = document.getElementsByClassName("loader-filtro");
         loaderfiltross[typefilter.index].style.display = "block";
@@ -356,6 +359,7 @@ class Home extends React.Component {
         if (emitir === 1) { this.enviarParametrosFiltro(2, typefilter, false) }
 
     }
+    //Metodo para eviar el tipo de filtro seleccionado al invitado
     enviarParametrosFiltro(tipo, valores, upORdown) {
         let id;
         if (!this.state.auxInvitado) {
@@ -372,6 +376,7 @@ class Home extends React.Component {
         this.state.socketIo.emit("enviandoParametros", datos)
     }
 
+    //Metodo para agregar un nombre a la imagen a descargar
     asiganarNombreDescargaImagen() {
         const canvas = document.getElementById('canvas');
         const imagen = this.state.nombreImg;
@@ -385,6 +390,7 @@ class Home extends React.Component {
 
         this.descargarImagen(canvas, nuevoNombre);
     }
+    //Descargar imagen que se edito
     descargarImagen(canvas, newFilename) {
 
         let e;
@@ -396,6 +402,7 @@ class Home extends React.Component {
         e = new MouseEvent("click");
         link.dispatchEvent(e);
     }
+    //Metdo para mostrar u ocultar el menu donde se encuentran los parametros que se pueden editar de la imagen
     openwindowAjustes() {
         if (!this.state.aux2) {
             let as = document.getElementsByClassName("side-bar-ajustes-etc");
@@ -416,8 +423,7 @@ class Home extends React.Component {
         }
 
     }
-
-
+    //Metodo
     viewHomeSideBarImagen() {
         if (this.state.bandera) {
 
@@ -439,7 +445,7 @@ class Home extends React.Component {
             }
         }
     }
-
+    //Metodo para mostra u ocultar la ventana de las notificaciones
     openWindowNotify() {
         let notify = document.getElementsByClassName("home-windows-view-notificaciones");
         let notifiactive = document.getElementsByClassName("notificacion-activo");
@@ -456,7 +462,7 @@ class Home extends React.Component {
             })
         }
     }
-
+    //Metodo para mostra u ocultar la ventana de los usuarios conectados
     openWindowAmigo() {
         let amigos = document.getElementsByClassName("home-window-view-amigos");
         if (!this.state.auxAmigo) {
@@ -471,7 +477,7 @@ class Home extends React.Component {
             })
         }
     }
-
+    //Metodo para ocultar o mostrar los botones de + y - de los parametros
     opensideBarItemButtos(typeItem, clastype) {
         let d = document.getElementsByClassName(clastype);
         switch (typeItem) {
@@ -536,6 +542,7 @@ class Home extends React.Component {
 
     }
 
+    //Metodos para los botones -1 de los paraetros
     downBrillo() {
         Caman("#canvas", function () {
             this.brightness(-2).render();
@@ -567,7 +574,7 @@ class Home extends React.Component {
                 break;
         }
     }
-
+    //Metodos para los botones +1 de los paraetros
     upBrillo() {
         Caman("#canvas", function () {
             this.brightness(2).render();
@@ -598,7 +605,7 @@ class Home extends React.Component {
                 break;
         }
     }
-
+    //Metodo para enviar al usuario el tipo de parametro que se esta aplicando a imagen
     enviarParametros(tipo, valor, upORdown) {
         let id;
         if (!this.state.auxInvitado) {
@@ -615,6 +622,7 @@ class Home extends React.Component {
         this.state.socketIo.emit("enviandoParametros", datos)
     }
 
+    //Metodo para revertir todas las ediciones hechas al imagen
     revertir(emitir) {
         Caman("#canvas", function () {
             this.revert();
@@ -706,7 +714,6 @@ class Home extends React.Component {
                             </div>
 
                             <div className="div-buscador">
-                                <input className="buscar-amigo" placeholder="Busca a un amigo" />
                                 <ul>
                                     {
                                         this.state.user.map((item, index) => {
@@ -728,9 +735,7 @@ class Home extends React.Component {
                                                             </div>
                                                         </div>
                                                     </li>
-
                                                 </If>
-
                                             )
                                         })
                                     }
