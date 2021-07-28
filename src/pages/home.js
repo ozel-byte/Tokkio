@@ -286,16 +286,15 @@ class Home extends React.Component {
                 imgUser: this.state.imgUser,
                 auxInvitado: false
             }
-            this.state.socketIo.emit("notificacion-user", objetoUser);
-            let styleButtonInvitar = document.getElementsByClassName("style-button-invitar");
-            let amigos = document.getElementsByClassName("home-window-view-amigos");
-            styleButtonInvitar[index].style.backgroundColor = "grey";
-            amigos[0].style.display = "none";
-            this.setState({
-                auxAmigo: false
-            })
-
         }
+        this.state.socketIo.emit("notificacion-user", objetoUser);
+        let styleButtonInvitar = document.getElementsByClassName("style-button-invitar");
+        let amigos = document.getElementsByClassName("home-window-view-amigos");
+        styleButtonInvitar[index].style.backgroundColor = "grey";
+        amigos[0].style.display = "none";
+        this.setState({
+            auxAmigo: false
+        })
     }
 
     //Metodo para asignar imagen amostrar al aceptar o enviar una invitacio
