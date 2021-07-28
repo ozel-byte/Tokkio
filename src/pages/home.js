@@ -643,8 +643,6 @@ class Home extends React.Component {
                         <div className="home-side-bar-filtro-icons">
                             <ul className="list-home-side-bar-filtro-icons">
                                 <li onClick={this.viewHomeSideBarImagen.bind(this)}> <PhotoFilterIcon style={{ fontSize: 25 }} /></li>
-                                <li onClick={this.viewHomeSideBarImagen.bind(this)}> <TextFormatIcon style={{ fontSize: 25 }} /></li>
-                                <li onClick={this.viewHomeSideBarImagen.bind(this)}><ArrowDownwardIcon style={{ fontSize: 25 }} /></li>
                                 <li onClick={() => this.revertir(1)}><ReplayOutlinedIcon style={{ fontSize: 25 }} /></li>
                             </ul>
                         </div>
