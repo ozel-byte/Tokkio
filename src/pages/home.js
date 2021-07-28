@@ -285,9 +285,10 @@ class Home extends React.Component {
                 userName: this.state.username,
                 imgUser: this.state.imgUser,
                 auxInvitado: false
-            }
+            };
+            this.state.socketIo.emit("notificacion-user", objetoUser);
         }
-        this.state.socketIo.emit("notificacion-user", objetoUser);
+       
         let styleButtonInvitar = document.getElementsByClassName("style-button-invitar");
         let amigos = document.getElementsByClassName("home-window-view-amigos");
         styleButtonInvitar[index].style.backgroundColor = "grey";
