@@ -624,7 +624,7 @@ class Home extends React.Component {
     render() {
         return (
             <>
-                <div className="container-home" onMouseMove={this.mousemoveuser.bind(this)}>
+                <div className="container-home" >
                     <div className="home-side-bar-filtro">
                         <div className="home-image-user">
                             <div className="container-list-user-conected">
