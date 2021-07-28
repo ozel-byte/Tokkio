@@ -676,6 +676,8 @@ class Home extends React.Component {
     }
 
     cerrarSesion(){
+        let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
+        imagenInvitado[0].style.display = "none"
         window.localStorage.removeItem('usertokkio');
         this.props.history.push('/');
     }
