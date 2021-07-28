@@ -47,6 +47,7 @@ class Home extends React.Component {
             invitaciones: [],
             tipoUser: "user",
             auxSendImageLoad: false,
+            grupo: false,
             arrayImgFiltros: ["vintage", "lomo", "clarity", "sincity", "crossprocess", "pinhole", "nostalgia", "hermajesty"]
         }
 
@@ -98,14 +99,24 @@ class Home extends React.Component {
         /*Evento que escucha ocualta la foto del user */
         socket.on('emitir', (res) => {
             this.setState({
-                user: res,
-                auxInvitar: false,
-                auxSendImageLoad: false
+                user: res
+            });
+        });
+
+        socket.on('actualizarAregloUsuario', (res) => {
+            if (this.state.idInvitado === res.idDesconectado || this.state.idEmisor === res.idDesconectado){
+                imagenInvitado[0].style.display = "none";
+                this.setState({
+                    auxInvitar: false,
+                    auxSendImageLoad: false,
+                    grupo: false
+                });
+            }
+            this.setState({
+                user: res.arreglo
             });
 
-            imagenInvitado[0].style.display = "none";
-
-        });
+        })
 
         /*Evento que esucha la notificacion */
         socket.on("notificacion", (res) => {
@@ -124,7 +135,8 @@ class Home extends React.Component {
             imagenInvitado[0].style.display = "block";
             this.setState({
                 userNameInv: res.username,
-                idInvitado: res.idReceptor
+                idInvitado: res.idReceptor,
+                grupo: true
             });
             swal(res.username, "Acepto tu Invitacion");
             if (this.state.auxSendImageLoad) {
@@ -275,7 +287,13 @@ class Home extends React.Component {
             }
             this.state.socketIo.emit("notificacion-user", objetoUser);
             let styleButtonInvitar = document.getElementsByClassName("style-button-invitar");
+            let amigos = document.getElementsByClassName("home-window-view-amigos");
             styleButtonInvitar[index].style.backgroundColor = "grey";
+            amigos[0].style.display = "none";
+            this.setState({
+                auxAmigo: false
+            })
+
         }
     }
 
@@ -289,31 +307,36 @@ class Home extends React.Component {
     //Metodo para aceptar la invitación recibida
     aceptarInvitacion(user, index) {
 
-        let objetoAcepto = {
-            id: user.idEmisor,
-            idReceptor: user.idReceptor,
-            username: this.state.username,
-            imagen: this.state.imgUser
-        }
-        this.state.socketIo.emit("aceptar-invitacion", objetoAcepto)
-        let auxInvitaciones = this.state.invitaciones
-        auxInvitaciones.splice(index, 1);
-        this.setState({
-            invitaciones: auxInvitaciones,
-            userNameInv: user.userName,
-            idEmisor: user.idEmisor,
-            auxInvitado: true,
-            auxSendImageLoad: true,
-            tipoUser: "invitado"
-        })
-        this.asignarImagen(user.imgUser);
-        let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
-        let notify = document.getElementsByClassName("home-windows-view-notificaciones");
-        imagenInvitado[0].style.display = "block";
-        notify[0].style.display = "none";
-        this.setState({
-            auxNotify: false
-        })
+      if (!this.state.grupo){
+          let objetoAcepto = {
+              id: user.idEmisor,
+              idReceptor: user.idReceptor,
+              username: this.state.username,
+              imagen: this.state.imgUser
+          }
+          this.state.socketIo.emit("aceptar-invitacion", objetoAcepto)
+          let auxInvitaciones = this.state.invitaciones
+          auxInvitaciones.splice(index, 1);
+          this.setState({
+              invitaciones: auxInvitaciones,
+              userNameInv: user.userName,
+              idEmisor: user.idEmisor,
+              auxInvitado: true,
+              auxSendImageLoad: true,
+              tipoUser: "invitado",
+              grupo: true
+          })
+          this.asignarImagen(user.imgUser);
+          let imagenInvitado = document.getElementsByClassName("home-side-bar-user-invited");
+          let notify = document.getElementsByClassName("home-windows-view-notificaciones");
+          imagenInvitado[0].style.display = "block";
+          notify[0].style.display = "none";
+          this.setState({
+              auxNotify: false
+          })
+      } else {
+          swal("Lo siento", "Solo puedes aceptar a un usuario", "error");
+      }
     }
 
     /* filtros */
@@ -482,16 +505,20 @@ class Home extends React.Component {
     //Metodo para mostra u ocultar la ventana de los usuarios conectados
     openWindowAmigo() {
         let amigos = document.getElementsByClassName("home-window-view-amigos");
-        if (!this.state.auxAmigo) {
-            amigos[0].style.display = "flex";
-            this.setState({
-                auxAmigo: true
-            })
+        if (!this.state.grupo){
+            if (!this.state.auxAmigo) {
+                amigos[0].style.display = "flex";
+                this.setState({
+                    auxAmigo: true
+                })
+            } else {
+                amigos[0].style.display = "none";
+                this.setState({
+                    auxAmigo: false
+                })
+            }
         } else {
-            amigos[0].style.display = "none";
-            this.setState({
-                auxAmigo: false
-            })
+            swal("Lo siento", "Solo puedes invitar a un usuario", "error");
         }
     }
     //Metodo para ocultar o mostrar los botones de + y - de los parametros
