@@ -164,7 +164,7 @@ class SignUp extends React.Component {
     }
 
     /*Metodo para inicio de sesion */
-   async signUp() {
+    signUp() {
         this.changeImageCloudinary().then(res  => {
             const dataBody = {
                 correo: this.state.correo,
@@ -173,19 +173,22 @@ class SignUp extends React.Component {
                 imgPerfil: res.data.url
             }
 
-             axios.post('http://167.172.146.90:3000/user/addUser', dataBody).then(data => {
+            axios.post('http://167.172.146.90:3000/user/addUser',dataBody).then(response => {
                 let loa = document.getElementsByClassName("loading");
                 loa[0].style.display = "none";
                 this.setState({
                     loading: "Sign Up"
                 });
-                swal("se creo con exito", "disfrute la edicion de fotos :9", "success");
-                this.props.history.push("/signIn")
+                swal(response.data.find,"aaa","error")
+                if(response.data.find === "true"){
+                    swal("se creo con exito", "disfrute la edicion de fotos :9", "success");
+                    this.props.history.push("/signIn");
+                }else if(response.data.find === "false"){
+                    swal("no se creo la cuenta", "intentelo de nuevo","error")
+                }
             }).catch(e => {
-                swal("no se creo la cuenta", "intentelo de nuevo", "error")
-            });
-
-            
+                swal("no se creo la cuenta", "intentelo despues","error")
+            })
         })
     }
 
