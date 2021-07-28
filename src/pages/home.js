@@ -1,8 +1,8 @@
 import React from 'react'
 import GroupAddIcon from '@material-ui/icons/GroupAdd';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import PhotoFilterIcon from '@material-ui/icons/PhotoFilter';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import PaletteOutlinedIcon from '@material-ui/icons/PaletteOutlined';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import PhotoLibraryIcon from '@material-ui/icons/PhotoLibrary';
 import PlayForWorkIcon from '@material-ui/icons/PlayForWork';
 import Brightness5Icon from '@material-ui/icons/Brightness5';
@@ -674,6 +674,11 @@ class Home extends React.Component {
         if (emitir === 1) { this.enviarParametrosFiltro(3, "revertir", false) }
     }
 
+    cerrarSesion(){
+        window.localStorage.removeItem('usertokkio');
+        this.props.history.push('/')
+    }
+
     render() {
         return (
             <>
@@ -694,13 +699,15 @@ class Home extends React.Component {
                         </div>
                         <div className="home-side-bar-filtro-icons">
                             <ul className="list-home-side-bar-filtro-icons">
-                                <li onClick={this.viewHomeSideBarImagen.bind(this)}> <PhotoFilterIcon style={{ fontSize: 25 }} /></li>
+                                <li onClick={this.viewHomeSideBarImagen.bind(this)}> <PaletteOutlinedIcon style={{ fontSize: 25 }} /></li>
                                 <li onClick={() => this.revertir(1)}><ReplayOutlinedIcon style={{ fontSize: 25 }} /></li>
                             </ul>
                         </div>
                         <div className="home-side-bar-filtro-ajustes">
                             <input type="file" id="file" onChange={this.uploadImage.bind(this)} /><label htmlFor="file" ><PhotoLibraryIcon /></label>
-                            <MoreVertIcon />
+                            <div onClick={this.cerrarSesion.bind(this)}>
+                                <ExitToAppIcon  style={{ fontSize: 25 }}/>
+                            </div>
                         </div>
                     </div>
                     <div className="home-side-bar-filtro-view animate__animated animate__backInLeft">
