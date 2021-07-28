@@ -26,7 +26,7 @@ class Splascreen extends React.Component{
                 clearInterval(intervalSplascreen);
                 this.props.history.push('/signIn');
             }
-        }, 3000);
+        }, 2000);
         
     }
     

@@ -107,6 +107,10 @@ class SignIn extends React.Component{
         borderInputColorError[1].style.border = '1px solid #932939';
        }
     }
+
+    signUp(){
+        this.props.history.push('/signUp');
+    }
     
     render() {
         return (
@@ -131,7 +135,7 @@ class SignIn extends React.Component{
                             <div className="seccion-Utils">
                                 <div><p>Olvidaste tu password?</p></div>
                                 <div className="divider"></div>
-                                <div><a href="/signUp">Sign Up</a></div>
+                                <div onClick={this.signUp.bind(this)} className="next-signUp"><a>Sign Up</a></div>
                             </div>
                         </div>
                      </div>
